@@ -1,0 +1,25 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<div>
+    {{section.name}}
+</div>
+
+<table class='table table-striped table-bordered'>
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>-</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for topic in topics %}
+    <tr>
+        <td><a href="{{path('hr_adm_forum_topic', {topicid: topic.id})}}">{{topic.title}}</a></td>
+        <td><a href="{{path('hr_adm_forum_delete_topic', {topicid: topic.id})}}">delete</a></td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

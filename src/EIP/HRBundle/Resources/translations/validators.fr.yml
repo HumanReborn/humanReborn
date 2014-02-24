@@ -1,0 +1,2 @@
+signup.username.unique: "Cet identifiant est déjà utilisé."
+signup.email.unique: "Un compte est déjà associé à cette adresse email."

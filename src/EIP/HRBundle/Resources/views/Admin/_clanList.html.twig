@@ -1,0 +1,22 @@
+<table class="adm-table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>createdOn</th>
+            <th>Members</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for e in clans %}
+    <tr>
+        <td>{{ e.id }}</td>
+        <td>{{ e.name }}</td>
+        <td>{{ e.createdOn|date('Y-m-d') }}</td>
+        <td><a href="{{ path('hr_adm_clan_members', { 'id': e.id }) }}">members</a></td>
+        <td><a href="{{ path('hr_adm_clan_edit', { 'id': e.id }) }}">Edit</a></td>
+    </tr>
+    {%  endfor %}
+    </tbody>
+</table>

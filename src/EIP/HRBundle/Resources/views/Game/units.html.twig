@@ -1,0 +1,214 @@
+{% extends 'EIPHRBundle:Game:layout.html.twig' %}
+{% block html %}<html data-ng-app='unitModule'>{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src='{{asset('bundles/eiphr/js/angular.min.js')}}'></script>
+{% endblock %}
+{% block content %}
+{% spaceless %}
+<section class="content-section">
+	<div class="container clearfix">
+		<h2 class="pull-left">
+            {{'armies'|trans}} <small> - {{'by.town'|trans}}</small>
+		</h2>
+		<div class="pull-right"><i class="fa fa-group fa-5x"></i></div>
+	</div>
+</section>
+<section class="content-section saw">
+	<div class="container">
+		<div id='armies' data-ng-controller='armiesCtrl'>
+			<div class='container-fluid'>
+				<div class='row-fluid'>
+					<div class='span4 well'>
+						<h4>{{'towns'|trans}}</h4>
+						<ul class='unstyled'>
+							<li data-ng-repeat='town in towns' data-ng-class='{active: town == currentTown}'>
+								<a ng-click='setCurrentTown(town)'>{[{town.name}]}</a>
+							</li>
+						</ul>
+					</div>
+					<div class='span8' >
+						<div class='row-fluid'>
+							<div class='well span4'>
+								<h4>{{'armies'|trans}}</h4>
+								<ul class='unstyled '>
+									<li data-ng-show='currentTown.armies.length == 0'>
+										{{'town.army.none'|trans}}
+									</li>
+									<li data-ng-repeat='army in currentTown.armies' data-ng-class='{active: army == currentArmy}'>
+										<a ng-click='setCurrentArmy(army)'>
+											{{ 'army'|trans }} {[{ army.id }]}
+										</a>
+									</li>
+								</ul>
+								<div class='text-center'>
+									<a id='createArmyButton' class='btn btn-small btn-success mtop'
+									 data-ng-href='{[{armyCreationPath}]}/{[{currentTown.id}]}'>
+									 	<i class="fa fa-plus"></i>
+									 	{{'units.armies.add'|trans}}
+									</a>
+								</div>
+							</div>
+							<div class='span8 well'>
+								<h4>{{'details'|trans}}</h4>
+								<div class='armyDetailsContainer'>
+									<div data-ng-switch on='currentArmy'>
+										<p data-ng-switch-when='null'>{{ 'army.selected.none'|trans }}</p>
+										<p data-ng-switch-default=''>{{ 'army'|trans }} {[{currentArmy.id}]}</p>
+									</div>
+									<div data-ng-switch on='currentArmy.moving'>
+										<p data-ng-switch-when='true'>{{ 'army.moving.true'|trans }}</p>
+										<p data-ng-switch-when='false'>{{ 'army.moving.false'|trans }}</p>
+									</div>
+									<div data-ng-repeat='unit in currentArmy.units' class='thumb dib' title='{[{unit.name}]}'>
+										<img data-ng-src="{[{ getUnitImage(unit) }]}" alt="unit image" />
+										<p class='text-center'>{[{unit.number}]}</p>
+									</div>
+									<p class='text-center' id='manageArmyButton'>
+										<a class='btn btn-small' data-ng-show='currentArmy != null'
+											data-ng-href='{[{armyManagementPath}]}/{[{currentArmy.id}]}'>{{'units.army.manage'|trans}}</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="content-section saw">
+	<div class="container clearfix">
+		<h2 class="pull-left">
+			{{'garrisons'|trans}} <small> - {{'by.town'|trans}}</small>
+		</h2>
+		<div class="pull-right"><i class="fa fa-group fa-5x"></i></div>
+	</div>
+</section>
+<section class="content-section saw">
+	<div class="container">
+		<div id='garrisons' data-ng-controller='garrisonsCtrl'>
+			<div class='container-fluid'>
+				<div class='row-fluid'>
+					<div class='span4 well'>
+						<h4>{{'towns'|trans}}</h4>
+						<ul class='unstyled'>
+							<li data-ng-repeat='town in towns' data-ng-class='{active: town == currentTown}'>
+								<a ng-click='setCurrentTown(town)'>{[{town.name}]}</a>
+							</li>
+						</ul>
+					</div>
+					<div class='span8 well'>
+						<h4>{{'garrison'|trans}}</h4>
+						<p>{[{town.name}]}</p>
+						<div class='text-center'>
+							<div data-ng-repeat='unit in currentTown.garrison.units' class='thumb dib' title='{[{unit.name}]}'>
+								<img data-ng-src="{[{getUnitImage(unit)}]}" alt="unit image"/>
+								<p class='text-center'>{[{unit.number}]}</p>
+							</div>
+						</div>
+						<div class='text-center' id='recruitButton'>
+							<a href='{[{recruitPath}]}/{[{currentTown.id}]}' class='btn btn-small'>{{ 'units.recruit'|trans|capitalize }}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+$(function() { $('.unitMiniImg').tooltip(); });
+
+var app = angular.module('unitModule',[]);
+
+app.config(['$interpolateProvider', function ($interpolateProvider) {
+    $interpolateProvider.startSymbol('{[{');
+    $interpolateProvider.endSymbol('}]}');
+}]);
+
+var towns = [
+	{% for town in towns %}
+	{
+	 id: {{town.id}},
+	 name: '{{town.name}}',
+	 x: {{town.xCoord}},
+	 y: {{town.yCoord}},
+	 armies: [
+	 	{% for army in town.armies if army.garrison == 0 %}
+ 		{
+ 		 id: {{army.id}},
+ 		 moving: {{army.moving ? 'true' : 'false'}},
+ 		 {% set unitsArray = army.getUnitsCount() %}
+ 		 units: [
+ 		 	{% for unit in unitsArray %}
+ 		 	{
+ 		 		name: '{{unit.name|trans({}, 'units')}}',
+ 		 		number: {{unit.number}},
+ 		 		image: {{unit.image}},
+ 		 	},
+	 		{% endfor %}
+ 		 ]
+ 		},
+	 	{% endfor %}
+	 ],
+	 garrison: {
+	 	units: [
+	 	{% for army in town.armies if army.garrison == 1 %}
+	 	{% set unitsArray = army.getUnitsCount() %}
+		 	{% for unit in unitsArray %}
+ 		 	{
+ 		 		name: '{{unit.name|trans({}, 'units')}}',
+ 		 		number: {{unit.number}},
+ 		 		image: {{unit.image}},
+ 		 	},
+	 		{% endfor %}
+	 	{% endfor %}
+	 	]
+	 }
+
+    },
+	{% endfor %}
+];
+
+var imagePath = '{{asset('bundles/eiphr/images/schema/units/')}}';
+var armyManagementPath = '{{path('hr_army')}}';
+var armyCreationPath = '{{path('hr_add_army')}}';
+var recruitPath = '{{path('hr_recruit')}}';
+
+function armiesCtrl($scope) {
+	$scope.armyCreationPath = armyCreationPath;
+	$scope.armyManagementPath = armyManagementPath;
+	$scope.imagePath = imagePath;
+	$scope.towns = towns;
+	$scope.currentTown = $scope.towns[0];
+	$scope.currentArmy = null;
+
+	$scope.setCurrentTown = function (town) {
+		$scope.currentTown = town;
+		$scope.currentArmy = null;
+	}
+	$scope.setCurrentArmy = function (army) {
+		$scope.currentArmy = army;
+	}
+
+	$scope.getUnitImage = function(unit) {
+		return '{{asset("bundles/eiphr/images/schema/units/")}}' + unit.image + '.jpg';
+	}
+}
+
+function garrisonsCtrl($scope) {
+	$scope.imagePath = imagePath;
+	$scope.towns = towns;
+	$scope.currentTown = $scope.towns[0];
+	$scope.recruitPath = recruitPath;
+	$scope.setCurrentTown = function (town) {
+		$scope.currentTown = town;
+	}
+	$scope.getUnitImage = function(unit) {
+		return '{{asset("bundles/eiphr/images/schema/units/")}}' + unit.image + '.jpg';
+	}
+}
+
+</script>
+{% endspaceless %}
+{% endblock %}

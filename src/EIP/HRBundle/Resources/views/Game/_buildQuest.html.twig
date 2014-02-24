@@ -1,0 +1,40 @@
+<div class='row-fluid resource-tab'>
+    <div id='given' class='span6'>
+        <h4 class='page-header'>{{'progression'|trans}}</h4>
+        {% if quest %}
+        <table class='table table-bordered'>
+            {% for key,value in quest.data if schema.data[key] > 0 %}
+            <tr>
+                <td>
+                    <img src='{{asset('bundles/eiphr/images/schema/buildings/'~buildingSchemaInfo[key].rvalue)}}.jpg'
+                         alt='{{ buildingSchemaInfo[key].name|trans }}' class='big-image' />
+                </td>
+                <td>
+                    <div>{{ buildingSchemaInfo[key].name|trans }}</div>
+                    <div>{{ value }}</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class='lead text-center quest-not-followed'>{{'quest.not.followed'|trans({}, 'quests') }}</p>
+        {% endif %}
+    </div>
+    <div id='goal' class='span6'>
+        <h4 class='page-header'>{{'goal'|trans}}</h4>
+        <table  class='table table-bordered'>
+            {% for key, value in schema.data if value > 0 %}
+            <tr>
+                <td>
+                    <img src='{{asset('bundles/eiphr/images/schema/buildings/'~buildingSchemaInfo[key].rvalue)}}.jpg'
+                         alt='{{ buildingSchemaInfo[key].name|trans }}' class='big-image' />
+                </td>
+                <td>
+                    <div>{{ buildingSchemaInfo[key].name|trans }}</div>
+                    <div>{{ value }}</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

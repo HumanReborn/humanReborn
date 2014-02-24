@@ -1,0 +1,16 @@
+water.well: "Extracteur d'eau"
+water.well.desc: "L'eau est devenue une denrée rare mais reste essentiel au développement de l'activité humaine. Les extracteurs d'eau vous permettent de pomper l'eau des lacs souterrains, peu contaminés. Construisez d'avantage d'extracteurs d'eau pour augmenter la quantité d'eau récoltée chaque minute."
+decontamination.center: "Centre de décontamination"
+decontamination.center.desc: "Les centres de décontamination vous permettent de purifier de l'eau contaminée, et d'obtenir ainsi de l'eau pure."
+refinery: Raffinerie
+refinery.desc: "Malgré l'Effondrement, les véhicules ont toujours besoin de carburant. Les raffineries extraient le carburant des du sol et vous l'apportent à intervalles réguliers."
+barracks: Caserne
+barracks.desc: "Vos troupes ont besoin de logements et d'entrainement. Les casernes répondent à ces besoin et vous permettront d'entrainer des soldats."
+research.center: Centre de recherche
+research.center.desc: "Le centre de recherche est nécessaire dés lors que vous souhaitez développer vos technologies. Il offre un lieu de travail à vos scientifiques qui pourront enfin travailler dans des conditions correctes."
+mine: Mine
+mine.desc: "Les mines vous permettent d'extraire les métaux requis à la construction de vos unités blindées ou autre bâtiments."
+factory: Usine
+factory.desc: "Les usines permettent la création des unités blindées basiques telle que les buggies ou les humvees, si vous possédez les technologies associées."
+factory.advanced: "Usine spécialisée"
+factory.advanced.desc: "Les usines spécialisées sont un prérequis à la création des unités blindées et robots. Ces unités d'élite ont besoin des dernières technologies et moyen de production pour être parfaitement opérationnelles."

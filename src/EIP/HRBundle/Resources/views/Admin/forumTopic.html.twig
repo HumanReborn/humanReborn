@@ -1,0 +1,12 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+<div>
+{% for post in topic.posts %}
+    <p>{{post.user.username}} - {{post.postedOn|date}}</p>
+    <p><a href="{{path('hr_adm_forum_delete_post', {postid: post.id})}}">delete</a></p>
+    <div>{{post.content}}</div>
+{% else %}
+    <div>No post</div>
+{% endfor %}
+<div>
+{% endblock %}

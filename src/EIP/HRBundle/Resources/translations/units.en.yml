@@ -1,0 +1,10 @@
+mercenary: Mercenary
+soldier: Soldier
+buggy: Buggy
+humvee: Humvee
+tank: Tank
+mercenary.desc: "Present in great number since the Breaking, mercenaries are usually undisciplined and lack in training, but their fees are low, their training is fast and the do not require any infrastructures to operate. Mercenaries are a good start for your armies."
+soldier.desc: "Trained in the barracks, having maintained weaponry and equipment, the soldiers are a better infantery than the mercenaries and their cost is still low."
+buggy.desc:  "Fast motorized unit, suitable for the broken roads of the new world. The strength of the buggies comes from their speed which allows them to reach the furthest battlefields very quickly."
+humvee.desc: "Light armored unit, humvees are polyvalent. Their making require consequent investments, but the power and speed their provide is a sure asset in the battle."
+tank.desc: "Heavily armored unit with unrivaled firepower, tanks rule the battlefield. Building tanks is costly, long and requires dangerous sacrifices, but once on the battlefield, few can stop them."

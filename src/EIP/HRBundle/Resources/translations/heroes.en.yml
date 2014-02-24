@@ -1,0 +1,12 @@
+general: "General"
+protector: "Protector"
+scientist: "Scientist"
+warlord: "Conqueror"
+
+general.desc: "The general is a versatile hero. By picking the general, you are free in your strategy and your enemies wil have a hard time reading your next movements ! The general offers good bonuses in attack, defense, resources collect rate and make your units move faster."
+
+protector.desc: "Protectors are cautious and specialize in the defense of their clans. Picking the protector offers a large bonus in armor in each of your fights, but lesser bonuses in every other aspect. Chose the protector if you plan to use a defensive strategy."
+
+scientist.desc: "Scientists are geniuses obsessed in the technologies losts during the Breaking. The scientist will put his intellect to good use and provide a massive bonus for your resources collection rate, but the help he can offer on the battlefield is rather limited."
+
+warlord.desc: "Conquerors live to fight and are in a constant search for new battlefields. The conqueror gambles everything on his relentless attacks and despise all other strategies. Picking a conqueror will grant your units a colossal attack bonus, but near to to no bonus everywhere else."

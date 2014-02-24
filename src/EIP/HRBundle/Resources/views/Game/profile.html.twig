@@ -1,0 +1,91 @@
+{% extends loggedIn ? 'EIPHRBundle::/Game/layout.html.twig' : 'EIPHRBundle::/Visitor/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{profile.username}}</h2>
+        <div class="pull-right"><i class="fa fa-user fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div class='clearfix'>
+            <div class='row-fluid'>
+                <div class='span4'>
+                    <h4>{{'profile.image'|trans({}, 'achievements')}}</h4>
+                    {% if profile.achievements.count >= 15 %}
+                    {% set rank = 3 %}
+                    {% elseif profile.achievements.count >= 10 %}
+                    {% set rank = 2 %}
+                    {% else %}
+                    {% set rank = 1 %}
+                    {% endif %}
+                    <div id='profileImg' class="mtop">
+                        <img src='{{asset('bundles/eiphr/images/schema/achievements/rank'~rank~'.png')}}'
+                        alt='{{'profile.image'|trans({}, 'achievements')}}' class="thumb" />
+                    </div>
+                </div>
+                <div class='span8'>
+                    <h4>{{'stats'|trans}}</h4>
+                    <table class='table table-condensed  table-striped mtop'>
+                        <tr>
+                            <td>{{'member.since'|trans({}, 'achievements')}}</td>
+                            <td>{{profile.createdOn|date('Y-m-d')}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{'games.number'|trans({}, 'achievements')}}</td>
+                            <td>{{ nbGames }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{'achievements.number'|trans({}, 'achievements')}}</td>
+                            <td>{{ profile.achievements.count }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{'victories.number'|trans({}, 'achievements')}}</td>
+                            <td>0</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div id='profile-achievements'>
+            <h4>{{'achievements'|trans}}</h4>
+            <ul class='unstyled'>
+                {% for ac in profile.achievements %}
+                <li class="achievement">
+                    <div class='media'>
+                        <div class='pull-left achievement-image-container'>
+                            <img src='{{asset('bundles/eiphr/images/schema/achievements/' ~ ac.schema.type)}}.png'
+                            class='media-object'
+                            alt='{{ ac.schema.name|trans({}, 'achievements') }}'
+                            title='{{ ac.schema.name|trans({}, 'achievements') }}' />
+                            <div class='stars'>
+                                {% for i in 0..ac.schema.step %}
+                                <img src='{{asset('bundles/eiphr/images/schema/achievements/star.png')}}' alt='star' />
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class='media-body'>
+                            <div class='clearfix'>
+                                <p class='lead pull-left'>{{ac.schema.name|trans({}, 'achievements')}}</p>
+                                <p class='pull-right'><small>{{'achieved.on'|trans({}, 'achievements')}}: {{ ac.achievedOn|date('Y-m-d') }}</small></p>
+                            </div>
+                            <p>
+                                {{ac.schema.descriptionString|transchoice(ac.schema.value, {'%value%':ac.schema.value}, 'achievements')}}
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                {% else %}
+                <li>{{'achievements.none'|trans({}, 'achievements')}}</li>
+                {% endfor %}
+            </ul>
+            <a class='btn mtop' href="{{path('hr_achievements_all')}}">{{'achievements.all'|trans}}</a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

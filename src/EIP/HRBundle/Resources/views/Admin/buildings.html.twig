@@ -1,0 +1,45 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<h3>Buildings</h3>
+
+<a class='btn' href="{{ path('hr_adm_add_building') }}">add a buildingSchema</a>
+
+<table class='table table-striped table-bordered'>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>rvalue</th>
+            <th>waterCost</th>
+            <th>pureWaterCost</th>
+            <th>steelCost</th>
+            <th>waterCR</th>
+            <th>pureWaterCR</th>
+            <th>steelCR</th>
+            <th>buildTime</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+{% for building in buildings %}
+            <tr>
+                <td>{{ building.id }}</td>
+                <td>{{ building.name }}</td>
+                <td>{{ building.rValue }}</td>
+                <td>{{ building.waterCost }}</td>
+                <td>{{ building.pureWaterCost }}</td>
+                <td>{{ building.steelCost }}</td>
+                <td>{{ building.waterCollectRate }}</td>
+                <td>{{ building.pureWaterCollectRate }}</td>
+                <td>{{ building.steelCollectRate }}</td>
+                <td>{{ building.buildingTime }}</td>
+                <td><a href="{{ path('hr_adm_edit_building', { 'id' : building.id }) }}">edit</a></td>
+                <td><a href="javascript:void(0)" attr-path="{{ path('hr_adm_delete_building', { 'id':building.id }) }}" onclick="confirmDelete(this)">Delete</a></td>
+            </tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

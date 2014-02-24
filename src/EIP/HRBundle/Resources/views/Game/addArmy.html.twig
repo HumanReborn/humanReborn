@@ -1,0 +1,259 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block html %}<html data-ng-app="newArmyModule">{% endblock %}
+{% block content %}
+
+<section class="content-section">
+    <div class="container">
+        <h2>
+            {{'army.new'|trans}}
+            <small>{{'army.new.desc'|trans}}</small>
+        </h2>
+    </div>
+</section>
+
+<section class="content-section saw">
+    <div class="container">
+        <div data-ng-controller="transferCtrl">
+            <div class="row-fluid">
+                <div class='span6 well'>
+                    <h4>{{'garrison'|trans}}</h4>
+                    <table class="table" id='garrisonTable'>
+                        <tr data-ng-repeat="unit in garrison">
+                            <td>
+                                <div class='thumb' title='{[{unit.type}]}' ng-click='getUnitDetails(unit)'>
+                                    <img src="{[{ getUnitImage(unit) }]}" alt="unit image" />
+                                    <p class='text-center'>{[{unit.number}]}</p>
+                                </div>
+                            </td>
+                            <td class='valign-middle'>
+                                <a href="#transferDialog" role="button" class="btn" data-toggle="modal" data-ng-click="onDialogOpened(1)">
+                                    {{ 'troop.transfer.button'|trans }}
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='span6 well'>
+                    <h4>{{'army'|trans|capitalize}}</h4>
+                    <table class="table" id='armyTable'>
+                        <tr data-ng-show='newArmy.length == 0'>
+                            <td colspan='2' style='text-align:center;'>
+                                {{ 'army.empty'|trans }}
+                            </td>
+                        </tr>
+                        <tr data-ng-repeat="unit in newArmy">
+                            <td class='valign-middle'>
+                                <a href="#transferDialog" role="button" class="btn" data-toggle="modal" data-ng-click="onDialogOpened(2)">
+                                    {{ 'troop.transfer.button'|trans }}
+                                </a>
+                            </td>
+                            <td>
+                                <div class='thumb' title='{[{unit.type}]}' ng-click='getUnitDetails(unit)'>
+                                    <img src="{[{ getUnitImage(unit) }]}" alt="unit image" />
+                                    <p class='text-center'>{[{unit.number}]}</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="transferDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel">{{ 'troop.transfer'|trans }}</h3>
+                    </div>
+                    <div class="modal-body">
+                        <label>{{ 'troop.transfer.label'|trans }}</label>
+                        <input type="number" />
+                    </div>
+                    <div class="modal-footer" style='margin-bottom:20px'>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">{{'close'|trans}}</button>
+                        <button class="btn btn-primary" data-ng-click="validateTransfer()">{{ 'validate'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="emptyArmyAlert" class="alert alert-block alert-error hrAlert" style='display:none;'>
+                    <a class="close" id='closeAlertButton'  href="#">&times;</a>
+                    <p>{{ 'army.empty.creation.impossible'|trans }}</p>
+                </div>
+                <p class='links text-center'>
+                    <a href="{{ path('hr_units') }}" class="btn btn-small">{{ 'back'|trans }}</a>
+                    <a href="javascript:void(0)" class="btn btn-primary btn-small" data-ng-click="confirmArmyCreation()">{{ 'army.create.finish'|trans }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id='unitDetailModal' class="modal hide fade">
+    <div style='height:200px;text-align:center;'>
+    <h4>{{'loading'|trans}}</h4>
+    <img src='{{asset('bundles/eiphr/images/ajax-loader.gif')}}' alt='{{'loading'|trans}}' style='margin:90px auto;' />
+    </div>
+</div>
+
+<script src="{{ asset('bundles/eiphr/js/angular.min.js') }}"></script>
+<script>
+$('#unitDetailModal').on('hidden', function() {
+    $(this).html("<div style='height:200px;text-align:center;'><h4>{{'loading'|trans}}</h4><img src='{{asset('bundles/eiphr/images/ajax-loader.gif')}}' alt='{{'loading'|trans}}' style='margin:90px auto;' /></div>");
+});
+
+function initTooltips() {
+    $('#garrisonTable .unitMiniImg').tooltip({placement:'right'});
+    $('#armyTable .unitMiniImg').tooltip({placement:'left'});
+}
+
+$(function() {
+    initTooltips();
+});
+
+var app = angular.module('newArmyModule',[]).directive('backImg', function(){
+    return function(scope, element, attrs) {
+        attrs.$observe('backImg', function(value){
+            element.css('background-image', 'url(' + value +')');
+        });
+    };
+});
+app.config(['$interpolateProvider', function ($interpolateProvider) {
+    $interpolateProvider.startSymbol('{[{');
+    $interpolateProvider.endSymbol('}]}');
+}]);
+
+function transferCtrl($scope, $http)
+{
+    $scope.imagePath = '{{asset('bundles/eiphr/images/schema/units')}}';
+    var armyIndex = 1;
+    var unitIndex = 0;
+    $scope.garrison = [
+        {% for key,value in garrisonContent %}
+        { schema: {{key}}, number: {{value.number}}, type: '{{value.name|trans({}, 'units')}}', image: {{value.image}} },
+        {% endfor %}
+    ];
+
+    $scope.newArmy = [];
+
+    $scope.transferToNewArmy = function(toTransfer)  {
+        if (toTransfer == 0) return ;
+        var unit = {
+            type: $scope.garrison[unitIndex].type,
+            number: $scope.garrison[unitIndex].number,
+            schema: $scope.garrison[unitIndex].schema,
+            image: $scope.garrison[unitIndex].image
+        };
+        if (toTransfer > unit.number)
+            toTransfer = unit.number;
+        unit.number = toTransfer;
+        $scope.garrison[unitIndex].number -= toTransfer;
+        // if unit exists, just add to number, if not add unit
+        var existingUnits = $scope.newArmy.filter(function(u) {
+            return u.type == unit.type;
+        });
+        if (existingUnits.length > 0)
+            existingUnits[0].number += toTransfer;
+        else
+            $scope.newArmy.push(unit);
+        // remove if number = 0
+        if ($scope.garrison[unitIndex].number == 0)
+            $scope.garrison.splice(unitIndex, 1);
+    };
+    $scope.transferToGarrison = function(toTransfer) {
+        if (toTransfer == 0) return ;
+        var unit = {
+            type: $scope.newArmy[unitIndex].type,
+            number: $scope.newArmy[unitIndex].number,
+            schema: $scope.newArmy[unitIndex].schema,
+            image: $scope.newArmy[unitIndex].image
+        };
+        if (toTransfer > unit.number)
+            toTransfer = unit.number;
+        unit.number = toTransfer;
+        $scope.newArmy[unitIndex].number -= toTransfer;
+         // if unit exists, just add to number, if not add unit
+         var existingUnits = $scope.garrison.filter(function(u) {
+            return u.type == unit.type;
+         });
+         if (existingUnits.length > 0)
+            existingUnits[0].number += toTransfer;
+         else
+            $scope.garrison.push(unit);
+         // remove if number = 0
+         if ($scope.newArmy[unitIndex].number == 0)
+            $scope.newArmy.splice(unitIndex, 1);
+    };
+    $scope.validateTransfer = function() {
+        var toTransfer = parseInt($('#transferDialog input').val()) || 0;
+        if (armyIndex == 1)
+            $scope.transferToNewArmy(toTransfer);
+        else
+            $scope.transferToGarrison(toTransfer);
+        $("#transferDialog").modal("hide");
+        setTimeout(initTooltips, 500)
+    };
+    $scope.onDialogOpened = function(index) {
+        armyIndex = index;
+        unitIndex = this.$index;
+        var nb = 0;
+        if (armyIndex == 1)
+            nb = $scope.garrison[unitIndex].number;
+        else
+            nb = $scope.newArmy[unitIndex].number;
+        $('#transferDialog input').val(nb);
+    };
+    $scope.confirmArmyCreation = function() {
+        // check if new army is not empty
+        var empty = $scope.newArmy.filter(function(elem) {
+            return elem.number > 0;
+        });
+        if (empty.length == 0)
+        {
+            $("#emptyArmyAlert").fadeIn('slow');
+            return false ;
+        }
+        // create the army
+        $.post("{{ path('hr_add_new_army') }}", {garrisonID: {{ garrison.id }}, transferedUnits: $scope.newArmy }, function(data) {
+            if (data != "ok")
+                return false;
+            window.location.href = "{{ path('hr_units') }}";
+        });
+    };
+
+    $scope.getUnitDetails = function (unit) {
+        var unitDetailPath = '{{path('hr_unit_detail')}}';
+        var m = $('#unitDetailModal').modal('show');
+        $http(
+        {
+            method: 'POST',
+            url: unitDetailPath,
+            data: $.param({"schemaid": unit.schema}),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (data, status, headers, config) {
+            m.html(data);
+            m.modal('show');
+        }).error(function (data, status, headers, config) {
+            var errorString = '<div style="padding:15px"> \
+            <div class="alert alert-block alert-error fade in">   \
+            <button type="button" class="close" data-dismiss="alert">×</button>      \
+            <h4 class="alert-heading" style="color:#fff;">{{ "unit.detail.error.title"|trans }}</h4> \
+            <p>{{"unit.detail.error.content"|trans}}</p>          \
+            <p class="text-center"> \
+              <a class="btn btn-danger" data-dismiss="modal">{{"close"|trans}}</a> \
+            </p>                        \
+          </div></div>';
+            m.html(errorString);
+            m.modal('show');
+        });
+    }
+
+    $scope.getUnitImage = function(unit) {
+        return '{{asset("bundles/eiphr/images/schema/units/")}}'+unit.image+'.jpg';
+    }
+}
+
+$('#closeAlertButton').click(function (e) {
+    e.preventDefault();
+    $(this).parent().fadeOut('slow');
+});
+
+</script>
+{% endblock %}

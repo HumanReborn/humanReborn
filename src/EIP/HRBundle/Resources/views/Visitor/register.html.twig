@@ -1,0 +1,65 @@
+{% extends 'EIPHRBundle::/Visitor/layout.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="{{asset('bundles/eiphr/css/account.css')}}"/>
+{% endblock %}
+{% block content %}
+<section class="content-section">
+    <div class="container">
+        <h2>{{ 'register.title'|trans|raw }}</h2>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div class='row-fluid'>
+          <div class='span6'>
+            <form method="post" action="" id="register-form" class="well clearfix">
+                <div class="text-danger">
+                    {{ form_errors(form) }}
+                </div>
+                {{ form_widget(form._token) }}
+                {% if form.email.vars.errors|length %}
+                <div class='text-center text-danger'>{{ form_errors(form.email) }}</div>
+                {% endif %}
+                <div class='control-group '>
+                    <label class='span4 text-center'>{{ 'register.email'|trans }}</label>
+                    <div class='span8 text-center'>
+                        <input type="text" name="{{ form.email.vars.full_name }}" maxlength="30" placeholder="{{ 'register.email'|trans }}"/>
+                    </div>
+                </div>
+                {% if form.username.vars.errors|length %}
+                <div class="text-center text-danger">{{ form_errors(form.username) }}</div>
+                {% endif %}
+                <div class='control-group '>
+                    <label class='span4 text-center'>{{ 'register.username'|trans }}</label>
+                    <div class='span8 text-center'>
+                        <input type="text" name="{{ form.username.vars.full_name }}" maxlength="30" placeholder="{{ 'register.username'|trans }}"/>
+                    </div>
+                </div>
+                {% if form.password.vars.errors|length %}
+                <div class='text-center text-danger'>{{ form_errors(form.password) }}</div>
+                {% endif %}
+                <div class='control-group '>
+                    <label class='span4 text-center'>{{ 'register.password'|trans }}</label>
+                    <div class='span8 text-center'>
+                        <input type="password" name="{{ form.password.vars.full_name }}" maxlength="30" placeholder="{{ 'register.password'|trans }}"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6 mtop text-center">
+                        <a href="{{ path('hr_homepage') }}" class='btn btn-small'>{{ 'register.cancel'|trans }}</a>
+                    </div>
+                    <div class="span6 mtop text-center">
+                        <input class='btn btn-large btn-primary' type='submit' />
+                    </div>
+                </div>
+        </form>
+        </div>
+        <div class="span6">
+                <img src='{{asset('bundles/eiphr/images/homepage/whitelogo.png')}}' alt='logo' class="bottom-logo" />
+        </div>
+    </div>
+
+</div>
+</section>
+{% endblock %}

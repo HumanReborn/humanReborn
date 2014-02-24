@@ -1,0 +1,8 @@
+general: "Général"
+protector: "Sentinelle"
+scientist: "Scientifique"
+warlord: "Conquérant"
+general.desc: "Le général est un héros polyvalent. En choisissant le général vous êtes libre dans votre stratégie et vos adversaires auront probablement du mal à prévoir vos prochains déplacements ! Il offre de bons bonus en attaque, défense, récolte de ressources et rend vos troupes plus mobiles."
+protector.desc: "La sentinelle est prudente et se spécialise dans la défense de son clan. Choisir la sentinelle vous offre un important bonus d'armure lors de tous vos combats, mais des bonus bien moindre partout ailleurs. Optez pour la sentinelle si vous prévoyez une stratégie misant sur la défense."
+scientist.desc: "Le scientifique est un génie passionné par toutes les technologies perdues lors de l'Effondrement. Il mettra son génie à votre service et vous fournira un bonus de récolte de ressources conséquent, mais son apport est faible sur les champs de bataille."
+warlord.desc: "Le conquérant vit pour la guerre et recherche de nouveaux champs de bataille en permanence. Le conquérant mise tout sur ses attaques dévastatrices et méprise tout autre stratégie. Choisir le conquérant vous procure un colossal bonus en attaque, mais des bonus très faibles partout ailleurs."

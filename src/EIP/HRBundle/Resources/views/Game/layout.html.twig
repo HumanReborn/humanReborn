@@ -1,0 +1,118 @@
+<!doctype html>
+{% block html %}<html>{% endblock %}
+<head>
+    <title>{% block title %}HumanReborn | Game{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='utf-8' />
+    {% block stylesheets %}
+        {% stylesheets  filter='cssrewrite'
+                        'bundles/eiphr/bootstrap/css/theme.min.css'
+                        'bundles/eiphr/bootstrap/css/bootstrap-responsive.min.css'
+                        'bundles/eiphr/font-awesome/css/font-awesome.min.css'
+                        'bundles/eiphr/css/main.css'
+                        'bundles/eiphr/css/gameLayout.css'
+         %}
+            <link rel="stylesheet" href="{{asset_url}}" />
+        {% endstylesheets %}
+    {% endblock %}
+    {% block javascripts %}
+        {% javascripts
+                        'bundles/eiphr/js/jquery.js'
+                        'bundles/eiphr/bootstrap/js/bootstrap.min.js'
+                        'bundles/eiphr/js/hr.js'
+                        'bundles/eiphr/js/menu.js'
+        %}
+            <script src="{{asset_url}}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>
+{% include 'EIPHRBundle:Game:_menu.html.twig' %}
+{% block container %}
+
+      {% if app.session.flashbag.keys %}
+      <section>
+      <div id='flashMessagesContainer'>
+          {% for key in ['buff', 'resource', 'unit', 'info'] %}
+              {% for buff in app.session.flashbag.get(key) %}
+              <div class='flash'>
+                  <h4 class='text-center'>
+                    <small></small>
+                    {{ (key~'s')|trans }}
+                    <button type="button" class="close">&times;</button>
+                  </h4>
+                  <p class="text-justify margin-sm">{{buff}}</p>
+              </div>
+              {% endfor %}
+          {% endfor %}
+      </div>
+      </section>
+      {% endif %}
+
+{% block content %}
+{% endblock  %}
+
+{% endblock container %}
+
+<!-- END bottomnav -->
+<script type="text/javascript">
+  $(function  () {
+    setInterval(function () {
+      var qTime = $(".queue-time");
+      for (var i = 0, length = qTime.length; i < length; i++) {
+        var text = $(qTime[i]).text().split(":");
+        var hours = parseInt(text[0]);
+        var mins = parseInt(text[1]);
+        var secs = parseInt(text[2]);
+        var fullTime = "";
+        secs--;
+        if (secs < 0)
+        {
+          secs = 59;
+          mins--;
+          if (mins < 0)
+          {
+            mins = 59;
+            hours--;
+          }
+          if (hours < 0)
+          {
+            hours = 0;
+            mins = 0;
+            secs = 0;
+            $(qTime[i]).parent().remove();
+          }
+        }
+        if (hours < 10) fullTime = "0";
+        fullTime += hours+":";
+        if (mins < 10)  fullTime += "0";
+        fullTime += mins+":";
+        if (secs < 10)  fullTime += "0";
+        fullTime += secs;
+        qTime[i].innerHTML = fullTime;
+      }
+    }, 1000);
+
+  });
+  // flash messages
+  var $flashContainer = $('#flashMessagesContainer');
+
+  function updateFlashNumber() {
+    $flashContainer.find('small').text('('+$flashContainer.children().length+')');
+  }
+
+  $flashContainer.find('.close').click(function(e) {
+    $(this).parents('.flash').remove();
+    if ($flashContainer.children().length == 0) {
+      $flashContainer.remove();
+    }
+    updateFlashNumber();
+    e.preventDefault();
+  });
+  updateFlashNumber();
+</script>
+
+<img src='{{asset('bundles/eiphr/images/homepage/whitelogo.png')}}' alt='logo' class="bottom-logo" />
+</body>
+</html>
+

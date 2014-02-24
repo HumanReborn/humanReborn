@@ -1,0 +1,1010 @@
+/* line 4, ../../sass/_menu.scss */
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+/* line 13, ../../sass/_menu.scss */
+body {
+  padding-top: 55px;
+  padding-bottom: 60px;
+}
+
+/* line 18, ../../sass/_menu.scss */
+#menu {
+  z-index: 20;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 55px;
+  color: #eee;
+  background-color: black;
+}
+/* line 20, ../../sass/_menu.scss */
+#menu ul {
+  list-style: none;
+}
+/* line 21, ../../sass/_menu.scss */
+#menu * {
+  margin: 0;
+  padding: 0;
+}
+/* line 32, ../../sass/_menu.scss */
+#menu .opener, #menu .queues-opener {
+  width: 60px;
+  height: 55px;
+  vertical-align: middle;
+  text-align: center;
+}
+/* line 38, ../../sass/_menu.scss */
+#menu .opener:hover, #menu .queues-opener:hover {
+  display: inline-block;
+  background-color: #efefef;
+  color: #333333;
+}
+/* line 43, ../../sass/_menu.scss */
+#menu .opener .fa, #menu .queues-opener .fa {
+  line-height: 55px;
+}
+/* line 46, ../../sass/_menu.scss */
+#menu #top-menu {
+  height: 55px;
+}
+/* line 48, ../../sass/_menu.scss */
+#menu #top-menu li {
+  vertical-align: top;
+  display: inline-block;
+}
+/* line 51, ../../sass/_menu.scss */
+#menu #top-menu li a {
+  display: block;
+  vertical-align: middle;
+  line-height: 55px;
+  color: #cccccc;
+  height: 55px;
+  padding: 0px 20px;
+  text-decoration: none;
+}
+/* line 59, ../../sass/_menu.scss */
+#menu #top-menu li a:hover {
+  color: #333333;
+  background-color: #efefef;
+}
+/* line 65, ../../sass/_menu.scss */
+#menu #top-menu .logo {
+  width: 200px;
+  text-align: center;
+  height: 55px;
+  border-left: 1px #444 solid;
+  border-right: 1px #444 solid;
+}
+/* line 71, ../../sass/_menu.scss */
+#menu #top-menu .logo img {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 55px;
+  padding: 8px;
+}
+@media (max-width: 790px) {
+  /* line 65, ../../sass/_menu.scss */
+  #menu #top-menu .logo {
+    display: none;
+  }
+}
+/* line 82, ../../sass/_menu.scss */
+#menu .resources {
+  text-align: center;
+}
+/* line 84, ../../sass/_menu.scss */
+#menu .resources li {
+  height: 55px;
+  display: inline-block;
+  padding: 1px 20px;
+}
+@media (max-width: 790px) {
+  /* line 84, ../../sass/_menu.scss */
+  #menu .resources li {
+    font-size: 11px;
+    line-height: 14px;
+    padding: 1px 10px;
+  }
+}
+/* line 93, ../../sass/_menu.scss */
+#menu .resources li img {
+  height: 30px;
+}
+@media (max-width: 790px) {
+  /* line 93, ../../sass/_menu.scss */
+  #menu .resources li img {
+    height: 18px;
+  }
+}
+/* line 99, ../../sass/_menu.scss */
+#menu .resources li span {
+  color: #9ca;
+}
+@media (max-width: 790px) {
+  /* line 99, ../../sass/_menu.scss */
+  #menu .resources li span {
+    display: block;
+  }
+}
+
+/* line 110, ../../sass/_menu.scss */
+#left-menu:hover a:hover {
+  color: #333333;
+  background-color: #efefef;
+}
+
+/* line 115, ../../sass/_menu.scss */
+#left-menu {
+  overflow: auto;
+  position: fixed;
+  background-color: black;
+  color: #eee;
+  left: -61px;
+  top: 55px;
+  width: 60px;
+  height: 100%;
+  -webkit-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  -moz-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  -o-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+/* line 124, ../../sass/_menu.scss */
+#left-menu.opened {
+  left: 0px;
+}
+/* line 126, ../../sass/_menu.scss */
+#left-menu.opened a {
+  color: #cccccc;
+}
+/* line 132, ../../sass/_menu.scss */
+#left-menu:hover, #left-menu.opened.full {
+  left: 0px;
+  width: 250px;
+}
+/* line 135, ../../sass/_menu.scss */
+#left-menu:hover a, #left-menu.opened.full a {
+  color: #cccccc;
+}
+/* line 139, ../../sass/_menu.scss */
+#left-menu li {
+  -webkit-box-shadow: 0px 0px 1px #999999;
+  -moz-box-shadow: 0px 0px 1px #999999;
+  box-shadow: 0px 0px 1px #999999;
+}
+/* line 142, ../../sass/_menu.scss */
+#left-menu li, #left-menu a {
+  display: block;
+}
+/* line 145, ../../sass/_menu.scss */
+#left-menu a {
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0);
+  text-decoration: none;
+  line-height: 60px;
+  height: 60px;
+  vertical-align: middle;
+}
+/* line 152, ../../sass/_menu.scss */
+#left-menu a .icon {
+  display: inline-block;
+  text-align: center;
+  width: 60px;
+  font-size: 1.5em;
+}
+
+/* line 162, ../../sass/_menu.scss */
+#queues {
+  position: fixed;
+  right: -251px;
+  top: 55px;
+  bottom: 0;
+  width: 250px;
+  background-color: black;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+/* line 171, ../../sass/_menu.scss */
+#queues.opened {
+  right: 0;
+}
+/* line 175, ../../sass/_menu.scss */
+#queues .queueSelector {
+  border-top: 1px #555 solid;
+}
+/* line 176, ../../sass/_menu.scss */
+#queues .queueSelector a {
+  display: inline-block;
+  width: 33.3%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #cccccc;
+}
+/* line 185, ../../sass/_menu.scss */
+#queues .queueSelector a:hover, #queues .queueSelector a.opened {
+  color: #333333;
+  background-color: #efefef;
+}
+/* line 191, ../../sass/_menu.scss */
+#queues .queue {
+  display: none;
+  margin: 10px;
+}
+/* line 194, ../../sass/_menu.scss */
+#queues .queue.opened {
+  display: block;
+}
+/* line 198, ../../sass/_menu.scss */
+#queues .queue li:nth-child(1) {
+  color: #11e611;
+}
+/* line 199, ../../sass/_menu.scss */
+#queues .queue li:nth-child(2) {
+  color: #28dc11;
+}
+/* line 200, ../../sass/_menu.scss */
+#queues .queue li:nth-child(3) {
+  color: #41d211;
+}
+/* line 201, ../../sass/_menu.scss */
+#queues .queue li:nth-child(4) {
+  color: #64b411;
+}
+/* line 202, ../../sass/_menu.scss */
+#queues .queue li:nth-child(5) {
+  color: #73a011;
+}
+/* line 203, ../../sass/_menu.scss */
+#queues .queue li:nth-child(6) {
+  color: #879611;
+}
+/* line 204, ../../sass/_menu.scss */
+#queues .queue li:nth-child(7) {
+  color: #9b9611;
+}
+/* line 205, ../../sass/_menu.scss */
+#queues .queue li:nth-child(8) {
+  color: #aa7811;
+}
+/* line 206, ../../sass/_menu.scss */
+#queues .queue li:nth-child(9) {
+  color: #c88211;
+}
+/* line 207, ../../sass/_menu.scss */
+#queues .queue li:nth-child(10) {
+  color: #e66e11;
+}
+
+/* line 216, ../../sass/_menu.scss */
+#options {
+  visibility: hidden;
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  margin-top: 200px;
+  margin-left: -200px;
+  width: 400px;
+  height: 400px;
+  z-index: 1;
+}
+/* line 218, ../../sass/_menu.scss */
+#options * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 228, ../../sass/_menu.scss */
+#options ul {
+  -webkit-box-shadow: 0px 0px 4px #555555;
+  -moz-box-shadow: 0px 0px 4px #555555;
+  box-shadow: 0px 0px 4px #555555;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 400px;
+  height: 400px;
+  position: relative;
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  -o-transform: scale(0.1);
+  transform: scale(0.1);
+  background-color: #000;
+}
+/* line 239, ../../sass/_menu.scss */
+#options.opened {
+  z-index: 20;
+  visibility: visible;
+}
+/* line 242, ../../sass/_menu.scss */
+#options.opened ul {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+/* line 247, ../../sass/_menu.scss */
+#options li {
+  overflow: hidden;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 0;
+  left: 0;
+  -webkit-transform-origin: 100% 100%;
+  -moz-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  -o-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+  background-color: black;
+}
+/* line 257, ../../sass/_menu.scss */
+#options li:nth-child(2n) {
+  background-color: #141414;
+}
+/* line 261, ../../sass/_menu.scss */
+#options li:hover {
+  background-color: #efefef;
+}
+/* line 263, ../../sass/_menu.scss */
+#options li:hover a {
+  color: #333333;
+}
+/* line 268, ../../sass/_menu.scss */
+#options li:first-child {
+  -webkit-transform: rotate(0deg) skew(60deg);
+  -moz-transform: rotate(0deg) skew(60deg);
+  -ms-transform: rotate(0deg) skew(60deg);
+  -o-transform: rotate(0deg) skew(60deg);
+  transform: rotate(0deg) skew(60deg);
+}
+/* line 271, ../../sass/_menu.scss */
+#options li:nth-child(2) {
+  -webkit-transform: rotate(30deg) skew(60deg);
+  -moz-transform: rotate(30deg) skew(60deg);
+  -ms-transform: rotate(30deg) skew(60deg);
+  -o-transform: rotate(30deg) skew(60deg);
+  transform: rotate(30deg) skew(60deg);
+}
+/* line 274, ../../sass/_menu.scss */
+#options li:nth-child(3) {
+  -webkit-transform: rotate(60deg) skew(60deg);
+  -moz-transform: rotate(60deg) skew(60deg);
+  -ms-transform: rotate(60deg) skew(60deg);
+  -o-transform: rotate(60deg) skew(60deg);
+  transform: rotate(60deg) skew(60deg);
+}
+/* line 277, ../../sass/_menu.scss */
+#options li:nth-child(4) {
+  -webkit-transform: rotate(90deg) skew(60deg);
+  -moz-transform: rotate(90deg) skew(60deg);
+  -ms-transform: rotate(90deg) skew(60deg);
+  -o-transform: rotate(90deg) skew(60deg);
+  transform: rotate(90deg) skew(60deg);
+}
+/* line 280, ../../sass/_menu.scss */
+#options li:nth-child(5) {
+  -webkit-transform: rotate(120deg) skew(60deg);
+  -moz-transform: rotate(120deg) skew(60deg);
+  -ms-transform: rotate(120deg) skew(60deg);
+  -o-transform: rotate(120deg) skew(60deg);
+  transform: rotate(120deg) skew(60deg);
+}
+/* line 283, ../../sass/_menu.scss */
+#options li:nth-child(6) {
+  -webkit-transform: rotate(150deg) skew(60deg);
+  -moz-transform: rotate(150deg) skew(60deg);
+  -ms-transform: rotate(150deg) skew(60deg);
+  -o-transform: rotate(150deg) skew(60deg);
+  transform: rotate(150deg) skew(60deg);
+}
+/* line 287, ../../sass/_menu.scss */
+#options li a {
+  color: #cccccc;
+  position: absolute;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  bottom: -72px;
+  right: -52px;
+  padding-top: 15px;
+  -webkit-transform: skew(-60deg) rotate(-75deg);
+  -moz-transform: skew(-60deg) rotate(-75deg);
+  -ms-transform: skew(-60deg) rotate(-75deg);
+  -o-transform: skew(-60deg) rotate(-75deg);
+  transform: skew(-60deg) rotate(-75deg);
+  text-decoration: none;
+}
+/* line 298, ../../sass/_menu.scss */
+#options li a i {
+  font-size: 2em;
+}
+/* line 301, ../../sass/_menu.scss */
+#options li a img {
+  width: 50px;
+}
+/* line 307, ../../sass/_menu.scss */
+#options #toggle-button {
+  visibility: visible;
+  width: 100px;
+  height: 100px;
+  line-height: 66.66667px;
+  font-size: 3em;
+  vertical-align: middle;
+  text-align: center;
+  color: #cccccc;
+  background-color: #000;
+  -webkit-box-shadow: 0px 0px 5px white;
+  -moz-box-shadow: 0px 0px 5px white;
+  box-shadow: 0px 0px 5px white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* line 4, ../../sass/gameLayout.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 7, ../../sass/gameLayout.scss */
+ul, ol {
+  list-style: none;
+}
+
+/* line 12, ../../sass/gameLayout.scss */
+#activeBuffsList p {
+  text-decoration: underline;
+  margin-top: 25px;
+}
+
+/* line 19, ../../sass/gameLayout.scss */
+.hero-image {
+  line-height: 282px;
+  vertical-align: middle;
+}
+/* line 22, ../../sass/gameLayout.scss */
+.hero-image img {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 8px black;
+  -moz-box-shadow: 0px 0px 8px black;
+  box-shadow: 0px 0px 8px black;
+}
+
+/* line 28, ../../sass/gameLayout.scss */
+#hero-stats-table tr:first-child td {
+  border-top: 0;
+}
+
+/* line 32, ../../sass/gameLayout.scss */
+#heroProgressBar {
+  position: relative;
+  top: 15px;
+}
+/* line 35, ../../sass/gameLayout.scss */
+#heroProgressBar #heroExperience {
+  width: 100%;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+/* line 43, ../../sass/gameLayout.scss */
+#items .item {
+  display: inline-block;
+}
+/* line 45, ../../sass/gameLayout.scss */
+#items .item img {
+  width: 80px;
+  height: 80px;
+}
+/* line 49, ../../sass/gameLayout.scss */
+#items .item .name {
+  margin: 10px 0px;
+}
+/* line 52, ../../sass/gameLayout.scss */
+#items .item .img-container {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* line 58, ../../sass/gameLayout.scss */
+#itemDetailsModal .itemImg {
+  margin: 20px 0px;
+}
+/* line 60, ../../sass/gameLayout.scss */
+#itemDetailsModal .itemImg img {
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 2px #888 solid;
+}
+
+/* line 70, ../../sass/gameLayout.scss */
+.town-info {
+  margin: 0;
+  padding: 0;
+  line-height: 51px;
+  vertical-align: middle;
+}
+/* line 75, ../../sass/gameLayout.scss */
+.town-info a:not(.btn) {
+  color: #fe6600;
+}
+
+/* line 81, ../../sass/gameLayout.scss */
+.town-detail-build a img {
+  height: 40px;
+  width: 40px;
+}
+/* line 85, ../../sass/gameLayout.scss */
+.town-detail-build a span {
+  line-height: 40px;
+  vertical-align: middle;
+  margin-left: 20px;
+}
+
+/* line 93, ../../sass/gameLayout.scss */
+.thumb {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px #888888 solid;
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+/* line 100, ../../sass/gameLayout.scss */
+.thumb img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 105, ../../sass/gameLayout.scss */
+.thumb.selected {
+  border: 2px #5bb75b solid;
+}
+/* line 108, ../../sass/gameLayout.scss */
+.thumb p {
+  position: absolute;
+  height: 20px;
+  line-height: 20px;
+  width: 100%;
+  top: 50%;
+  margin-top: -10px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 2.5em;
+  text-shadow: 0px 0px 8px white;
+}
+/* line 120, ../../sass/gameLayout.scss */
+.thumb.big {
+  width: 150px;
+  height: 150px;
+}
+
+/* line 126, ../../sass/gameLayout.scss */
+.building-details .small-lead, .unit-details .small-lead, .technology-details .small-lead {
+  font-size: 15px;
+  margin: 4px 0px;
+  font-weight: bold;
+}
+/* line 127, ../../sass/gameLayout.scss */
+.building-details .requirements-title, .unit-details .requirements-title, .technology-details .requirements-title {
+  margin-top: 30px;
+}
+/* line 130, ../../sass/gameLayout.scss */
+.building-details .requirements, .unit-details .requirements, .technology-details .requirements {
+  margin-bottom: 30px;
+  background-color: #cf4242;
+  padding: 10px;
+}
+/* line 134, ../../sass/gameLayout.scss */
+.building-details .requirements .thumb, .unit-details .requirements .thumb, .technology-details .requirements .thumb {
+  width: 80px;
+  height: 80px;
+  vertical-align: middle;
+}
+/* line 141, ../../sass/gameLayout.scss */
+.building-details .cost, .building-details .collect-rate, .building-details .building-time, .building-details .stats, .unit-details .cost, .unit-details .collect-rate, .unit-details .building-time, .unit-details .stats, .technology-details .cost, .technology-details .collect-rate, .technology-details .building-time, .technology-details .stats {
+  text-align: center;
+}
+/* line 143, ../../sass/gameLayout.scss */
+.building-details .cost img, .building-details .collect-rate img, .building-details .building-time img, .building-details .stats img, .unit-details .cost img, .unit-details .collect-rate img, .unit-details .building-time img, .unit-details .stats img, .technology-details .cost img, .technology-details .collect-rate img, .technology-details .building-time img, .technology-details .stats img {
+  height: 30px;
+}
+/* line 147, ../../sass/gameLayout.scss */
+.building-details .controls, .unit-details .controls, .technology-details .controls {
+  height: 59px;
+  line-height: 59px;
+  vertical-align: middle;
+}
+/* line 153, ../../sass/gameLayout.scss */
+.building-details .recruit-number, .unit-details .recruit-number, .technology-details .recruit-number {
+  margin-bottom: 0px;
+  width: 40px;
+}
+
+/* line 159, ../../sass/gameLayout.scss */
+.thumb-text-placeholder {
+  height: 100px;
+  line-height: 100px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* line 169, ../../sass/gameLayout.scss */
+#armies .active a, #garrisons .active a {
+  color: #49afcd;
+}
+/* line 172, ../../sass/gameLayout.scss */
+#armies a, #garrisons a {
+  cursor: pointer;
+}
+/* line 175, ../../sass/gameLayout.scss */
+#armies .thumb.dib, #garrisons .thumb.dib {
+  margin: 15px;
+}
+
+/* line 181, ../../sass/gameLayout.scss */
+.resource-tab td {
+  background-color: rgba(255, 255, 255, 0.05);
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 186, ../../sass/gameLayout.scss */
+.resource-tab img {
+  width: 45px;
+  height: 45px;
+}
+
+/* line 193, ../../sass/gameLayout.scss */
+.technoTreeContainer {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 7px;
+  width: 396px;
+  border: 2px #888 solid;
+}
+/* line 198, ../../sass/gameLayout.scss */
+.technoTreeContainer .technoTree {
+  position: relative;
+  height: 380px;
+  width: 382px;
+  margin: auto;
+}
+/* line 203, ../../sass/gameLayout.scss */
+.technoTreeContainer .technoTree i.treeConnection {
+  position: absolute;
+}
+/* line 204, ../../sass/gameLayout.scss */
+.technoTreeContainer .technoTree .techno {
+  width: 76px;
+  height: 76px;
+  position: absolute;
+  cursor: pointer;
+  border: 2px #333 solid;
+}
+/* line 210, ../../sass/gameLayout.scss */
+.technoTreeContainer .technoTree .techno > div {
+  line-height: 20px;
+  width: 20px;
+  margin: 30px auto;
+}
+/* line 215, ../../sass/gameLayout.scss */
+.technoTreeContainer .technoTree .techno.selected {
+  width: 76px;
+  height: 76px;
+  border: 2px orange solid;
+}
+
+/* line 223, ../../sass/gameLayout.scss */
+.currentTechnology {
+  margin: 0px 20px;
+  max-width: 500px;
+}
+/* line 226, ../../sass/gameLayout.scss */
+.currentTechnology .technology-description > p {
+  margin-top: 15px;
+}
+/* line 227, ../../sass/gameLayout.scss */
+.currentTechnology .building-time .content {
+  height: 60px;
+  line-height: 60px;
+}
+/* line 233, ../../sass/gameLayout.scss */
+.currentTechnology #technologyRequirements a img {
+  width: 76px;
+  height: 76px;
+  border: 2px #000 solid;
+  box-shadow: 0px 0px 5px #000;
+}
+/* line 239, ../../sass/gameLayout.scss */
+.currentTechnology #technologyRequirements a span {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+/* line 243, ../../sass/gameLayout.scss */
+.currentTechnology #technologyRequirements a:hover {
+  text-decoration: none;
+}
+
+/* line 250, ../../sass/gameLayout.scss */
+#myMap {
+  width: 1000px;
+  height: 1000px;
+  position: relative;
+  left: -1px;
+  margin: 0px auto 20px auto;
+  background: url("../images/map/map.jpg") no-repeat;
+  background-size: 100%;
+  border: 2px #333 solid;
+  box-shadow: 0px 0px 15px grey;
+}
+/* line 260, ../../sass/gameLayout.scss */
+#myMap .town {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  display: inline-block;
+  background: #000;
+  z-index: 2;
+  border-radius: 50%;
+  padding: 1px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+/* line 271, ../../sass/gameLayout.scss */
+#myMap .town:hover {
+  width: 30px;
+  height: 30px;
+}
+/* line 275, ../../sass/gameLayout.scss */
+#myMap .town.ally {
+  box-shadow: 0px 0px 10px #0f0;
+  border: 2px #0f0 solid;
+}
+/* line 279, ../../sass/gameLayout.scss */
+#myMap .town.ally.selected, #myMap .town.enemy.selected, #myMap .town.clanMember.selected {
+  box-shadow: 0px 0px 10px #fff;
+}
+/* line 282, ../../sass/gameLayout.scss */
+#myMap .town.enemy {
+  box-shadow: 0px 0px 10px #f00;
+  border: 2px #f00 solid;
+}
+/* line 286, ../../sass/gameLayout.scss */
+#myMap .town.clanMember {
+  border: 2px #6B6BEB solid;
+  box-shadow: 0px 0px 10px #6B6BEB;
+}
+/* line 291, ../../sass/gameLayout.scss */
+#myMap #actionInfo {
+  width: 400px;
+}
+
+/* line 295, ../../sass/gameLayout.scss */
+.unitImage {
+  position: relative;
+  display: inline-block;
+  margin: 0px 5px;
+}
+/* line 299, ../../sass/gameLayout.scss */
+.unitImage img {
+  width: 46px;
+  height: 46px;
+  border: 2px #333 solid;
+}
+/* line 304, ../../sass/gameLayout.scss */
+.unitImage > div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0px 0px 3px #fff;
+  text-align: center;
+}
+
+/* line 317, ../../sass/gameLayout.scss */
+.townArmy {
+  display: inline-block;
+  margin: 0px 10px;
+}
+/* line 320, ../../sass/gameLayout.scss */
+.townArmy .badge {
+  cursor: pointer;
+}
+/* line 323, ../../sass/gameLayout.scss */
+.townArmy .armyContent {
+  display: none;
+  background: #222;
+  border: 2px #555 solid;
+  padding: 5px;
+  margin-top: 5px;
+  position: absolute;
+  top: -80px;
+  width: 400px;
+  text-align: center;
+}
+/* line 334, ../../sass/gameLayout.scss */
+.townArmy:hover .armyContent {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  /* line 339, ../../sass/gameLayout.scss */
+  #armyModal .modal-footer .span6:nth-child(n+2) {
+    margin-top: 10px;
+  }
+}
+/* line 343, ../../sass/gameLayout.scss */
+#currentTown {
+  position: fixed;
+  bottom: 60px;
+  left: 5px;
+  width: 500px;
+  z-index: 3;
+}
+/* line 349, ../../sass/gameLayout.scss */
+#currentTown .dragHandle {
+  cursor: move;
+  background: #1f252a;
+}
+
+/* line 354, ../../sass/gameLayout.scss */
+.buildingsButton {
+  margin-left: 25px;
+}
+
+/* line 355, ../../sass/gameLayout.scss */
+.garrisonContentContainer .btn {
+  margin: 15px 0px 0px 25px;
+}
+
+/* line 356, ../../sass/gameLayout.scss */
+#actionInfo {
+  width: 500px;
+  bottom: 60px;
+  right: 5px;
+  position: fixed;
+  z-index: 3;
+}
+
+/* line 357, ../../sass/gameLayout.scss */
+.armyBadge {
+  display: inline-block;
+  position: relative;
+}
+
+/* line 360, ../../sass/gameLayout.scss */
+#messages form {
+  max-width: 500px;
+  margin: auto;
+}
+/* line 363, ../../sass/gameLayout.scss */
+#messages form input[type="text"], #messages form textarea {
+  width: 100%;
+}
+
+/* line 370, ../../sass/gameLayout.scss */
+#profileImg img {
+  background: #000;
+  width: 200px;
+  height: 200px;
+  -webkit-box-shadow: 0px 0px 8px black;
+  -moz-box-shadow: 0px 0px 8px black;
+  box-shadow: 0px 0px 8px black;
+}
+
+/* line 378, ../../sass/gameLayout.scss */
+.achievement {
+  margin-top: 10px;
+}
+/* line 380, ../../sass/gameLayout.scss */
+.achievement .achievement-image-container {
+  width: 76px;
+  height: 76px;
+  background: #000;
+  border: 2px #888 solid;
+  text-align: center;
+  line-height: 80px;
+  position: relative;
+  -webkit-box-shadow: 0px 0px 8px black;
+  -moz-box-shadow: 0px 0px 8px black;
+  box-shadow: 0px 0px 8px black;
+}
+/* line 389, ../../sass/gameLayout.scss */
+.achievement .achievement-image-container img {
+  width: 50px;
+  height: 50px;
+  display: inline;
+}
+/* line 394, ../../sass/gameLayout.scss */
+.achievement .achievement-image-container .stars {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  line-height: 14px;
+  width: 100%;
+}
+/* line 399, ../../sass/gameLayout.scss */
+.achievement .achievement-image-container .stars img {
+  width: 12px;
+  height: 12px;
+  margin: 3px;
+}
+/* line 405, ../../sass/gameLayout.scss */
+.achievement .media-body {
+  padding-left: 20px;
+}
+
+/* line 410, ../../sass/gameLayout.scss */
+.achievements-list {
+  text-align: center;
+}
+/* line 412, ../../sass/gameLayout.scss */
+.achievements-list .achievement {
+  display: inline-block;
+  width: 300px;
+}
+
+/* line 419, ../../sass/gameLayout.scss */
+.battle-report, .notification {
+  min-width: 250px;
+  margin-top: 15px;
+}
+/* line 422, ../../sass/gameLayout.scss */
+.battle-report:first-of-type, .notification:first-of-type {
+  margin-top: 0px;
+}
+
+/* line 427, ../../sass/gameLayout.scss */
+#game-result-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55px;
+  line-height: 55px;
+  vertical-align: middle;
+  font-size: 2em;
+}

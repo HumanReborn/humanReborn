@@ -1,0 +1,76 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'quests'|trans}}</h2>
+        <div class="pull-right"><i class="fa fa-trophy fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div class='row-fluid'>
+            <div class='span4'>
+                <h4 >{{'quests.current'|trans}}</h4>
+                <ul class='unstyled'>
+                    {% for q in currentQuests %}
+                    <li class="mtop">
+                        <div class='media'>
+                            <img class='thumb pull-left' src='{{ asset('bundles/eiphr/images/schema/quests/types/' ~ q.schema.type) }}.jpg' alt='{{ q.schema.name|trans({}, 'quests') }}' />
+                            <div class='media-body'>
+                                <p class='small-lead bold'>{{ q.schema.name|trans({}, 'quests') }}</p>
+                                <div class='quest-links'>
+                                    <a class='btn btn-mini btn-info' href='{{path('hr_quest_details', {schemaid: q.schema.id})}}'>{{'details'|trans}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li>{{'quest.none'|trans}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class='span4'>
+                <h4 >{{'quests.available'|trans}}</h4>
+                <ul class='unstyled'>
+                    {% for schema in availableQuests %}
+                    <li class="mtop">
+                        <div class='media'>
+                            <img class='thumb pull-left' src='{{ asset('bundles/eiphr/images/schema/quests/types/' ~ schema.type) }}.jpg' alt='{{ schema.name|trans({}, 'quests') }}' />
+                            <div class='media-body'>
+                                <p class='small-lead bold'>{{ schema.name|trans({}, 'quests') }}</p>
+                                <div class='quest-links'>
+                                    <a class='btn btn-info btn-mini' href='{{path('hr_quest_details', {schemaid: schema.id})}}'>{{'details'|trans}}</a>
+                                    <a class='btn btn-primary btn-mini' href='{{path('hr_quest_join', {schemaid: schema.id})}}'>{{'quest.join'|trans}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li>{{'quest.none'|trans}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class='span4'>
+                <h4 >{{'quests.completed'|trans}}</h4>
+                <ul class='unstyled'>
+                    {% for q in completedQuests %}
+                    <li class="mtop">
+                        <div class='media'>
+                            <img class='thumb pull-left' src='{{ asset('bundles/eiphr/images/schema/quests/types/' ~ q.schema.type) }}.jpg' alt='{{ q.schema.name|trans({}, 'quests') }}' />
+                            <div class='media-body'>
+                                <p class='small-lead bold'>{{ q.schema.name|trans({}, 'quests') }}</p>
+                                <div class='quest-links'>
+                                    <a class='btn btn-mini btn-info' href='{{path('hr_quest_details', {schemaid: q.schema.id})}}'>{{'details'|trans}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li>{{'quest.none'|trans}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!Doctype html>
+<html>
+<head>
+    {# ne pas indexer #}
+    <title>{% block title %}HumanReborn{% endblock %}</title>
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/bootstrap/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/css/hradm.css') }}" />
+    {% endblock %}
+    {% block javascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/eiphr/js/jquery.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/eiphr/bootstrap/js/bootstrap.min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/eiphr/js/back.js') }}" ></script>
+    {% endblock %}
+</head>
+<body>
+    <div id="body-wrapper" >
+        <nav id="menu" class="text-center page-header">
+            <ul class="nav nav-pills" >
+                {% set currentRoute = app.request.attributes.get('_route') %}
+                {%
+                    set routesArray = { 'hr_adm_users': 'users',
+                                        'hr_adm_games': 'games',
+                                        'hr_adm_buildings': 'buildings',
+                                        'hr_adm_units': 'units',
+                                        'hr_adm_clans': 'clans',
+                                        'hr_adm_technologies': 'technologies',
+                                        'hr_adm_messages': 'messages',
+                                        'hr_adm_towns': 'towns',
+                                        'hr_adm_armies': 'armies',
+                                        'hr_adm_heroes': 'heroes',
+                                        'hr_adm_forum': 'forum',
+                                        'hr_adm_items': 'items',
+                                        'hr_adm_buffs': 'buffs',
+                                        'hr_adm_quests': 'quests',
+                                       }
+                %}
+                {% for route, text in routesArray %}
+                    <li {% if currentRoute == route %}class='active'{%endif%}><a href="{{ path(route) }}">{{text}}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <div id="admWrapper">
+        {% block content %}admin content{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

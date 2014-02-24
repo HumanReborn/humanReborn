@@ -1,0 +1,150 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('bundles/eiphr/css/smoothness/jquery-ui-1.10.0.custom.min.css')}}" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+    $(function() {
+        $('#tabLinks a:first').tab('show').parent().addClass('active');
+    });
+    </script>
+{% endblock %}
+{% block content %}
+<div id='messages'>
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{ 'messages.messages' | trans }}</h2>
+        <div class="pull-right"><i class="fa fa-envelope fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+
+    <ul id='tabLinks' class='row-fluid text-center'>
+        <li class='span4'><a href='#new' data-toggle='tab'>{{ 'messages.write' | trans }}</a></li>
+        <li class='span4'><a href='#inbox' data-toggle='tab'>
+            {{ 'messages.inbox' | trans | raw}} (<span class="new">{{ unreadMessages }}</span>)</a></li>
+        <li class='span4'><a href='#sent' data-toggle='tab' >{{ 'messages.sent' | trans | raw}}</a></li>
+    </ul>
+
+    <div class='tab-content well'>
+        <div id="new" class='tab-pane fade'>
+            <h4>{{'messages.write'|trans}}</h4>
+            <form method="post" action="">
+                {{ form_widget(form._token) }}
+                    <div class='errorMsg'>{{ form_errors(form) }}</div>
+                    <div class='control-group'>
+                        <label class='control-label' for='hrmessagetype_title'>{{ 'messages.title' | trans }}</label>
+                        <div class='controls'>
+                            {{ form_widget(form.title) }}
+                        </div>
+                    </div>
+                    <div class="errorMsg">{{ form_errors(form.title) }}</div>
+                    <div class='control-group'>
+                        <label class='control-label' for='hrmessagetype_receiver'>{{ 'messages.to' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.receiver) }}</div>
+                    </div>
+                    <div class="errorMsg">{{ form_errors(form.receiver) }}</div>
+                    <div class='control-group'>
+                        <label class='control-label' for='hrmessagetype_content'>{{ 'messages.content' | trans }}</label></td></tr>
+                        <div class='controls'>{{ form_widget(form.content) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.content) }}</div>
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-small btn-primary" value="{{ 'messages.submit' | trans }}"/>
+                    </div>
+            </form>
+        </div>
+        <div id="inbox" class='tab-pane fade in active'>
+            <h4>{{'messages.inbox' | trans }}</h4>
+            <table class='table table-stripped'>
+                <thead>
+                    <tr><th>{{ 'messages.inbox.title' | trans }}</th><th>{{ 'messages.inbox.sender' | trans | raw}}</th></tr>
+                </thead>
+                <tbody>
+                {% for message in inMessages %}
+                    {% if loop.index % 2 == 0 %}
+                        <tr>
+                    {% else %}
+                        <tr class="line">
+                    {% endif %}
+                    {% if message.read == false %}
+                        <td><a href="#" class="inMsg unreadMsg" data-id='{{message.id}}'>{{ message.title }}</a></td>
+                        <td>{{ message.sender.username }}</td>
+                    {% else %}
+                        <td><a href="#" class="inMsg" data-id='{{message.id}}'>{{ message.title }}</a></td>
+                        <td>{{ message.sender.username }}</td>
+                    {% endif %}
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id="sent" class='tab-pane fade'>
+                <h4>{{'messages.sent' | trans }}</h4>
+        	<table class='table table-stripped'>
+                <thead>
+                    <tr><th>{{ 'messages.inbox.title' | trans }}</th><th>{{ 'messages.inbox.receiver' | trans }}</th></tr>
+                </thead>
+                <tbody>
+                {% for message in outMessages %}
+                <tr>
+                    <td><a href="#" class='outMsg' data-id='{{message.id}}'>{{ message.title }}</a></td>
+                    <td>{{ message.receiver.username }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div id='messageContentModal' class="modal hide fade"></div>
+
+        <script src="{{asset('bundles/eiphr/js/jquery-ui-1.10.3.autocomplete.min.js')}}"></script>
+        <script type="text/javascript">
+            var messages = [
+            {% set allMessages = inMessages|merge(outMessages) %}
+            {% for m in allMessages %}
+                { id: {{m.id}}, title: '{{m.title}}', content: '{{m.content}}', sender: '{{m.sender}}', sentOn: '{{m.sentOn|date('Y-m-d H:m:s')}}' },
+            {% endfor %}
+            ];
+
+            $('.inMsg, .outMsg').click(function(e) {
+                e.preventDefault();
+                var msgID = $(this).data('id');
+                var selectedMessage = null;
+                for (var i = 0; i < messages.length; i++)
+                {
+                    if (messages[i].id == msgID)
+                    {
+                        selectedMessage = messages[i];
+                        break;
+                    }
+                }
+                if (selectedMessage == null) return ;
+                var htmlStr = '<div class="modal-header"><h1 class="">'+selectedMessage.title+'</h1></div> \
+                                <div class="modal-body"> \
+                                <p>{{"messages.inbox.sender"|trans}} : '+selectedMessage.sender+'<br/>'+selectedMessage.sentOn+'</p> \
+                                '+selectedMessage.content+'</div> \
+                                <div class="modal-footer"> \
+                                    <a href="#" data-dismiss="modal">{{"close"|trans}}</a> \
+                                </div>';
+                $('#messageContentModal').html(htmlStr).modal('show');
+                $.post('readMessage', {'msgID': msgID});
+            });
+
+            var usernames = [];
+            $.get('{{ path('hr_get_usernames') }}', function(data) {
+                for (var i = data.length - 1; i >= 0; i--) {
+                    usernames.push(data[i].username);
+                };
+                $('#{{ form.receiver.vars.id }}').autocomplete({
+                   source: usernames
+                });
+                console.info('autocomplete initialization completed');
+            });
+        </script>
+    </div>
+</div>
+</section>
+{% endblock %}

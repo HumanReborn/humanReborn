@@ -1,0 +1,72 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{ town.name }}&nbsp;[&nbsp;{{ town.xCoord }},&nbsp;{{ town.yCoord}}&nbsp;]</h2>
+        <div class="pull-right"><i class="fa fa-building fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+    <div class='well'>
+        <div class='row-fluid'>
+            <div class='span4 text-center'>
+                    <h4 class='lead page-header'>{{ 'town.creating.buildings'|trans }}</h4>
+                    {% if queuedBuildings %}
+                        {% for inQueue in queuedBuildings %}
+                    <div class='building-line'>
+                        <a href='{{path('hr_build', {townid: town.id})}}' title='{{'building.goto'|trans}}'>
+                            {{ inQueue.schema.name|trans({}, 'buildings') }}
+                        </a>
+                        {% set rTime = inQueue.endTime > currentTime ? inQueue.endTime - currentTime : 0 %}
+                            <span class="queue-time">{{ remainingTime(rTime) }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                    <div class='none'>{{ 'town.creating.buildings.none'|trans }}</div>
+                    {% endif %}
+            </div>
+
+            <div class='span4 text-center'>
+            	<h4 class='lead page-header'>{{ 'town.existing.buildings'|trans }}</h4>
+                {% if buildings %}
+                    {% for building in buildings %}
+                    <div class='building-line'>
+                        <a href='{{path('hr_build', {townid: town.id})}}' title='{{'building.goto'|trans}}'>
+                            {{ building.schema.name|trans({}, 'buildings') }}
+                        </a>
+                        &nbsp;
+                        <a href="{{ path('hr_destroy_building', {buildingId: building.id}) }}" title='{{'building.destroy'|trans}}'>
+                            <i class="fa fa-times text-danger"></i>
+                        </a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class='none'>{{ 'town.existing.buildings.none'|trans }}</div>
+                {% endif %}
+            </div>
+
+            <div class='span4 text-center'>
+                <h4 class='lead page-header'>{{ 'town.free.slots'|trans }} ({{ remaining_slots }})</h4>
+                <div class="text-center town-detail-build">
+                    {% if remaining_slots > 0 %}
+                    <a href="{{ path('hr_build', {'townid':town.id}) }}" title='{{ 'town.free.slots'|trans }}' class="btn btn-success">
+                        <img src="{{asset('bundles/eiphr/images/hammerInversed.png')}}" alt="{{'build'|trans}}" />
+                        <span>{{'build'|trans}}</span>
+                    </a>
+                    {% else %}
+                    <a href="javascript:void(0)" class="btn btn-danger disabled">
+                        <img src="{{asset('bundles/eiphr/images/hammerInversed.png')}}" alt="{{'build'|trans}}" />
+                        <span>{{'build'|trans}}</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script>
+    $('a[title]').tooltip();
+</script>
+{% endblock %}

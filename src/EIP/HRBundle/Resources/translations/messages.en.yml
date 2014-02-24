@@ -1,0 +1,514 @@
+#######
+#  A  #
+#######
+achievements: Achievements
+achievements.all: View all achievements
+attack: Attack
+actions: Actions
+about: About Human Reborn
+about.design.icons: Most of Human Reborn's icons come from <a href="http://thenounproject.com">http://thenounproject.com</a>
+about.page.title: About
+armies: Armies
+army.moving.true: "Movement: moving"
+army.moving.false: "Movement: immobile"
+army: army
+army.id: Identifier
+army.new: New army
+army.new.desc: move units to your new army
+army.selected.none: No army selected
+army.empty: Empty army
+army.create.finish: Create army
+army.empty.creation.impossible: Cannot create an empty army
+army.content: See army content
+army.merge: Merge army
+army.merge.form.text: "Select the army you wish to merge with. Warning: this army will be deleted after the units it contains have been transfered"
+army.move: Move army
+army.move.form.where: Where do you want to move this army ?
+army.attack: Attack
+army.attack.form.text: Where do you want to attack ?
+army.transfer: Transfer units
+army.select: Select an army
+army.is.moving: The army is moving and cannot be managed at the time.
+army.informations: Army information
+army.lost: "Army %armyid% lost while attacking %town% %coords%"
+army.management: "Army management"
+attack.success: "%townname%'s attack at %coords% is a success ! Your army %armyid% is on its way back."
+attack.details: Attack details
+#######
+#  B  #
+#######
+buff:
+  permanent: Permanent
+  vinyl: Some good songs !
+  attack: Attack bonus
+  armor: Armor bonus
+  techno.build1: "Basic builder training"
+  techno.build2: "Advanced builder training"
+  techno.build3: "Master builder training"
+  techno.build4: "Artisan builder training"
+  techno.weapon1: "Weaponry (light)"
+  techno.weapon2: "Weaponry (medium)"
+  techno.weapon3: "Weaponry (heavy)"
+  techno.training1: "Soldier training"
+  techno.training2: "Sergent training"
+  techno.training3: "Warlord training"
+build.in.this.town: Build in this town
+building.goto: "To the building's page"
+buildings: Buildings
+building.destroy: Destroy the building
+Bad credentials: Bad credentials
+buff.new: New temporary bonus
+building.queue: Buildings
+by.town: By town
+back: Back
+bonus.attack: Attack bonus
+bonus.armor: Armor bonus
+bonus.health: Health bonus
+bonus.speed: Speed bonus
+bonus.collect: Collect bonus
+bonus.initial: Base bonus
+bonus.per.level: Bonus per level
+buffs: Bonuses
+buffs.current: Current bonuses
+buffs.total: Total bonuses
+battle.report: Battle report
+battle.reports: Battle reports
+battle.report.none: No battle report
+battle.report.read: Read the battle report
+battle.reports.all: All battle reports
+buff.none: No bonus
+buffs.type:
+    health: Health bonus
+    attack: Attack bonus
+    armor: Armor bonus
+    speed: Speed bonus
+    resources: Collect bonus
+    buildingTime: Building time bonus
+    trainingTime: Training time bonus
+#######
+#  C  #
+#######
+cancel: Cancel
+clan: Clan
+clan.admin: Clan administration
+clan.admin.msgalert1: A rank with this name already exists.
+clan.applylist: Awaiting applications
+clan.applydecision: Decision
+clan.applymsg: Applicant motivation
+clan.applyname: Applicant username
+clan.assign.button: Assign
+clan.assign.text: Assign a rank to a member
+clan.banner: clan banner
+clan.cannotcreaterank: "You don't have the rights to create or to delete a rank"
+clan.cannotdeleteuser: "You can't fire this member"
+clan.cannoteditext: "You don't have the rights to edit the messages of your team"
+clan.cannotfireyourself: "You can't fire yourself"
+clan.cannotRecruit: "You don't have the rights to recruit a member"
+clan.candeleterank.info: You can delete a rank by clicking on its name
+clan.cdele: Delete clan
+clan.cedit: Edit text
+clan.cfire: Can remove member
+clan.chire: Recruit
+clan.clan.acro: Acronyme
+clan.clan.banner: Banner
+clan.clan.private: Private message
+clan.clan.public: Public message
+clan.crank: Create rank
+clan.createrank: Create rank
+clan.cwars: Start a war
+clan.deleteclan: Delete this clan
+clan.deletemember: Remove member
+clan.editmembers: Edit members
+clan.editinfo: Edit
+clan.infoedit: Edit clan information
+clan.leaveclan: Leave this clan
+clan.listrank: Ranks list
+clan.memberslist: Clan members
+clan.membername: Member username
+clan.memberrank: Edit member rank
+clan.post.title: Do you want to apply ?
+clan.rankname: Rank name
+clan.ranksubmit: Create rank !
+clan.recruit: The clan can recruit
+clan.acronym: Acronyme
+clan.msg.cantapply: "You're already applying for another clan."
+clan.msg.hasalreadyclan: To apply, leave your current clan.
+clan.msg.motivation: You think you have what it takes to join this clan ? Write a small message and validate to apply.
+clan.msg.motivation.mini: Your message
+clan.clan.goadmin: Go to administration panel
+clan.msg.norecruit: The clan does not recruit at the time
+clan.name: Clan name
+clan.nbMember : Number of members
+clan.tab.apply: Apply
+clan.tab.listclan: Clans list
+clan.tab.createclan: Create clan
+clan.tab.members: Members list
+clan.tab.myclan: My clan
+clan.tab.presentation: Presentation
+clan.title: Clans
+clan.submit.apply : Apply !
+clan.submit.createclan: Create a clan !
+clan.user.norank: Without rank
+confirm: Confirm
+confirm.attack: "Attack confirmation"
+confirm.movement: "Movement confirmation"
+contact: Contacts
+contact.page.text: A question ? A problem ? Contact an admin
+close: Close
+credentials.bad: Bad credentials
+credentials.lost: Lost credentials ?
+credentials.lost.subject: Lost credentials
+credentials.lost.body: "<html><head></head><body>Hi,<br/>Click on the following link to reset your password: {{ link }}<br/>This link is valid for one hour.<br/>See you soon on HumanReborn</body></html>"
+content: Content
+chat.popup.open: Open the chat
+cost: Cost
+click.to.build: Click to build the building in the first available town
+click.to.select: Click to select the technology
+click.to.see.content: Click to display the content
+click.to.cancel.movement: "Click the 'Cancel' button to cancel the movement"
+click.to.cancel.attack: "Click the 'Cancel' button to cancel the attack"
+#######
+#  D  #
+#######
+destination.reach.time: Time to destination
+dashboard.logout: Disconnect
+dashboard.goto: Back to the main page
+details: Details
+destination: Destination
+dashboard.last.notifications: Last notifications
+defeat: Defeat
+#######
+#  E  #
+#######
+error: Error
+error500.text: Woops ! Everything's broken !
+error404.title: Invalid URL
+error404.text: The requested page could not be found ! Are you sure that the given address is valid ?
+enter: Validate
+email.your: Your email
+email.sent: Email sent
+#######
+#  F  #
+#######
+faq.title: F.A.Q.
+faq.question.what.is.human.reborn: What is HumanReborn
+faq.answer.what.is.human.reborn: HumanReborn is a multiplayer game taking place in a post apocalyptic world. Playing HumanReborn requires only a modern web browser, and an internet connection.
+faq.question.game.rules: Rules
+faq.answer.game.rules: The rules are simple.<br/><ul><li>Be polite. Sanctions from warnings to account closure will given to players who behave rudely.</li><li>Do not tell your password to anyone. HumanReborn administrators wil never ask for your password.</li><li>Any clan advocating hatred, racism or violence will be immediately deleted.</li><li>Having to account for a same game is forbidden for obvious balance purpose. If caught using multiple accounts for a same game, all accounts will be closed</li><li>The owner of an account is the one owning the associated email address.</li></ul>
+faq.question.game.moderator: Game administrators
+faq.answer.game.moderator: Game administrators keep an eye on the ongoing games, but they do not play. They make sure the players abide by the rules of the game. An administrator can close accounts, give warnings and handle disputes.
+faq.question.i.meet.a.bug: I encountered a bug, what should I do ?
+faq.answer.i.meet.a.bug: Human Reborn is still youngs and bugs are likely to appear to some of you. If you meet a bug, or any strange behavior, send a mail at hradmin@gmail.com beginning the title of the mail by [BUG_REPORT] or create a topic in the forum.
+faq.question.about.game: I have a question about how the game works.
+faq.answer.about.game: For more information about the game, please read the 'Rules' section.
+faq.question.forum: Forum
+faq.answer.forum: The rules of the game apply to the forum. The forum is place for player to exchange thoughts, talk about the game, their accomplishments or anything else they have in mind. When using the forum, you must be polite and make efforts to write easily understandable messages.<br/><br/>To log in the forum, use the same credentials as the ones for the game.
+faq.question.do.i.need.to.pay: Is it free ?
+faq.answer.do.i.need.to.pay: Human Reborn is completely free for the time being. Some non-free options may arrive in the future, we will keep you informed about those, but the game in itself will remain free.
+faq.question.which.browser: What web browser should I use ?
+faq.answer.which.browser: A recent web browser is required to access the full HumanReborn experience, HumanReborn's team advises the use of Google Chrome or Mozilla Firefox.
+faq.question.mobile.app: Mobile application
+faq.answer.mobile.app: "HumanReborn's website uses a 'responsive design', which means it will adapt the render to your screen, be it a smartphone, a tablet or a desktop 24 inches screen. As such, no additional application is being developped at the time."
+faq.question.site.subscription: Signing up
+faq.answer.site.subscription: "Signing up requires:<ul><li>a username.</li><li>a password</li><li>A valid Email address.</li></ul>"
+forum.general: General
+forum.general.description: Exchange about Human Reborn
+forum.technical: Technical assistance
+forum.technical.description: Section dedicated to the solving of technical issues
+forum.everything.else: Movies, books, ... Stuff !
+forum.everything.else.description: For everything else
+forum.topic.create.link: Create a topic
+forum.topic.none: No topic
+forum.topic.new: New topic
+forum.post.answer: Answer
+forum.created.by: Created by
+forum.last.message.date: Last message
+forum.login.to.answer: "LogIn to answer"
+from: From
+#######
+#  G  #
+#######
+game: Game
+game.join: Join game
+game.closed: Closed
+game.opened: Opened
+game.test.it: Private test game
+game.none: No game
+games.current: My games
+games.available: Available games
+games.status: "Games' status"
+games.future: Future games
+games.finished: Completed games
+games.opening.time: will open the
+garrisons: Garrisons
+garrison: Garrison
+general: General
+goal: Goal
+#######
+#  H  #
+#######
+hero.items.none: No item
+hero.items: "Hero's items"
+hero.stats: Stats
+hero.level.progression: Progress
+hero.level.up: Next level in
+hero.selection: Hero selection
+hero.select: Recruit
+hero.select.confirm: Confirm
+hero.select.cancel: Cancel
+hero.bonus: Passive bonus
+hero.bonus.health: "Increases the units' health"
+hero.bonus.speed: "Increases the units' movement speed"
+hero.bonus.attack: "Increases the units' attack"
+hero.bonus.armor: "Increases the units' armor"
+hero.bonus.collect: Increases the resources collect rate
+hero.selected: Selected hero
+heroes.available: Available heroes
+homepage: Home
+homepage.title: Connection
+homepage.goto: Back to the homepage
+hero: Hero
+hero.level: Level
+humanreborn.description: "HumanReborn is a free strategy game in your internet browser. Lead your clan to victory in a persistent post-apocalyptic world."
+humanreborn.keywords: "free game, strategy game, strategy, browser, humanreborn, human reborn, free, post-apocalyptic, armies, hero, roleplay, social"
+#######
+#  I  #
+#######
+item.details: Item details
+item.using: Using %itemName%
+infos: Information
+#######
+#  J  #
+#######
+join: Join
+#######
+#  K  #
+#######
+
+#######
+#  L  #
+#######
+login: Login
+logout: Logout
+loss: losses
+loss.none: No loss
+loser: Loser
+loser.loss: "Loser's losses"
+#######
+#  M  #
+#######
+map.attack.info: "Click on the enemy town you want to attack with this army"
+map.movement.info: "Click on the ally town you wish to move this army to"
+map: Map
+moving: Moving
+messages: Messages
+messages.messages: Messages
+messages.unread: Unread messages
+messages.inbox: Inbox
+messages.inbox.title: Title
+messages.inbox.sender: Sender
+messages.inbox.receiver: To
+messages.sent: Sent box
+messages.write: New message
+messages.title: Title
+messages.to: To
+messages.content: Content
+messages.submit: Send
+merge: Merge
+movement.completed: Movement of army %armyid% to %townName% completed.
+#######
+#  N  #
+#######
+notification.none: No notification
+notifications: Notifications
+notifications.all: All notifications
+#######
+#  O  #
+#######
+online.strategy.game: Online strategy game
+#######
+#  P  #
+#######
+password: Password
+password.reset.title: Reset password
+password.new: New password
+password.confirm: Confirm password
+passwords.dont.match: "Passwords don't match."
+password.changed: Password renewal completed
+place: Place
+progression: Progress
+profile: profile
+play: Play
+#######
+#  Q  #
+#######
+queues.toggle: "Show / Hide"
+quest: Quest
+quest.rewards: Rewards
+quests: Quests
+quest.none: No quest
+quests.current: Current quests
+quests.available: Available quests
+quests.completed: Completed quests
+quest.join: Accept
+quest.go: "Accept"
+queues: "Production queues"
+#######
+#  R  #
+#######
+result: Result
+research.started: Research started
+research.started.text: Research %research% started and will be completed in %seconds% seconds.
+register: Create account
+register.title: Create account
+register.email: Email
+register.username: Username
+register.password: Password
+register.submit: Submit
+register.cancel: Cancel
+resources: Resources
+resource.water: Polluted water
+resource.water.pure: Pure water
+resource.pureWater: Pure water
+resource.steel: Metal
+resource.fuel: Fuel
+resources.stock: Stock
+resources.capacity: Capacity
+resources.production: Current production
+resources.new: Won resources
+resources.not.enough: Insufficient resources
+resources.give: Give resources
+resources.give.warning: Warning, you will not be able to claim theses resources back!
+resources.give.text: Select the amount to give
+rule.title: Rules
+requirements.missing: Missing requirements
+#######
+#  S  #
+#######
+stats: Stats
+search: Search
+selected.army: Selected army
+selected.enemy.town: "Selected enemy town"
+selected.ally.town: Selected ally town
+submit: Submit
+#######
+#  T  #
+#######
+technology.known: Known
+technologies: Technologies
+technologies.build: Research
+technologies.type0: Basic technologies
+technologies.type1: Advanced technologies
+technologies.type2: Combat technologies
+technologies.type3: Transport technologies
+technologies.error.building: Click on a building to build it
+technologies.error.building.left: "Total space:"
+technologies.error.building.used: "Used space:"
+technologies.cost: Research cost
+technologies.time: Research time
+technologies.town.select: Select a town where to build
+technologies.error.technology: Click for more details
+technologies.list: Technologies list
+technology.queue: Researches
+technologies.tree: Technologies tree
+tooltip.title.begin: <span class="ui-tooltip-title">
+tooltip.title.end: </span>
+town.available.none.title: No town available
+town.available.none.text: "You do not own any town with free space to begin a new construction."
+town: Town
+towns: Towns
+towns.nom: Name
+
+towns.coordinates: Coordinates
+
+town.creating.buildings: Construction in progress
+town.creating.buildings.none: No building is being constructed
+town.existing.buildings: Existing
+town.existing.buildings.none: No existing building in this town
+town.free.slots: Free space
+town.building.build: Build
+town.building.cost: Cost
+town.building.time: Building time
+town.building.production: Production
+town.building.required: Required buildings
+town.building.required.none: None
+town.technology.required: Required technologies
+town.technology.required.none: None
+town.army.none: No army in this town
+town.owner: Belongs to
+town.attack: Attack
+town.lost: "Your town %townname% %coords% has been destroyed by %username% !"
+town.defended: "Enemy pushed back (%username%) at %townname% %coords%."
+troop.transfer.button: Transfer
+troop.transfer: Transfer units
+troop.transfer.label: Number of units to transfer
+title: Title
+time: Time
+time.remaining: Remaining time
+transfer: Transfer
+to: To
+this.is.a.testgame: "You are in private test game. Take your time to discover HumanReborn without having to fear an enemy attack."
+testgame.text: "Test HumanReborn in a private test game !"
+testgame.link: "Join test game"
+#######
+#  U  #
+#######
+unit.number: Number of units
+unit.attack: Attack
+unit.hp: Health point
+unit.armor: Armor
+unit.type: Type
+unit.speed: Speed
+unit.training: %unitname% is being recruited
+unit.build: Train
+unit.time: Building time
+username: Username
+user.does.not.exist: No user is linked to that email address
+units: Units
+units.army.manage: Manage army
+units.armies: Armies
+units.armies.movement: Army is moving
+units.armies.none: No army in this town
+units.armies.add: Create an army
+units.garrisons: Awaiting garrison
+units.garrisons.none: No awaiting garrison
+units.garrisons.add.units: Recruit new units
+units.recruit: Recruit
+units.building.required: Required buildings
+units.building.required.none: None
+units.technology.required: Required technologies
+units.technology.required.none: Aucune
+unit.summon.select.target.town: Select the town in which you want to see this units added.
+unit.details: Details of the unit
+units.new: transfered to
+unit.queue: formation
+unit.description: Description
+unit.detail.error.title: Error !
+unit.detail.error.content: "An error happened while fetching the data !"
+units.summoning: Summoning
+use: Use
+#######
+#  V  #
+#######
+validate: Validate
+view.buffs.current: See active bonuses
+victory: Victory
+#######
+#  W  #
+#######
+world.selection: Game selection
+winner: Winner
+winner.loss: "Winner's losses"
+#######
+#  X  #
+#######
+xp.point: "experience points"
+xp.none: "You have won no experience point"
+xp.win: "You have won %amount% experience points"
+#######
+#  Y  #
+#######
+your.towns: "Your towns"
+#######
+#  Z  #
+#######

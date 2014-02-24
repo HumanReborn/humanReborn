@@ -1,0 +1,12 @@
+<table>
+    {% for unit in armyContent %}
+    <tr>
+        <td>{{ unit.name }}</td>
+        <td>{{ unit.number }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="2">{{ 'army.empty'|trans }}</td>
+    </tr>
+    {% endfor %}
+</table>

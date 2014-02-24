@@ -1,0 +1,38 @@
+game.join1: Soldier
+game.join2: Conqueror
+game.join3: Warlord
+
+units.recruited1: "To arms !"
+units.recruited2: More soldiers
+units.recruited3: "Can't stop !"
+
+buildings1: Sand castle
+buildings2: Builder
+buildings3: Sim City
+
+units.destroyed1: Murderer
+units.destroyed2: Bloodlust
+units.destroyed3: I see dead people
+
+quests.completed1: Helper
+quests.completed2: Explorer
+quests.completed3: "Mr. Jones"
+
+max.hero.level1: "... Almost there ..."
+max.hero.level2: Serious business
+max.hero.level3: "What's next ?"
+
+game.join.desc: "Join one game.|Join %value% games."
+units.recruited.desc: "Recruit one unit.|Recruit %value% units."
+units.destroyed.desc: "Destroy one unit.|Destroy %value% units."
+buildings.desc: "Build one building.|Build %value% buildings."
+quests.completed.desc: "Complete one quest.|Complete %value% quests."
+max.hero.level.desc: "|Reach level %value% with a hero."
+
+profile.image: Profile image
+member.since: Member since
+games.number: Number of games
+achievements.number: Number of achievements
+victories.number: Victories
+achieved.on: Achieved on
+achievements.none: No achievement to this day

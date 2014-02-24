@@ -1,0 +1,23 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+<h3>Technologies list</h3>
+
+<a class='btn' href="{{ path('hr_adm_add_techno') }}">Create a technology</a>
+
+<table class='table table-striped table-bordered'>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>-</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for techno in technologies %}
+    <tr>
+        <td><a href="{{ path('hr_adm_edit_techno', { technoid: techno.id }) }}">{{ techno.name }}</a></td>
+        <td><a href="javascript:void(0)" attr-path="{{ path('hr_adm_delete_techno', { 'technoid':techno.id }) }}" onclick="confirmDelete(this)">Delete</a></td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock %}

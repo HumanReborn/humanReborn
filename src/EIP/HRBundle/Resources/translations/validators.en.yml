@@ -1,0 +1,2 @@
+signup.username.unique: "This username is not available."
+signup.email.unique: "This email address is already used by another account."

@@ -1,0 +1,239 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block html %}<html data-ng-app='technologyModule'>{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+<script src='{{asset('bundles/eiphr/js/angular.min.js')}}'></script>
+<script src="{{asset('bundles/eiphr/js/ui-bootstrap-tpls-0.5.0.min.js')}}"></script>
+{% endblock %}
+{% block content %}
+<div data-ng-controller='technologyCtrl'>
+    <section class="content-section">
+        <div class="container clearfix">
+            <h2 class="pull-left">{{'technologies'|trans}}</h2>
+            <div class="pull-right"><i class="fa fa-bolt fa-5x"></i></div>
+        </div>
+    </section>
+    <section class="content-section saw">
+        <div class="container">
+            <div class='well well-small fade' id='tree'>
+                <h3 class='text-center'>{{'technologies.tree'|trans}}</h3>
+                <div class="text-center">
+                    <div class="dib technoTreeContainer">
+                        <div class='technoTree'>
+                            <div data-ng-repeat='schemaView in schemaViews'>
+                                <div class='techno'
+                                data-ng-style='{left: schemaView.schema.type*100, top: schemaView.schema.index*100,
+                                background: getTechnoBackground(), "background-size": "80px 80px" }'
+                                data-ng-class='{selected: schemaView == currentSchemaView }'
+                                data-ng-click='changeCurrentSchemaView()' data-tooltip='{[{ schemaView.schema.name }]}' >
+                                <div data-ng-switch='isOwned(schemaView)'>
+                                    <div data-ng-switch-when="owned" class='text-center'>
+                                        <div class='img-circle' style='background-color:#51a351;'>
+                                            <i class='icon-white icon-ok'></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class='icon icon-arrow-down treeConnection'
+                            data-ng-style='{left: schemaView.schema.type*100+35, top: schemaView.schema.index*100+83 }'
+                            data-ng-class='{hide: schemaView.schema.index == (types[schemaView.schema.type] - 1),
+                            "icon-white": isOwned(schemaView) == "owned" }' ></i>
+                        </div>
+                    </div>
+                </div>
+                {#  #}
+                <div class='dib valign-top currentTechnology fade technology-details' id='schemaInfos'>
+                    <h4 class="text-center">{[{ currentSchemaView.schema.name }]}</h4>
+                    <div data-ng-show='currentSchemaView.errors'>
+                        <h5>{{'requirements.missing'|trans}}</h5>
+                        <div  class='row-fluid requirements'  id='technologyRequirements' >
+                                <div class='span6'>
+                                    <div data-ng-repeat='b in currentSchemaView.errors.buildings'>
+                                        <a data-ng-href='{[{ getBuildLink(b) }]}'
+                                        data-tooltip='{{'click.to.build'|trans}}'>
+                                        <span>{[{ b.name }]}</span>
+                                        <br/>
+                                        <img data-ng-src='{{asset('bundles/eiphr/images/schema/buildings/')}}{[{ b.rValue }]}.jpg' alt='{[{ b.name }]}'>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class='span6'>
+                                <div data-ng-repeat='t in currentSchemaView.errors.technologies'>
+                                    <a href='#/'
+                                    data-ng-click='selectRequiredTechnology(t.id)'
+                                    data-tooltip='{{'click.to.select'|trans}}'>
+                                        <span>{[{ t.name }]}</span>
+                                        <br/>
+                                        <img data-ng-src='{{asset('bundles/eiphr/images/schema/technologies/')}}{[{ t.rValue }]}.jpg' alt='{[{ b.name }]}'>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='row-fluid mtop'>
+                        <div class='span4 text-center'>
+                            <img src="" class='thumb' data-ng-src='{[{ currentSchemaView.schema.image }]}' alt='{[{ currentSchemaView.schema.name }]}' />
+                        </div>
+                        <div class='span8 text-justify text-justify' data-ng-bind-html-unsafe="currentSchemaView.schema.desc"></div>
+                    </div>
+                    <div class="row-fluid mtop">
+                    <div class='cost span6 darken-background'>
+                            <div class='small-lead'>{{ 'cost' | trans }}</div>
+                            <ul class='inline text-center'>
+                                <li>
+                                    <img
+                                    src="{{ asset('bundles/eiphr/images/pureWaterInverted.png') }}"
+                                    alt="{{ 'resource.water.pure'|trans }}" data-tooltip="{{ 'resource.water.pure'|trans }}"/>
+                                    <div class='text-center' data-ng-switch='{{layoutResources.pureWater}} < currentSchemaView.schema.pureWaterCost'>
+                                        <span data-ng-switch-when='true' class="not-enough">{[{ currentSchemaView.schema.pureWaterCost }]}</span>
+                                        <span data-ng-switch-when='false' class="spanCost">{[{ currentSchemaView.schema.pureWaterCost }]}</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img
+                                    src="{{ asset('bundles/eiphr/images/waterInverted.png') }}"
+                                    alt="{{ 'resource.water'|trans }}" data-tooltip="{{ 'resource.water'|trans }}"/>
+                                    <div class='text-center' data-ng-switch='{{layoutResources.water}} < currentSchemaView.schema.waterCost'>
+                                        <span data-ng-switch-when='true' class="not-enough">{[{ currentSchemaView.schema.waterCost }]}</span>
+                                        <span data-ng-switch-when='false' class="spanCost">{[{ currentSchemaView.schema.waterCost }]}</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img
+                                    src="{{ asset('bundles/eiphr/images/metalInverted.png') }}"
+                                    alt="{{ 'resource.steel'|trans }}" data-tooltip="{{ 'resource.steel'|trans }}"/>
+                                    <div class='text-center' data-ng-switch='{{layoutResources.steel}} < currentSchemaView.schema.steelCost'>
+                                        <span data-ng-switch-when='true' class="not-enough">{[{ currentSchemaView.schema.steelCost }]}</span>
+                                        <span data-ng-switch-when='false' class="spanCost">{[{ currentSchemaView.schema.steelCost }]}</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img
+                                    src="{{ asset('bundles/eiphr/images/fuelInverted.png') }}"
+                                    alt="{{ 'resource.fuel'|trans }}" data-tooltip="{{ 'resource.fuel'|trans }}"/>
+                                    <div class='text-center' data-ng-switch='{{layoutResources.fuel}} < currentSchemaView.schema.fuelCost'>
+                                        <span data-ng-switch-when='true' class="not-enough">{[{ currentSchemaView.schema.fuelCost }]}</span>
+                                        <span data-ng-switch-when='false' class="spanCost">{[{ currentSchemaView.schema.fuelCost }]}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class='span6 building-time darken-background'>
+                            <div class='small-lead'>{{'technologies.time'|trans}}</div>
+                            <div class='text-center content valign-middle'>
+                                <img src='{{asset('bundles/eiphr/images/timeInverted.png')}}'
+                                alt='{{ 'technologies.time' | trans }}' class='hrIcon'
+                                data-tooltip='{{ 'technologies.time'| trans }}' />
+                                <span>{[{ currentSchemaView.schema.buildingTime.toHHMMSS() }]}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                         <div data-ng-switch='isOwned(currentSchemaView)' class='mtop'>
+                                <a data-ng-switch-when='no'
+                                class='btn btn-block'
+                                data-ng-class='{"btn-danger": !canBuyCurrentSchemaView(),
+                                disabled: !canBuyCurrentSchemaView(),
+                                "btn-success": canBuyCurrentSchemaView() }'
+                                href='#' data-ng-href='{[{ getBuyLink() }]}'>{{'technologies.build'|trans}}</a>
+                                <button data-ng-switch-when='owned' class='btn btn-info btn-block disabled' >{{'technology.known'|trans}}</button>
+                                <button data-ng-switch-when='inQueue' class='btn btn-info btn-block disabled' >{{'research.started'|trans}}</button>
+                            </div>
+                    </div>
+                </div>
+                {#  #}
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+<script>
+    var app = angular.module('technologyModule',[ 'ui.bootstrap']);
+    app.config(['$interpolateProvider', function ($interpolateProvider) {
+        $interpolateProvider.startSymbol('{[{');
+        $interpolateProvider.endSymbol('}]}');
+    }]);
+
+    function display (targets, index) {
+        if (targets[index]){
+            $(targets[index]).toggleClass('in');
+            setTimeout(function() { display(targets, index+1); } , 150);
+        }
+    }
+
+    var technologyCtrl = function($scope, $http) {
+        var ownedTechnologies = [{% for t in ownedTechnologies %}{{t.id}},{% endfor %}];
+        var queuedTechnologies = [{% for t in queuedTechnologies %}{{t.schema.id}}{%endfor %}];
+        $http.get('{{path('hr_technology_schemaviews')}}').then(function(response){
+            $scope.types = [0,0,0,0];
+            response.data.forEach(function(item)
+            {
+                item.schema = JSON.parse(item.schema);
+                item.schema.index = $scope.types[item.schema.type]++;
+                item.schema.image = '{{asset('bundles/eiphr/images/schema/technologies/')}}' + item.schema.rValue + '.jpg';
+                if (item.errors) {
+                    item.errors.buildings.forEach(function(elem, index, array) {
+                        array[index] = JSON.parse(elem);
+                    });
+                    item.errors.technologies.forEach(function(elem, index, array) {
+                        array[index] = JSON.parse(elem);
+                    });
+                }
+                if (item.schema.id === {{ schemaid }})
+                    $scope.currentSchemaView = item;
+            });
+            $scope.schemaViews = response.data;
+            if (!$scope.currentSchemaView)
+                $scope.currentSchemaView = $scope.schemaViews[0];
+            display(['#tree', '#technologyRequirements', '#schemaInfos'], 0);
+        });
+$scope.currentTechnology = null;
+$scope.changeCurrentSchemaView = function() { $scope.currentSchemaView = this.schemaView; };
+$scope.isOwned = function(sv) {
+    if (!sv) return 'no';
+        if ($.inArray(sv.schema.id, ownedTechnologies) != -1) return 'owned'; // if owned
+        return ($.inArray(sv.schema.id, queuedTechnologies) != -1 ? 'inQueue' : 'no'); // if in queue, else
+    };
+    $scope.getTechnoBackground = function() {
+        var technoImgPath = '{{asset('bundles/eiphr/images/schema/technologies/')}}' + this.schemaView.schema.rValue + '.jpg';
+        return (this.schemaView.available ?
+                '#000 url("'+technoImgPath+'") no-repeat 50% 50%'
+                : 'url({{asset('bundles/eiphr/images/schema/error.png') }}) no-repeat 50% 50%, url('+technoImgPath+') no-repeat 50% 50%');
+    };
+    $scope.getBuyLink = function() {
+        if (!$scope.currentSchemaView || !$scope.currentSchemaView.canBuy) return '#/';
+        return Routing.generate('hr_technology_research_start', { id: $scope.currentSchemaView.schema.id, _locale: "{{ app.request.locale }}" });
+    };
+    $scope.canBuyCurrentSchemaView = function() {
+        var csv = $scope.currentSchemaView;
+        if (!csv) return false;
+        if (csv.canBuy !== undefined) return csv.canBuy;
+        var canBuy = (!csv.errors
+                      && {{ layoutResources.water }} >= csv.schema.waterCost
+                      && {{ layoutResources.pureWater }} >= csv.schema.pureWaterCost
+                      && {{ layoutResources.steel }} >= csv.schema.steelCost
+                      && {{ layoutResources.fuel }} >= csv.schema.fuelCost
+                      );
+        $scope.currentSchemaView.canBuy = canBuy;
+        return canBuy;
+    };
+    $scope.selectRequiredTechnology = function(id) {
+        for (var i = $scope.schemaViews.length - 1; i >= 0; i--)
+        {
+            if ($scope.schemaViews[i].schema.id === id)
+            {
+                $scope.currentSchemaView = $scope.schemaViews[i];
+                return ;
+            }
+        }
+    };
+    $scope.getBuildLink = function(b) {
+        return Routing.generate('hr_build_requirement',{schemaid: b.id, _locale: "{{ app.request.locale }}"});
+    };
+
+}
+</script>
+{% endblock %}

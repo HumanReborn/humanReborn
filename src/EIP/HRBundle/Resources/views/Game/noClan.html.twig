@@ -1,0 +1,86 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+
+{% block javascripts %}
+{{ parent() }}
+ <script>
+<!-- 
+
+    $(function() {
+        $('#tabLinks a:first').tab('show').parent().addClass('active');
+    });
+
+//-->
+</script> 
+
+{% endblock %}
+{% block content %}
+<div id="Clan">
+<div class='container-fluid'>
+    <h1 class="page-header">{{ 'clan.title' | trans }}</h1>
+    <ul id='tabLinks' class='row-fluid text-center'>
+        <li class='span4'><a href='#listclan' data-toggle='tab'>{{ 'clan.tab.listclan' | trans }}</a></li>
+        {% if myClan %} <li class='span4'><a href='#myclan' data-toggle='tab'>{{ 'clan.tab.myclan'|trans }} : [{{ myClan.acronym }}] {{ myClan.name }}</a></li> {% endif %}
+        {% if form %}<li class='span4'><a href='#createclan' data-toggle='tab'>{{ 'clan.tab.createclan'|trans }}</a></li>{% endif %}
+    </ul>
+    
+    <div class="tab-content well">
+        <div id="listclan" class='tab-pane fade in active'>
+            <h4 class='page-header'>{{ 'clan.tab.listclan' | trans }}</h4>
+            <table class='table table-stripped'>
+                <thead>
+                    <tr><th>{{ 'clan.acronym' | trans }}</th><th>{{ 'clan.name' | trans | raw}}</th><th>{{ 'clan.nbMember' | trans | raw}}</th></tr>
+                </thead>
+                <tbody>
+               {% for clanlist in clanList %}
+                    {% if loop.index % 2 == 0 %}
+                        <tr>
+                    {% else %}
+                        <tr class="line">
+                    {% endif %}
+                        <td><a href="{{ path('hr_clan_detail', {'clanname':clanlist.url} ) }}" class="clan-acronym" onclick="">{{ clanlist.acronym }}</a></td>
+                        <td><a href="{{ path('hr_clan_detail', {'clanname':clanlist.url} ) }}" class="clan-name" onclick="">{{ clanlist.name }}</a></td>
+                        <td><a href="{{ path('hr_clan_detail', {'clanname':clanlist.url} ) }}" class="clan-nmmember" onclick="">{{ clanlist.nmMember }}</a></td>
+                	</tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% if myClan %}
+        <div id="myclan"  class='tab-pane fade in active'>
+            <h4 class='page-header'>{{ 'clan.tab.myclan'|trans }} : [{{ myClan.acronym }}] {{ myClan.name }}</h4>
+                <p><img src="{{ myClan.banner }}" /></p><br>
+                
+                <h4>{{ 'clan.clan.public'|trans }}</h4>
+                <p>{{ myClan.publicPresentation }}</p><br>
+                <h4>{{ 'clan.clan.private'|trans }}</h4>
+                <p>{{ myClan.privatePresentation }}</p>
+                {% if canEdit %} <br><h4><a href="{{ path('hr_clan_admin', {'clanname':myClan.url} ) }}">{{ 'clan.clan.goadmin'|trans }}</a></h4> {% endif %}
+                {% if rankname != 'Admin' %}<br><h4><a href="{{ path('hr_clan_leave', {'idUser':userID} ) }}">{{ 'clan.leaveclan' | trans }}</a></h4>{% endif %}
+        </div>
+    {% endif %}
+    {% if form %}
+        <div id="createclan"   class='tab-pane fade'>
+            <h4 class='page-header'>{{ 'clan.tab.createclan'|trans }}</h4>
+            <form method="post" action="">
+                {{ form_widget(form._token) }}
+                    <div class="errorMsg">{{ form_errors(form) }}</div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.acronym' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.acronym) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.acronym) }}</div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.name' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.name) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.name) }}</div>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-small btn-primary" value="{{ 'clan.submit.createclan' | trans }}"/>
+                    </div>
+            </form>
+        </div>
+            {% endif %}
+    </div>
+</div>
+</div>
+{% endblock %}

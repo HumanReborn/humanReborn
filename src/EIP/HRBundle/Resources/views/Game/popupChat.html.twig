@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+    <title>Chat - Human Reborn</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/bootstrap/css/theme.min.css')  }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/css/chat.css')  }}" />
+    <script type="text/javascript" src="{{ asset('bundles/eiphr/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{  asset('bundles/eiphr/bootstrap/js/bootstrap.min.js')  }}"></script>
+
+</head>
+<body>
+    <div id='chat-menu'>
+        <ul>
+            <li><a href="#game-chat" onclick="changeTab(0)" id="game-chat-link" class="active">{{'game'|trans}}</a></li>
+            <li><a href="#clan-chat" onclick="changeTab(1)" id="clan-chat-link">Clan</a></li>
+        </ul>
+    </div>
+    <section id='chat-zone'>
+        <ul id='game-chat'></ul>
+        <ul id='clan-chat' class="hide"></ul>
+    </section>
+    <section id='chat-controls'>
+        <form onsubmit="return false;">
+            <div class="text-center">
+                <input  type="text" id="to-send" />
+                <button class='btn btn-primary' onclick="send()" >Send</button>
+            </div>
+        </form>
+    </section>
+    <div class='text-center' id='chat-bottom-logo'>
+        <img src="{{ asset('bundles/eiphr/images/homepage/whitelogo.png') }}" alt="logo" />
+    </div>
+        <script type="text/javascript">
+        // constant
+        var GAMETAB = 0;
+        var CLANTAB = 1;
+        //
+        if (!sessionStorage )
+            alert("Localstorage isnt supported by your browser");
+        var gameHistory = (sessionStorage && sessionStorage["gameChatHistory"] != null) ?
+        JSON.parse(sessionStorage["gameChatHistory"]) : new Array;
+        var clanHistory = (sessionStorage && sessionStorage["clanChatHistory"] != null) ?
+        JSON.parse(sessionStorage["clanChatHistory"]) : new Array;
+        var gameHistoryIndex = gameHistory.length > 0 ? gameHistory.length - 1 : 0;
+        var clanHistoryIndex = clanHistory.length > 0 ? clanHistory.length - 1 : 0;
+
+
+        var currentTab = 0;
+        var socket = null;
+
+        // on load
+        $(function() {
+            document.body.onkeydown = function(k){
+                if ($("#toSend").is(":focus"))
+                {
+                    switch (k.keyCode)
+                    {
+                        case 13: send(); break;
+                        case 38: historyUp(); break;
+                        case 40: historyDown(); break;
+                    }
+                }
+            };
+
+            socket = new WebSocket("ws://163.5.84.191:4344");
+            socket.onopen = function (event) { openfunc(event); };
+            socket.onerror = function (event) { socket.close(); };
+            socket.onclose = function(event) {
+                var error = {'data' : "<span style='color:red;'>Connection to server lost</span>" };
+                messagefunc(error);
+                error.data = '/clan ' + error.data;
+                messagefunc(error);
+            };
+        });
+
+
+        function changeTab(i) {
+            $('#chat-menu .active').removeClass('active');
+            currentTab = i;
+            var target, showTarget, hideTarget;
+            if (i == GAMETAB){
+                target = $("#game-chat-link");
+                showTarget = $('#game-chat');
+                hideTarget = $('#clan-chat');
+            } else {
+                target = $("#clan-chat-link");
+                showTarget = $('#clan-chat');
+                hideTarget = $('#game-chat');
+            }
+            showTarget.removeClass('hide');
+            hideTarget.addClass('hide');
+
+            target.removeClass('updated');
+            target.addClass('active');
+
+        }
+
+        function openfunc(event) {
+            console.log("ws connection established");
+            socket.send("{{ tokenValue }}");
+            socket.onmessage = function (event) { messagefunc(event); };
+        }
+
+        function send() {
+            var toSend = $("#to-send").val();
+            if (toSend != "")
+            {
+                if (currentTab == 1)
+                {
+                    clanHistory.push(toSend);
+                    clanHistoryIndex = clanHistory.length;
+                    if (sessionStorage) sessionStorage["clanChatHistory"] = JSON.stringify(clanHistory);
+                    toSend = "/clan " + toSend;
+                }
+                else
+                {
+                    gameHistory.push(toSend);
+                    gameHistoryIndex = gameHistory.length;
+                    if (sessionStorage) sessionStorage["gameChatHistory"] = JSON.stringify(gameHistory);
+                }
+                socket.send(toSend);
+                $("#to-send").val("");
+            }
+            $("#to-send").focus();
+        }
+
+        function messagefunc(event) {
+            var li = document.createElement("li");
+            var target;
+            if (event.data.lastIndexOf("/clan ", 0) === 0)
+            {
+                target = $("#clan-chat")
+                li.innerHTML = event.data.substring(6);
+                if (currentTab != CLANTAB) {
+                    $("#clan-chat-link").addClass('updated');
+                }
+            }
+            else
+            {
+                target = $("#game-chat");
+                li.innerHTML = event.data;
+                if (currentTab != GAMETAB) {
+                    $("#game-chat-link").addClass('updated');
+                }
+            }
+            target.append(li);
+            if ($(target.selector + " > li").size() > 150)
+                $(target.selector + " > li")[0].remove();
+            target = document.getElementById(target.selector.substring(1));
+            target.scrollTop = target.scrollHeight;
+        }
+
+
+        function historyUp()
+        {
+            if (currentTab == GAMETAB && gameHistoryIndex > 0)
+                $("#to-send").val(gameHistory[--gameHistoryIndex]);
+            else if (currentTab == CLANTAB && clanHistoryIndex > 0)
+                $("#to-send").val(clanHistory[--clanHistoryIndex]);
+        }
+
+        function historyDown()
+        {
+            if (currentTab == GAMETAB && gameHistoryIndex < gameHistory.length - 1)
+                $("#to-send").val(gameHistory[++gameHistoryIndex]);
+            else if (currentTab == CLANTAB && clanHistoryIndex < clanHistory.length - 1)
+                $("#to-send").val(clanHistory[++clanHistoryIndex]);
+        }
+
+    </script>
+</body>
+</html>
+
+

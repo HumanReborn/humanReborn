@@ -1,0 +1,14 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<p>sections</p>
+<ul class='unstyled'>
+{% for section in sections %}
+        <li>
+            <a href="{{path('hr_adm_forum_section', {sectionid: section.id})}}">{{section.name}}</a>
+        </li>
+{% endfor %}
+</ul>
+
+
+{% endblock %}

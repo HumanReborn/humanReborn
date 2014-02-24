@@ -1,0 +1,207 @@
+{% extends 'EIPHRBundle::/Visitor/layout.html.twig' %}
+{% block content %}
+{# logo #}
+<section class='content-section first' id='homepage-title'>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span6 text-center " id='svg-container'>
+                <div id='animated-logo'>
+                    <img src="{{asset('bundles/eiphr/images/homepage/hr.png')}}" alt="HR" class='fade' />
+                    <div class="clearfix">
+                        <svg></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="span6 text-center">
+                <h1>HumanReborn</h1>
+                <h4>{{'online.strategy.game'|trans}}</h4>
+                <div class="links">
+                    {% set params = app.request.get('_route_params')  %}
+                    <a href="{{path(app.request.get('_route'), params | merge({_locale: 'fr'})) }}"><img src="{{asset('bundles/eiphr/images/fr.png')}}" alt="Français"></a>
+                    <a href="{{path(app.request.get('_route'), params | merge({_locale: 'en'})) }}"><img src="{{asset('bundles/eiphr/images/gb.png')}}" alt="English"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# form #}
+<section class='content-section saw'>
+    <div class="container">
+       <div class="row-fluid">
+            <div class='span8'>
+                <h2>2014/2/14</h2>
+                <p>{{'main.news'|trans({}, 'homepagev2')}}</p>
+            </div>
+            <div class='span4'>
+                {% if error %}
+                    <div class="text-danger margin-sm">{{ error.message|trans }}</div>
+                {% endif %}
+                <form method="post" action="{{ path('hr_login_check') }}" id="login-form">
+                    <input type='hidden' name="_target_path" value="hr_games" />
+                    <div>
+                        <input type="text" name="_username" maxlength="30" placeholder="{{ 'username'|trans }}"   required="required" class='input-xlarge'/>
+                    </div>
+                    <div>
+                        <input type="password" name="_password" maxlength="30" placeholder="{{ 'password'|trans }}" required="required" class='input-xlarge' />
+                    </div>
+                    <div>
+                        <button type="submit" class='btn btn-primary'><i class='icon-ok'></i> {{ 'enter'|trans }}</button>
+                    </div>
+                </form>
+                <div>
+                    <a href="{{ path('hr_register') }}" class='btn btn-small'>
+                        <i class='icon-th-list icon-white'></i> {{ 'register'|trans }}
+                    </a>
+                    <a href="{{ path('hr_lost_credentials') }}" class='btn btn-small'>
+                        <i class='icon-question-sign icon-white'></i> {{ 'credentials.lost'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
+</section>
+
+<section class='content-section saw' id='homepage-what'>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span4 screenshots">
+                <img src="{{ asset('bundles/eiphr/images/homepage/screenshot1.png') }}" alt="humanreborn image"/>
+                <img src="{{ asset('bundles/eiphr/images/homepage/screenshot2.png') }}" alt="humanreborn image"/>
+                <img src="{{ asset('bundles/eiphr/images/homepage/screenshot3.png') }}" alt="humanreborn image"/>
+            </div>
+            <div class="span8">
+                <h4>{{'conquest'|trans({}, 'homepagev2')}}</h4>
+                <p>{{'conquest.text'|trans({}, 'homepagev2')}}</p>
+                <h4>{{'roleplay'|trans({}, 'homepagev2')}}</h4>
+                <p>{{'roleplay.text'|trans({}, 'homepagev2')}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{# eip #}
+<section class='content-section saw' id='homepage-eip'>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="text-center">
+                    <img src="{{ asset('bundles/eiphr/images/homepage/logo_epitech.jpg')}}" alt="EPITECH">
+                </div>
+                <p>{{'epitech'|trans({}, 'homepagev2')|raw}}</p>
+            </div>
+            <div class="span6">
+                <div class="text-center">
+                    <img src="{{ asset('bundles/eiphr/images/homepage/logo_eip.jpg')}}" alt="EIP">
+                </div>
+                <p>{{'eip'|trans({}, 'homepagev2')}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src='{{asset('bundles/eiphr/js/snap.svg-min.js')}}'></script>
+<script>
+    var earth_resource_path = '{{asset('bundles/eiphr/images/homepage/earth.svg')}}';
+    var shards_resource_path = '{{asset('bundles/eiphr/images/homepage/shards.svg')}}';
+
+    // animation
+    var INITIAL_X = 0,
+        INITIAL_Y = 200;
+    var s =  Snap('#animated-logo svg');
+    var c = s.circle(250 + INITIAL_X, 250 + INITIAL_Y, 250);
+    c.attr({'fill':'#fff'});
+
+    Snap.load(earth_resource_path, function(f){
+        var p = f.select('path')
+        p.attr({'fill':'#fff', 'stroke':'#fff', 'transform': "t"+INITIAL_X+","+INITIAL_Y});
+        s.append(p);
+    });
+    setTimeout(function() { c.animate({'opacity': 0}, 1000); }, 800);
+
+    Snap.load(shards_resource_path, function(f){
+        var p = f.selectAll('path');
+        p.attr({'fill': '#fff', 'stroke':'#fff', transform: "t"+INITIAL_X+","+INITIAL_Y});
+
+        for (var i = p.length - 1; i >= 0; i--)
+            p[i].click(function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                console.log(this.node.id);
+            });
+
+        setTimeout(function() {
+            Snap.animate(0, 500, function(i){
+                for (var j = p.length - 1; j >= 0; j--) {
+                    var m = getTranslationMatrixForShardId(p[j], i, 500);
+                    p[j].attr({transform: m });
+                }
+            },1000, mina.elastic, shardsAnimationCallback); // end Snap animation
+        }, 1800); // end setTimeout
+
+        s.append(p);
+    });
+
+    function shardsAnimationCallback() {
+        setTimeout(function() {
+            $('#animated-logo img').toggleClass('in');
+        }, 700);
+    }
+
+
+    var coordinates = {
+            'p1': [130, -20, 0],
+            'p2': [20, -50, 0],
+            'p3': [40, -50, 0],
+            'p4': [120, -110, 0],
+            'p5': [255, -180, 0],
+            'p6': [170, -210, 0],
+            'p7': [190, -50, 0],
+            'p8': [260, -150, 0],
+            'p9': [270, -130, 0],
+            'p10': [125, -143, 0],
+            'p11': [200, -154, 0],
+            'p12': [232, -146, 0],
+            'p13': [65, -95, 0],
+            'p14': [127, -150, 0],
+            'p15': [155, -132, 0],
+            'p16': [120, -149, 0],
+            'p17': [192, -146, 0],
+            'p18': [245, -60, 0],
+            'p19': [247, -120, 0],
+            'p20': [40, -32, 0],
+            'p21': [30, -24, 0],
+            'p22': [138, -136, 0],
+            'p23': [3, -255, 0],
+            'p24': [193, -110, 0],
+            'p25': [172, 12, 0],
+            'p26': [160, -30, 0],
+            'p27': [212, -66, 0],
+            'p28': [25, -15, 0],
+            'p29': [227, -55, 0],
+            'p30': [30, -30, 0],
+            'p31': [280, -80, 420],
+    };
+
+    function getTranslationMatrixForShardId(nodeObj, iteration, totalIteration) {
+        var nodeId = nodeObj.node.id;
+        //var m = new Snap.Matrix(),
+        var m = new Snap.Matrix(),
+        x = INITIAL_X,
+        y = INITIAL_Y,
+        r = 0;
+        if (!!coordinates[nodeId]) {
+            x += coordinates[nodeId][0] * iteration / totalIteration;
+            y += coordinates[nodeId][1] * iteration / totalIteration;
+        }
+        m.translate(x,y);
+
+        // ugly fix pour faire de la place pour le logo HR
+        if (nodeId == 'p23'){
+            var bbox = nodeObj.getBBox();
+            m.scale(1 - (0.5 * iteration / totalIteration), 1 - (0.5 * iteration / totalIteration), bbox.cx, bbox.cy );
+        }
+        return m;
+    }
+</script>
+
+{% endblock %}

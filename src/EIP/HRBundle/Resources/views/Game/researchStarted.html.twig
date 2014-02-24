@@ -1,0 +1,20 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container">
+        <h2>{{'research.started'|trans}}</h2>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+            <p class='text-center'>
+                <img class='thumb dib margin-sm' src='{{asset('bundles/eiphr/images/schema/technologies/'~schema.rValue)}}.jpg' alt='{{schema.name|trans}}' />
+               {% trans with {'%research%': schema.name|trans({}, 'technologies'), '%seconds%': remainingTime(schema.buildingTime) } %}research.started.text{% endtrans %}
+            </p>
+            <div class='links text-center'>
+                <a class='btn' href='{{path('hr_technology')}}'>{{'back'|trans}}</a>
+            </div>
+    </div>
+</section>
+
+{% endblock %}

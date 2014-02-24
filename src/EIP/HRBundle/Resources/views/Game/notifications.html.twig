@@ -1,0 +1,62 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'notifications'|trans}}</h2>
+        <div class="pull-right"><i class="fa fa-warning fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div class="text-center">
+            {% for notification in notifications %}
+            <div class='darken-background dib margin-sm notification'>
+                <div class="padding-sm">
+                    <div class="clearfix">
+                        <div class='badge badge-{{ getNotificationClass(notification) }} pull-left'><i class="fa {{ getNotificationIcon(notification) }}"></i></div>
+                        <div class="pull-right underlined">{{ notification.time|date('Y-m-d H:i:s') }}</div>
+                    </div>
+                    <p class='text-justify mtop'>
+                        {{ notification.content }}
+                    </p>
+                </div>
+            </div>
+            {% else %}
+            <div >{{'notification.none'|trans}}</div>
+            {% endfor %}
+        </div>
+        <div class="pagination pagination-centered">
+            <ul>
+                {% if currentPage <= 1 %}
+                <li class="disabled">
+                    <a>&laquo;</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{{path('hr_notifications', {page: (currentPage-1)})}}">&laquo;</a>
+                </li>
+                {% endif %}
+
+                {% for i in 1..maxPage %}
+                    <li {% if i == currentPage %}class="active"{%endif%}>
+                        <a href="{{path('hr_notifications', {page: i})}}">{{i}}</a>
+                    </li>
+                {% endfor %}
+
+                {% if currentPage == maxPage %}
+                <li class="disabled">
+                    <a>&raquo;</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{{path('hr_notifications', {page: (currentPage+1)})}}">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <p class='text-center'>
+            <a class='btn' href='{{path('hr_game_dashboard')}}'>{{'back'|trans}}</a>
+        </p>
+</div>
+</section>
+{% endblock %}

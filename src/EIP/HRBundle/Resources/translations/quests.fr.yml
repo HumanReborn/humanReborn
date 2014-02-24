@@ -1,0 +1,23 @@
+type.give.resources: Ressources
+type.destroy.unit: Destruction
+type.build: Construction
+
+destroy.q1: Bain de sang
+quest.completed: Quête '%questName%' accomplie !
+resources.q1: Marchand ambulant
+
+quest.finished: Terminée
+quest.victory: Accomplie
+quest.ongoing: En cours
+quest.not.followed: Vous ne réalisez pas cette quête.
+
+item.reward.none: Aucun objet
+
+one.desc: >
+  <h3>Mes marchandises vous tentent ?</h3>
+  <p>La caravane de Gohl est de passage et vous propose une fois de plus ses étranges marchandises. Aujourd’hui sont en vente : un très pratique puits portable, un pack de disques vinyles en parfait état ainsi que de nombreux débris de tanks récupérés sur les champs de bataille. Le tout, pour un prix défiant toute l’inexistante concurrence ! Parviendrez-vous à résister ? </p>
+two.desc: >
+  <h3>Chasseur de prime</h3>
+  <p>Vos agents vous ont rapporté qu’il existe une prime pour la capture ou l’élimination de certains de vos ennemis … Si vos chemins venaient à se croiser, réfléchissez bien. Le jeu en vaut-il la chandelle ? Êtes-vous assez puissant pour vous défaire de ces ennemis tout en maintenant la sécurité de votre clan ?</p>
+
+

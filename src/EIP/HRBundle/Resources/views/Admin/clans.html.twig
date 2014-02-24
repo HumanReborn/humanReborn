@@ -1,0 +1,13 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<h2>Clans administration</h2>
+
+
+<a href="{{ path('hr_adm_add_clan') }}">create a clan</a>
+
+<div id="clanList">
+{% include 'EIPHRBundle::/Admin/_clanList.html.twig' %}
+</div>
+
+{% endblock %}

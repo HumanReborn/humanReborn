@@ -1,0 +1,32 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<h3>buffs schema</h3>
+<a class='btn' href='{{path('hr_adm_add_buff')}}'>add new HRBuffSchema</a>
+<table class='table table-striped table-bordered'>
+    <thead>
+        <tr>
+            <th>name</th>
+            <th>type</th>
+            <th>value</th>
+            <th>duration</th>
+            <th>-</th>
+            <th>-</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for schema in schemas %}
+    <tr>
+        <td>{{ schema.name }}</td>
+        <td>{{ schema.type }}</td>
+        <td>{{ schema.value }}</td>
+        <td>{{ schema.duration }}</td>
+        <td><a href='{{path('hr_adm_edit_buff', {schemaid: schema.id})}}'>edit</a></td>
+        <td><a href='{{path('hr_adm_delete_buff', {schemaid: schema.id})}}'>delete</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

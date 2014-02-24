@@ -1,0 +1,141 @@
+<!doctype html>
+<html data-ng-app='heroSelectionModule'>
+<head>
+    <meta charset="utf-8" />
+    <title>HumanReborn - {{ 'hero.selection'|trans }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/bootstrap/css/theme.min.css')  }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/bootstrap/css/bootstrap-responsive.min.css')  }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/css/main.css')  }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/css/heroSelection.css')  }}" />
+</head>
+<body data-ng-controller='heroCtrl'>
+    <div id="menu">
+        <div class="text-center">
+            <a href="{{path('hr_homepage')}}"><img src="{{asset('bundles/eiphr/images/homepage/hr.png')}}" alt="hr"/></a>
+        </div>
+    </div>
+    <section class="content-section header">
+        <div class="container clearfix">
+            <h2 class="pull-left">{{'hero.selection'|trans}}</h2>
+            <a class="pull-right" href='{{path('hr_homepage')}}'><img src='{{asset('bundles/eiphr/images/homepage/whitelogo.png')}}' alt='Humanreborn'/></a>
+        </div>
+    </section>
+    <section class="content-section saw">
+        <div class="container">
+
+            <div id='heroThumbs' >
+                <h3>{{'heroes.available'|trans}}</h3>
+                <div id='heroThumbsContainer' class="text-center">
+                    <div data-ng-repeat='hero in heroes' ng-click='selectHero(hero)' class="dib" >
+                        <img  ng-src='{[{hero.img}]}' alt='{[{hero.name}]}' class="heroThumb" data-ng-class="{selected: selectedHero == hero}" />
+                        <div>{[{hero.name}]}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content-section ">
+        <div class="container">
+
+            <div id='heroDetails'>
+                <h3>{{'hero.selected'|trans}}</h3>
+                <div>
+                    <div id='detailText'>
+                        <h4 class='text-center'>{[{selectedHero.name }]}</h4>
+                        <p class='text-justify'>{[{selectedHero.description}]}</p>
+                    </div>
+                    <div id='detailImg' class='text-center'>
+                        <img ng-src='{[{selectedHero.img}]}' alt='{[{selectedHero.name}]}'  />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content-section saw" style="padding-top:20px;">
+        <div class="container">
+            <div id='heroStats'>
+                <h4>{{'hero.stats'|trans}}</h4>
+                <table class='table table-bordered table-striped table-condensed' >
+                    <thead>
+                        <tr>
+                            <th>{{'bonus'|trans|capitalize}}</th>
+                            <th>{{'bonus.initial'|trans}}</th>
+                            <th>{{'bonus.per.level'|trans}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img ng-src='{{asset('bundles/eiphr/images/unit_detail/heartInversed.png')}}' alt='{{'bonus.health'|trans}}' /></td>
+                            <td>{[{selectedHero.health}]}</td>
+                            <td>{[{selectedHero.healthPerLevel}]}</td>
+                        </tr>
+                        <tr>
+                            <td><img ng-src='{{asset('bundles/eiphr/images/unit_detail/swordInversed.png')}}' alt='{{'bonus.attack'|trans}}' /></td>
+                            <td>{[{selectedHero.attack}]}</td>
+                            <td>{[{selectedHero.attackPerLevel}]}</td>
+                        </tr>
+                        <tr>
+                            <td><img ng-src='{{asset('bundles/eiphr/images/unit_detail/shieldInversed.png')}}' alt='{{'bonus.armor'|trans}}' /></td>
+                            <td>{[{selectedHero.armor}]}</td>
+                            <td>{[{selectedHero.armorPerLevel}]}</td>
+                        </tr>
+                        <tr>
+                            <td><img ng-src='{{asset('bundles/eiphr/images/unit_detail/speedInversed.png')}}' alt='{{'bonus.speed'|trans}}' /></td>
+                            <td>{[{selectedHero.speed}]}</td>
+                            <td>{[{selectedHero.speedPerLevel}]}</td>
+                        </tr>
+                        <tr>
+                            <td><img ng-src='{{asset('bundles/eiphr/images/unit_detail/moneyInversed.png')}}' alt='{{'bonus.collect'|trans}}' /></td>
+                            <td>{[{selectedHero.collectRate}]} %</td>
+                            <td>{[{selectedHero.collectRatePerLevel}]} %</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class='links text-center' id='heroSelectionControl'>
+            <a class='btn' href='{{path('hr_games')}}'>{{'back'|trans}}</a>
+            <a class='btn btn-primary' href='{[{selectedHero.path}]}'>{{'validate'|trans}}</a>
+        </p>
+    </section>
+<img src='{{asset('bundles/eiphr/images/homepage/whitelogo.png')}}' alt='logo' class="bottom-logo" />
+<script src='{{asset('bundles/eiphr/js/jquery.js')}}'></script>
+<script src='{{asset('bundles/eiphr/js/angular.min.js')}}'></script>
+{% autoescape true js %}
+<script>
+    var app = angular.module('heroSelectionModule', [])
+    .config(['$interpolateProvider', function ($interpolateProvider) {
+        $interpolateProvider.startSymbol('{[{');
+        $interpolateProvider.endSymbol('}]}');
+      }]);
+
+    function heroCtrl($scope) {
+        $scope.heroes = [
+        {% for hero in heroschemas %}
+          {
+              id: {{hero.id}},
+              name: '{{hero.name|trans({}, 'heroes')}}',
+              description: '{{hero.description|trans({}, 'heroes')}}',
+              img: '{{asset('bundles/eiphr/images/schema/heros/' ~ hero.img ~ '.jpg')}}',
+              attack: {{hero.bonusAttack}},
+              armor: {{hero.bonusArmor}},
+              health: {{hero.bonusHealth}},
+              speed: {{hero.bonusSpeed}},
+              collectRate: {{hero.bonusCollectRate}},
+              attackPerLevel: {{hero.bonusAttackPerLevel}},
+              armorPerLevel: {{hero.bonusArmorPerLevel}},
+              healthPerLevel: {{hero.bonusHealthPerLevel}},
+              speedPerLevel: {{hero.bonusSpeedPerLevel}},
+              collectRatePerLevel: {{hero.bonusCollectRatePerLevel}},
+              path: '{{ path('hr_hero_confirm_selection', { 'heroid': hero.id, 'gameid':game.id }) }}'
+          },
+        {% endfor %}
+        ];
+
+        $scope.selectedHero = $scope.heroes[0];
+        $scope.selectHero = function(hero) { $scope.selectedHero = hero; };
+    }
+</script>
+{% endautoescape %}
+</body>
+</html>

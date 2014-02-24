@@ -1,0 +1,36 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class='container'>
+        <h2>{{'attack'|trans}}</h2>
+    </div>
+</section>
+<section class="content-section saw">
+<div class='container'>
+    <div class='row-fluid'>
+        <div class='span6'>
+            <h3>{{'attack.details'|trans}}</h3>
+            <ul class='unstyled'>
+                <li>{{ 'army'|trans|capitalize ~' '~attackingArmy.id }}</li>
+                <li>{{ 'from'|trans~" : "~attackingArmy.town.name~" ["~attackingArmy.movement.fromX~":"~attackingArmy.movement.fromY~"]" }}</li>
+                <li>{{ 'to'|trans~" : "~attackedTown.name~" ["~attackingArmy.movement.toX~":"~attackingArmy.movement.toY~"]" }}</li>
+                <li>{{'destination.reach.time'|trans~" : "~reachTime }} sec.</li>
+            </ul>
+        </div>
+
+        <div class='span6'>
+            <h3>{{'units'|trans}}</h3>
+            {% for unit in armyContent %}
+            <div class='thumb dib' title='{{unit.name|trans({}, 'units')}}' >
+                <img src="{{asset('bundles/eiphr/images/schema/units/' ~ unit.image)}}.jpg" alt="{{unit.name|trans({}, 'units')}}"/>
+                <p class='text-center'>{{unit.number}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class='text-center'>
+        <a href='{{path('hr_units')}}' class='btn' >{{'back'|trans}}</a>
+    </div>
+</div>
+</section>
+{% endblock %}

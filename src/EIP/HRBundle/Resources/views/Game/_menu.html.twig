@@ -1,0 +1,129 @@
+<div id="menu" class="clearfix">
+    {% spaceless %}
+    <ul id="top-menu" class="pull-left">
+        <li class='opener unselectable'>
+            <i class="fa fa-th-large fa-2x"></i>
+        </li>
+        <li class="logo">
+            <a href="{{path('hr_homepage')}}"><img src="{{asset('bundles/eiphr/images/homepage/hr.png')}}" alt="logo" /></a>
+        </li>
+    </ul>
+    {% endspaceless %}
+    <nav id='left-menu'>
+        <ul><!--
+            --><li><a href="{{path('hr_game_dashboard')}}"><i class='icon fa fa-align-justify'></i>{{'game'|trans}}</a></li><!--
+            --><li><a href="{{path('hr_units')}}"><i class='icon fa fa-group'></i>{{'units'|trans}}</a></li><!--
+            --><li><a href="{{path('hr_towns')}}"><i class="icon fa fa-building"></i>{{'buildings'|trans}}</a></li><!--
+            --><li><a href="{{path('hr_technology')}}"><i class='icon fa fa-bolt'></i>{{'technologies'|trans}}</a></li><!--
+            --><li><a href="{{path('hr_hero')}}"><i class='icon fa fa-male'></i>{{'hero'|trans}}</a></li><!--
+            --><li><a href="{{path('hr_quests')}}"><i class='icon fa fa-trophy'></i>{{'quests'|trans}}</a></li><!--
+            --><li><a href="{{path('hr_map')}}"><i class='icon fa fa-globe'></i>{{'map'|trans}}</a></li><!--
+            --><li><a href="{{path('hr_messages')}}"><i class='icon fa fa-envelope'></i>{{'messages'|trans}}</a></li><!--
+            --><li><a href="{{path('hr_clan')}}"><i class='icon fa fa-flag'></i>{{'clan'|trans}}</a></li><!--
+        --></ul>
+    </nav>
+
+    <div class="queues-opener pull-right" title='{{'queues'|trans}}'><i class='fa fa-clock-o fa-2x'></i></div>
+
+    <ul class="resources pull-right">
+        <li><img src="{{asset('bundles/eiphr/images/waterInverted.png')}}" alt='{{'resource.water'|trans}}' title='{{'resource.water'|trans}}'>
+            <div>{{layoutResources.water|number_format}}<span>(+{{layoutResources.waterGain}})</span></div></li>
+            <li><img src="{{asset('bundles/eiphr/images/pureWaterInverted.png')}}" alt="{{'resource.water.pure'|trans}}" title='{{'resource.water.pure'|trans}}'>
+                <div>{{layoutResources.pureWater|number_format}}<span>(+{{layoutResources.pureWaterGain}})</span></div></li>
+            </li>
+            <li><img src="{{asset('bundles/eiphr/images/metalInverted.png')}}" alt='{{'resource.steel'|trans}}' title='{{'resource.steel'|trans}}'>
+                <div>{{layoutResources.steel|number_format}} <span>(+{{layoutResources.steelGain}})</span></div>
+            </li>
+            <li><img src="{{asset('bundles/eiphr/images/fuelInverted.png')}}" alt='{{'resource.fuel'|trans}}' title='{{'resource.fuel'|trans}}'>
+                <div>{{layoutResources.fuel|number_format}} <span>(+{{layoutResources.fuelGain}})</span></div>
+            </li>
+        </ul>
+
+        <div id="queues">
+        <div class='queueSelector'><!--
+            --><a href='javascript:void(0)' title='{{'units'|trans}}'  class='opened' data-target='.units'><i class="fa fa-group" ></i></a><!--
+            --><a href='javascript:void(0)' title='{{'buildings'|trans}}' data-target='.buildings'><i class="fa fa-building"></i></a><!--
+            --><a href='javascript:void(0)' title='{{'technologies'|trans}}' data-target='.technologies'><i class="fa fa-bolt"></i></a><!--
+        --></div>
+        <div class="queue units opened">
+            <ul>
+                {% for luq in layoutUnitQueue %}
+                {% set rTime = luq.endTime > currentTime ? luq.endTime - currentTime : 0 %}
+                <li>{{luq.schema.name|trans({}, 'units')}} - <span class='queue-time'>{{ remainingTime(rTime) }}</span></li>
+                {% endfor %}
+                {% for i in 1..(10-(layoutUnitQueue|length)) %}
+                <li>-</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="queue buildings">
+            <ul>
+                {% for lbq in layoutBuildingQueue %}
+                {% set rTime = lbq.endTime > currentTime ? lbq.endTime - currentTime : 0 %}
+                <li>{{lbq.schema.name|trans({}, 'buildings')}} - <span class='queue-time'>{{ remainingTime(rTime) }}</span></li>
+                {% endfor %}
+                {% for i in 1..(10-(layoutBuildingQueue|length)) %}
+                <li>-</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="queue technologies">
+            <ul>
+                {% for ltq in layoutTechnologyQueue %}
+                {% set rTime = ltq.endTime > currentTime ? ltq.endTime - currentTime : 0 %}
+                <li>{{ltq.schema.name|trans({}, 'technologies')}} - <span class='queue-time'>{{ remainingTime(rTime) }}</span></li>
+                {% endfor %}
+                {% for i in 1..(10-(layoutTechnologyQueue|length)) %}
+                <li>-</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="options">
+    <ul>
+        <li><a href='{{path('hr_profile', {username: app.user.username})}}'><i title="{{'profile'|trans}}" class="fa fa-user"></i></a></li>
+        <li><a target='_blank' href='{{path('hr_popup_chat')}}'><i title="Chat" class="fa fa-comments-o"></i></a></li>
+        <li><a href="{{path('hr_forum_home')}}"><i title="Forum" class="fa fa-group"></i></a></li>
+
+        {% set params = app.request.get('_route_params')  %}
+        <li>
+            <a data-locale='en'  href='javascript:void(0)' data-href="{{path(app.request.get('_route'), params | merge({_locale: 'en'}) )}}" >
+                <img src="{{asset('bundles/eiphr/images/big_flags/gbGrayed.jpg')}}" alt="gb" title="English" />
+            </a>
+        </li>
+        <li>
+            <a data-locale='fr' href='javascript:void(0)' data-href="{{path(app.request.get('_route'), params | merge({_locale: 'fr'}) )}}" >
+                <img src="{{asset('bundles/eiphr/images/big_flags/frGrayed.jpg')}}" alt="fr" title="Français" />
+            </a>
+        </li>
+        <li><a href="{{path('hr_logout')}}"><i title="{{'dashboard.logout'|trans}}" class="fa fa-sign-out"></i></a></li>
+    </ul>
+    <div id="toggle-button" class="unselectable">+</div>
+</div>
+
+<script>
+    /* two functions ... ~ sf2 routing too strict and do not want to include in every page */
+    function changeLocaleToFr(href) {
+        $.post('{{ path('hr_change_locale', { locale: 'fr' }) }}', function(){
+            window.location = href;
+        });
+    };
+    function changeLocaleToEn(href) {
+        $.post('{{ path('hr_change_locale', { locale: 'en' }) }}', function(){
+            window.location = href;
+        });
+    };
+    $('#options a[data-locale]').click(function(e){
+        var elem = $(this);
+        var locale = elem.data('locale');
+        var href = elem.data('href');
+        if (locale == 'fr')
+            changeLocaleToFr(href);
+        else
+            changeLocaleToEn(href);
+        e.preventDefault();
+        e.stopPropagation();
+    });
+</script>

@@ -1,0 +1,19 @@
+{% extends 'EIPHRBundle::/Visitor/layout.html.twig' %}
+{% block content %}
+{% set categories = [ 'goal', 'towns', 'armies', 'buildings', 'technologies',
+         'heroes', 'items', 'quests', 'alliances', 'achievements', 'chat' ] %}
+<section class="content-section first">
+    <div class="container">
+        <h2>{{ 'rule.title'|trans }}</h2>
+    </div>
+</section>
+{% for c in categories %}
+<section class='content-section saw'>
+    <div class="container">
+        <h2>{{ ('rule.title.'~c)|trans({}, 'rules') }}</h2>
+        <p>{{ ('rule.text.'~c)|trans({}, 'rules')|raw}}</p>
+    </div>
+</section>
+{% endfor %}
+
+{% endblock %}

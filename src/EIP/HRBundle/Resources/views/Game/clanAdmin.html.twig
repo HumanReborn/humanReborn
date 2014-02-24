@@ -1,0 +1,252 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block javascripts %}
+{{ parent() }}
+ <script>
+<!-- 
+
+    $(function() {
+        $('#tabLinks a:first').tab('show').parent().addClass('active');
+    });
+
+//-->
+</script> 
+
+{% endblock %}
+{% block content %}
+<div id="Clan">
+<div class='container-fluid'>
+    
+    <h1 class="page-header">{{ 'clan.admin'|trans }}</h1>
+    <ul id='tabLinks' class='row-fluid text-center'>
+        <li class='span3'><a href='#modifclan' data-toggle='tab'>{{ 'clan.infoedit'|trans }}</a></li>
+        <li class='span3'><a href='#modifrank' data-toggle='tab'>{{ 'clan.createrank'|trans }}</a></li>
+        <li class='span3'><a href="#editmembers" data-toggle='tab'>{{ 'clan.editmembers'|trans }}</a></li>
+        <li class='span3'><a href='#admcandidature' data-toggle='tab'>{{ 'clan.applylist'|trans }}</a></li>
+    </ul>
+    
+    <div class="tab-content well">
+        <div id="modifclan" class='tab-pane fade in active'>
+            <h4 class='page-header'>{{ 'clan.infoedit' | trans }}</h4>
+            {% if canedittext %}
+            <form method="post" action="{{ path('hr_clan_edit_clan',  {'clanname': clanname, 'id': idclan}) }}">
+                {{ form_widget(formedit._token) }} 
+                   {#  {{ form_rest(formedit) }} #}
+                    <div class="errorMsg">{{ form_errors(form) }}</div>
+                    <div class='control-group hidden'>
+                        <div class='controls hidden'>{{ form_widget(formedit.name) }}</div>
+                        <div class="errorMsg">{{ form_errors(formedit.name) }}</div>
+                    </div>
+                    <div class='control-group hidden'>
+                        <div class='controls hidden'>{{ form_widget(formedit.acronym) }}</div>
+                        <div class="errorMsg">{{ form_errors(formedit.acronym) }}</div>
+                    </div>
+                    <div class='control-group'>   
+                        <label class='control-label'>{{ 'clan.banner' | trans }}</label>
+                        <div class='controls'>{{ form_widget(formedit.banner) }}</div>
+                        <div class="errorMsg">{{ form_errors(formedit.banner) }}</div>
+                    </div>
+                    <div class='control-group'>      
+                        <label class='control-label'>{{ 'clan.recruit' | trans }}</label>
+                        <div class='controls'>{{ form_widget(formedit.recruitmentStatut) }}</div>
+                        <div class="errorMsg">{{ form_errors(formedit.recruitmentStatut) }}</div>
+                    </div>
+                    <div class='control-group'>      
+                        <label class='control-label'>{{ 'clan.clan.private' | trans }}</label>
+                        <div class='controls'>{{ form_widget(formedit.privatePresentation) }}</div>
+                        <div class="errorMsg">{{ form_errors(formedit.privatePresentation) }}</div>
+                    </div>
+                    <div class='control-group'>      
+                        <label class='control-label'>{{ 'clan.clan.public' | trans }}</label>
+                        <div class='controls'>{{ form_widget(formedit.publicPresentation) }}</div>
+                        <div class="errorMsg">{{ form_errors(formedit.publicPresentation) }}</div>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-small btn-primary" value="{{ 'clan.editinfo' | trans }}"/>
+                    </div>
+            </form>
+            {% else %}
+            <h5>{{ 'clan.cannoteditext' | trans }}</h5>
+            {% endif %}
+            {% if candeleteclan %}
+            <h4><a href='{{ path('hr_clan_delete', {'idClan':idclan} ) }}'>{{ 'clan.deleteclan' | trans }}</a></h4>
+            {% endif %}
+        </div>
+            
+            
+        <div id="modifrank" class='tab-pane fade'>
+            <h4 class='page-header'>{{ 'clan.crank' | trans }}</h4>
+            {% if cancreaterank %}
+            <form method="post" action="{{ path('hr_clan_create_rank',  {'clanname': clanname}) }}">
+                {{ form_widget(form._token) }} 
+                    <div class="errorMsg">{{ form_errors(form) }}</div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.rankname' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.name) }} </div>
+                        <div class="errorMsg">{{ form_errors(form.name) }} </div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.cfire' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.CanFireMember) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.CanFireMember) }}</div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.chire' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.CanAcceptNewMember) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.CanAcceptNewMember) }}</div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.cedit' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.CanEditText) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.CanEditText) }}</div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.cwars' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.CanDeclareWar) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.CanDeclareWar) }}</div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.crank' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.CanCreateRank) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.CanCreateRank) }}</div>
+                    </div>
+                    <div class='control-group'>
+                        <label class='control-label'>{{ 'clan.cdele' | trans }}</label>
+                        <div class='controls'>{{ form_widget(form.canDeleteClan) }}</div>
+                        <div class="errorMsg">{{ form_errors(form.canDeleteClan) }}</div>
+                    </div>
+                    <div>
+                	<input type="submit" class="btn btn-small btn-primary" value="{{ 'clan.ranksubmit' | trans }}"/>
+                    </div>
+            </form>
+            {% else %}
+            <h5>{{ 'clan.cannotcreaterank' | trans }}</h5>
+            {% endif %}
+            {% if msgAlert == 1 %}
+                <h5 id="clan-alert-msg" >{{ 'clan.admin.msgalert1'|trans }}</h5>
+            {% endif %}
+                
+            <br>    
+           <h4>{{ 'clan.listrank'|trans }}</h4>
+            {% if cancreaterank %} <h5>{{ 'clan.candeleterank.info' | trans }}</h5> {% endif %}
+            <table class='table table-stripped'>
+                <thead>
+                    <tr>
+                        <th>{{ 'clan.rankname' | trans }}</th>
+                        <th>{{ 'clan.cfire' | trans | raw}}</th>
+                        <th>{{ 'clan.chire' | trans | raw}}</th>
+                        <th>{{ 'clan.cedit' | trans | raw}}</th>
+                        <th>{{ 'clan.cwars' | trans | raw}}</th>
+                        <th>{{ 'clan.crank' | trans | raw}}</th>
+                        <th>{{ 'clan.cdele' | trans | raw}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for ranklist in rankList %}
+                    {% if loop.index % 2 == 0 %}
+                        <tr>
+                    {% else %}
+                        <tr class="line">
+                    {% endif %}
+                            {% if cancreaterank  and ranklist.name != "Admin" %}
+                            <td><a href='admin/deleterank/{{ ranklist.id}}'>{{ ranklist.name }}</a></td>
+                            {% else %}
+                            <td>{{ ranklist.name }}</td>
+                            {% endif %}
+                            <td>{% if ranklist.cfire  %}Oui {% else %} Non {% endif %}</td>
+                            <td>{% if ranklist.chire  %}Oui {% else %} Non {% endif %}</td>
+                            <td>{% if ranklist.cedit  %}Oui {% else %} Non {% endif %}</td>
+                            <td>{% if ranklist.cwars  %}Oui {% else %} Non {% endif %}</td>
+                            <td>{% if ranklist.crank  %}Oui {% else %} Non {% endif %}</td>
+                            <td>{% if ranklist.cdele  %}Oui {% else %} Non {% endif %}</td>
+                	</tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+            
+        <div id="editmembers" class="tab-pane fade">
+            <h4 class='page-header'>{{ 'clan.editmembers' | trans }}</h4>
+            {% if memberlist %}
+            <table class='table table-stripped'>
+                <thead>
+                    <tr>
+                        <th>{{ 'clan.membername' | trans }}</th>
+                        <th>{{ 'clan.deletemember' | trans }}</th>
+                        <th>{{ 'clan.rankname' | trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for member in memberlist %}
+                    {% if loop.index % 2 == 0 %}
+                        <tr>
+                    {% else %}
+                        <tr class="line">
+                    {% endif %}
+                        <td>{{ member.uname }}</td>
+                        <td>
+                            {% if canfiremember == false %}
+                            {{ 'clan.cannotdeleteuser' | trans }}
+                            {% elseif member.uid == iduser %}
+                            {{ 'clan.cannotfireyourself' | trans }}
+                            {% else %}
+                            <a href='admin/firemember/{{ member.uid }}'>{{ 'clan.deletemember' | trans}}</a>
+                            {% endif %}
+                        </td>
+                        <td>{% if member.rankName != "" %} 
+                                {{ member.rankName }} 
+                            {%else%} 
+                                {{ 'clan.user.norank' | trans }}
+                            {% endif %}
+                        </td>
+                        </tr>
+                {% endfor %}
+               </tbody>
+            </table>
+                {% if cancreaterank %}
+                    <h5>{{ 'clan.assign.text' | trans }}</h5>
+                    <form method="post" action="{{ path('hr_clan_update_rank',  {'clanname': clanname}) }}">
+                        {{ form_widget(formmember._token) }} 
+                        {{ form_widget(formmember.idClan) }}
+                        {{ form_widget(formmember.idUser) }}
+                        {{ form_widget(formmember.idRank) }}
+                        <div>
+                            <input type="submit"  class="btn btn-small btn-primary" value="{{ 'clan.assign.button' | trans }}" />
+                        </div>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>    
+            
+        <div id="admcandidature" class='tab-pane fade'>
+            <h4 class='page-header'>{{ 'clan.applylist' | trans }}</h4>    
+            {% if canrecruit %}
+             <table  class='table table-stripped'>
+                 <thead><tr>
+                    <th>{{ 'clan.applyname' | trans }}</th>
+                    <th>{{ 'clan.applymsg' | trans | raw}}</th>
+                    <th>{{ 'clan.applydecision' | trans | raw}}</th>
+                </tr></thead>
+                 <tbody>
+                {% for applylist in applyList %}
+                {% if loop.index % 2 == 0 %}
+                    <tr>
+                {% else %}
+                    <tr class="line">
+                {% endif %}
+                    <td>{{ applylist.name  }}</td>
+                    <td>{{ applylist.message  }}</td>
+                    <td><a href="{{ path('hr_clan_accept_candidature', { 'clanname':clanname, 'idcand':applylist.id }) }}" onclick=""> Accepter</a> / <a href="{{ path('hr_clan_refuse_candidature', { 'clanname':clanname, 'idcand':applylist.id }) }}" onclick="">Refuser</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h5>{{ 'clan.cannotRecruit' | trans }}</h5>
+            {% endif %}
+        </div>
+            
+    </div>        
+</div>
+</div>
+            
+{% endblock %}

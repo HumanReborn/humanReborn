@@ -1,0 +1,70 @@
+{%  extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<div class='container-fluid'>
+    <h1 class='page-header'>{%trans with {'%itemName%': item.schema.name}%}item.using{%endtrans%}</h1>
+    <div class='well text-center'>
+        <p>{{'units.summoning'|trans}}</p>
+        <div class='unitMiniImg' title='{{item.schema.unitSchema.name}}'
+            style='background-image:url("{{asset('bundles/eiphr/images/schema/units/') ~ item.schema.unitSchema.img }}.jpg")'>
+            <p class='text-center'>{{item.schema.value}}</p>
+        </div>
+
+        <p>{{'unit.summon.select.target.town'|trans|capitalize}}</p>
+        <form method='post' action=''>
+            <select name='townid'>
+                {% for town in towns %}
+                    <option value='{{town.id}}'>{{town.name}} [{{town.xCoord}},{{town.yCoord}}]</option>
+                {% endfor %}
+            </select>
+            <div class='links'>
+                <a class='btn btn-small' href='{{path('hr_hero')}}'>{{'back'|trans}}</a>
+                <input class='btn btn-small btn-primary' type='submit' />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id='unitDetailModal' class="modal hide fade">
+    <div style='height:200px;text-align:center;'>
+    <h4>{{'loading'|trans}}</h4>
+    <img src='{{asset('bundles/eiphr/images/ajax-loader.gif')}}' alt='{{'loading'|trans}}' style='margin:90px auto;' />
+    </div>
+</div>
+
+
+<script>
+$(function() {    
+    var modalDefaultContent = $('#unitDetailModal').html();
+    $('.unitMiniImg').tooltip({placement: 'right'});
+    $('#unitDetailModal').on('hidden', function() {
+        $(this).html(modalDefaultContent);
+    });
+    
+    $('.unitMiniImg').click(function(e) {
+        e.preventDefault();
+        var m = $('#unitDetailModal');
+        m.modal('show');
+        $.ajax({
+            type: 'POST',
+            url: '{{path('hr_unit_detail')}}',
+            data: {schemaid: {{item.schema.unitSchema.id}}},
+            success: function(data) { m.html(data); },
+            error: function() { 
+                var errorString = '<div style="padding:15px"> \
+                    <div class="alert alert-block alert-error fade in">   \
+                    <button type="button" class="close" data-dismiss="alert">×</button>      \
+                    <h4 class="alert-heading" style="color:#fff;">{{ "unit.detail.error.title"|trans }}</h4> \
+                    <p>{{"unit.detail.error.content"|trans}}</p>          \
+                    <p class="text-center"> \
+                      <a class="btn btn-danger" data-dismiss="modal">{{"close"|trans}}</a> \
+                    </p>                        \
+                  </div></div>';
+                $('unitDetailModal').html(errorString);
+            },
+          });
+    });
+    
+});
+
+</script>
+{% endblock %}

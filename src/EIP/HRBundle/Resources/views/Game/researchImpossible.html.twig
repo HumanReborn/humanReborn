@@ -1,0 +1,31 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<div>
+    research impossible :
+    {{ schemaView.schema.name }}
+    <div>
+        Missing buildings:
+        <ul>
+
+            {% for building in schemaView.errors.buildings %}
+                {{ building.name }}
+            {% else %}
+                No building missing
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        Missing technology:
+        <ul>
+            {% for technology in schemaView.errors.technologies %}
+                {{ technology.name }}
+            {% else %}
+                No building missing
+            {% endfor %}
+        </ul>
+    </div>
+
+
+</div>
+{% endblock %}

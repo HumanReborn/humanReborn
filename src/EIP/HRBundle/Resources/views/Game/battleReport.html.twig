@@ -1,0 +1,88 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'battle.report'|trans}}</h2>
+        <div class="pull-right">
+            <i class="fa fa-info-circle fa-5x"></i>
+        </div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <h4>{{'details'|trans}}</h4>
+                    <dl class='dl-horizontal margin-top' id='battleReportDetails'>
+                        <dt>Status</dt>
+                        <dd style='margin-bottom:10px;'>
+                            {% if report.winner.id == app.user.id %}
+                            <span class='badge badge-success' id='victoryBadge'>{{'victory'|trans}}</span>
+                            {% else %}
+                            <span class='badge badge-important' id='defeatBadge'>{{'defeat'|trans}}</span>
+                            {% endif %}
+                        </dd>
+                        <dt>{{'place'|trans}}</dt><dd>{{report.place.name}}</dd>
+                        <dt>Date</dt><dd>{{report.time|date('Y-m-d H:i:s')}}</dd>
+                        <dt>{{'winner'|trans}}</dt><dd>{{report.winner.username}}</dd>
+                        <dt>{{'xp.point'|trans}}</dt>
+                        {% if report.winner.id == app.user.id %}
+                        <dd>{{report.xpWon}}</dd>
+                        {% else %}
+                        <dd>{{'xp.none'|trans}}</dd>
+                        {% endif %}
+                    </dl>
+                </div>
+
+        </div>
+        <div class="row-fluid">
+            <div class="span6 mtop">
+                <h4>{{'winner'|trans}}</h4>
+                {% for s in report.armies[report.winner.id] %}
+                    <div class="thumb dib" title="{{ s.name }}">
+                            <img src="{{ asset('bundles/eiphr/images/schema/units/' ~ s.image) }}.jpg" alt="unit image" />
+                            <p class="text-center">{{s.number}}</p>
+                    </div>
+                {% endfor %}
+
+                <h4>{{'loser'|trans}}</h4>
+                {% for s in report.armies[report.loser.id] %}
+                    <div class="thumb dib" title="{{ s.name }}">
+                            <img src="{{ asset('bundles/eiphr/images/schema/units/' ~ s.image) }}.jpg" alt="unit image" />
+                            <p class="text-center">{{s.number}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div id='losses' class='span6 mtop'>
+                    <h4 class='text-center'>{{'winner.loss'|trans}}</h4>
+                    <div class='text-center margin-top'>
+                    {% for schemaid,count in report.lostUnits.winner %}
+                        <div class='thumb dib' title='{{schemaArray[schemaid].name}}'>
+                            <img src="{{asset('bundles/eiphr/images/schema/units/' ~ schemaArray[schemaid].img)}}.jpg" alt="unit image"/>
+                            <p class='text-center'>{{count}}</p>
+                        </div>
+                    {% else %}
+                        <p class="thumb-text-placeholder">{{'loss.none'|trans}}</p>
+                    {% endfor %}
+                    </div>
+                    <h4 class='text-center'>{{'loser.loss'|trans}}</h4>
+                    <div class='text-center margin-top'>
+                    {% for schemaid,count in report.lostUnits.loser %}
+                        <div class='thumb dib' title='{{schemaArray[schemaid].name}}'>
+                            <img src="{{asset('bundles/eiphr/images/schema/units/' ~ schemaArray[schemaid].img)}}.jpg" alt="unit image"/>
+                            <p class='text-center'>{{count}}</p>
+                        </div>
+                    {% else %}
+                    <p class="thumb-text-placeholder">{{'loss.none'|trans}}</p>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='text-center mtop'><a class='btn' href='{{path('hr_game_dashboard')}}'>{{'back'|trans}}</a></div>
+</div>
+</section>
+<script>
+    $('#losses *[title]').tooltip();
+</script>
+{% endblock %}

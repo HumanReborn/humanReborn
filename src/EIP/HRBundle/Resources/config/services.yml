@@ -1,0 +1,14 @@
+parameters:
+#    eiphr.example.class: EIP\HRBundle\Example
+
+services:
+    hr.twig.hrbundle_extension:
+            class: EIP\HRBundle\Twig\HRBundleExtension
+            tags:
+                - { name: twig.extension }
+
+    town_factory:
+        class: EIP\HRBundle\Entity\Factory\HRTownFactory
+        calls: 
+            - [ setContainer, ["@service_container"] ]
+

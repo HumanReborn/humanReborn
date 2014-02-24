@@ -1,0 +1,71 @@
+ZIP SUR FTP
+
+une install windows
+check script unix
+
+laptop version a jour -- reinstaller tortoise git ou apprendre a passer la clef en ligne de commande
+
+
+
+
+
+apprendre a scp ~~
+
+
+
+
+
+Preparer une partie pour le TA avec deux ou trois notifications
++ un battle report + un allie pour le bleu sur map + :|
+
+
+
+
+ELSE
+2 ou 3 unites | quetes de plus
+
+TESTER LE SWITCH DB !
+finir le script deploy windows
+retest unix full
+
+Tester en ssh sur vm
+install vmware 10 sur le laptop  pour pouvoir prouver que vm eip != vm fournie :|
+
+/////////////////////////////////////////////////////////////////
+
+OAuth a tester
+Requete http -> de quoi c'est fait + codes
+Transitions angular
+
+Machine learning: http://see.stanford.edu/see/lecturelist.aspx?coll=348ca38a-3a6d-4052-937d-cb017338d7b1
+
+Angular / Dart / TypeScript / Neo4j / MongoDB / Backbone /  Redis
+
+////////////
+TODO + CALENDAR : DB non codefirst, how to ?
+///////////
+
+Done: Doc TA 7
+Done: Site vitrine FR | EN + update + images
+Done: PPT Blanc soutenance finale
+Done: pouvoir rejoindre ecran gameResult
+Done: pouvoir voir quand une game va commencer
+Done: batch recruit
+Done: Fin de partie
+Done: v3
+Done: js & prototypes | bind
+Done: node cluster ~ c'est du fork avec partage de ressources & messaging
+
+Done: temps apres deplacement sur la map
+Done: autocompletion message
+Done: contenu total des armees dans les rapports de batailles
+Done: voir le level du hero ennemi sur la carte
+Done: estimation garnison sur la carte
+Done: RESKIN LE CHAT & check que ca marche LOLOL sur la version remote
+
+yoko kanno
+yuki kajira
+joe hisaishi
+
+/////////////////
+

@@ -1,0 +1,17 @@
+vendor
+web
+UPGRADE.md
+.travis.yml
+composer.lock
+LICENSE
+phpunit.phar
+README.md
+/nbproject/private/
+nbproject
+
+cache
+logs
+
+/src/EIP/HRBundle/ChatServer/logFile
+
+/bin

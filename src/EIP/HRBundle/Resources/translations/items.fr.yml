@@ -1,0 +1,27 @@
+itemWaterResource1: Puits portable
+itemTankUnit1: Débris de tanks
+itemResourcesBuff1: Pack de disques vinyles
+itemTankUnit1.desc: >
+  <p>
+    Des morceaux de tanks plus ou moins complets ...
+    <br/>
+    Vous devriez pouvoir en tirer quelque chose avec un peu de travail !
+    <br/>
+    Effet: invoque 10 tanks dans la ville de votre choix
+  </p>
+
+itemWaterResource1.desc: >
+  <p>
+    Un puits portable qui vous permettra de trouver de l'eau où que vous soyez !
+    <br/>
+    Effet: vous donne instantanément 100 unité d'eau
+  </p>
+
+itemResourcesBuff1.desc: >
+  <p>
+    Un pack de vieux disques encore lisible !
+    <br/>
+    Rien de mieux pour le moral des troupes et améliorer leur productivité.
+    <br/>
+    Effet: augmente la quantité de ressources collecté de 10% pendant 90 minutes
+  </p>

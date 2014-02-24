@@ -1,0 +1,28 @@
+itemWaterResource1: Portable well
+itemTankUnit1: Tank remnants
+itemResourcesBuff1: Pack of old vinyl records
+itemTankUnit1.desc: >
+  <p>
+    Tank remnants, some seem usable ...
+    <br/>
+    You should be able to get something out of this with some work !
+    <br/>
+    Effect: summons 10 tanks in an ally town of your choice
+  </p>
+
+itemWaterResource1.desc: >
+  <p>
+    A portable well will be able to find water everywhere !
+    A must-have in these lands.
+    <br/>
+    Effect: instantly gives you 100 water
+  </p>
+
+itemResourcesBuff1.desc: >
+  <p>
+    A pack of old vinyl disks, they are in pretty good shape.
+    <br/>
+    It will improve the moral of your units and their productivity
+    <br/>
+    Effect: increases the quantity of resources gathered by 10% for 90 minutes
+  </p>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>HumanReborn | {{'error'|trans}}</title>
+    <link rel='stylesheet'  href='{{ asset('bundles/eiphr/bootstrap/css/theme.min.css') }}' />
+    <link rel='stylesheet'  href='{{ asset('bundles/eiphr/css/error.css') }}' />
+</head>
+<body>
+    <div class='container-fluid hero-unit'>
+        <div class='econtainer text-center'>
+            <div class='text-center'><img src='{{asset('bundles/eiphr/images/homepage/whitelogo.png')}}' alt='logo humanreborn' /></div>
+            <h1>{{'error500.text'|trans}}</h1>
+            {% if app.session.get('game') %}
+            <div>
+                <a href='{{path('hr_game_dashboard')}}'>{{'dashboard.goto'|trans}}</a>
+            </div>
+            {% endif %}
+            <div>
+                <a href='{{path('hr_homepage')}}'>{{'homepage.goto'|trans}}</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<div class='container-fluid'>
+    <div class='well text-center'>
+        <h4 class='page-header'>{{ 'town.available.none.title'|trans }}</h4>
+        <p>{{ 'town.available.none.text'|trans }}</p>
+        <div class='margin-top'>
+            <a class='btn' href='{{path('hr_technology')}}'>{{'back'|trans}}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

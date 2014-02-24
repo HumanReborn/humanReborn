@@ -1,0 +1,24 @@
+<!Doctype html>
+<html>
+<head>
+    {# ne pas indexer... #}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/css/hradm.css') }}" />
+    <title>HumanReborn admin</title>
+</head>
+<body>
+    <div class="rounded-borders shadow-box" id="admin-login-form">
+        {% if error %}<div class="error-msg small-margin-bottom">{{ error.message|trans }}</div>{% endif %}
+            <form method="post" action="{{ path('hr_adm_login_check') }}">
+            <div>
+                <input type="text" name="_username" value="{{ last_username }}" placeholder="login" />
+            </div>
+            <div>
+                <input type="password" name="_password" placeholder="password" class="small-margin-top"/>
+            </div>
+            <div>
+                <input type="submit" class="small-margin-top"/>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

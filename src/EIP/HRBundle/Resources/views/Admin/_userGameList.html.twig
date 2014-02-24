@@ -1,0 +1,5 @@
+<ul>
+{% for gameLink in gameLinks %}
+    <li><a href="{{ path('hr_adm_user_game_detail', { userid: userid, gameid: gameLink.game.id }) }}">{{ gameLink.game.name }}</a></li>
+{% endfor %}
+</ul>

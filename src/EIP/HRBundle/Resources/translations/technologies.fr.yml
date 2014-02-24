@@ -1,0 +1,46 @@
+techno.build1: "Formation ouvrière"
+techno.build2: "Formation quartier-maître"
+techno.build3: "Formation maître"
+techno.build4: "Formation artisan"
+techno.advanced1: "Entretien"
+techno.weapon1: "Armes à feu (légères)"
+techno.weapon2: "Armes à feu (intermédiaires)"
+techno.weapon3: "Armes à feu (lourdes)"
+techno.training1: "Entrainement (débutant)"
+techno.training2: "Entrainement (intermédiaire)"
+techno.training3: "Entrainement (avancé)"
+techno.build1.desc: >
+  Permet à tous vos ouvriers de suivre une formation, améliorant leur rendement et la qualité de leur travail.
+  <p>Cela se traduit par une réduction du temps de construction de vos bâtiments de 5%.</p>
+techno.build2.desc: >
+  Certains de vos meilleurs ouvriers sont promus au rang de quartier-maître, et ont en charge la direction des travaux et leurs organisations.
+  <p>Le temps requis pour construire vos nouveaux bâtiments est maintenant réduit de 10%.</p>
+techno.build3.desc: >
+  Élève certains de vos ouvriers au rang de maître, renforçant votre expertise dans la création de bâtiments.
+  <p>Le temps requis pour construire de nouveaux bâtiments est réduit de 15%.</p>
+techno.build4.desc: >
+  Vos bâtisseurs ont accès aux meilleures techniques et aux meilleurs outils qui soient.
+  <p>Le temps de construction de tous les bâtiments est réduit de 20%.</p>
+techno.advanced1.desc: >
+  Laoreet felis. Vivamus auctor non tellus quis dapibus. Quisque odio nunc, mattis eget dignissim a, blandit feugiat leo.
+  Morbi scelerisque, nulla id fermentum sagittis, lectus nulla venenatis nisl, sed varius est mi id ligula.
+  Quisque odio dui, mattis vel sagittis ut, sollicitudin at mi.
+  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+techno.training1.desc: >
+  L'entrainement de niveau débutant vous permet de créer vos troupes plus rapidement.
+  <p>Le temps requis pour entrainer une unité est réduit de 5%.</p>
+techno.training2.desc: >
+  L'entrainement de niveau intermédiaire est une évolution du programme d'entrainement débutant.
+  <p>Il porte la réduction du temps requis pour l'entrainement à 10%.</p>
+techno.training3.desc: >
+  L'entrainement avancé améliore encore le programe d'entrainement de vos troupes et
+  porte la réduction du temps requis à l'entrainement de vos unité à 15% du temps initial.
+techno.weapon1.desc: >
+  Vos troupes maîtrisent les armes à feu légères: création, entretien et pourquoi pas, un peu de bricolage...
+  <p>Cette amélioration est requise pour la création de la plupart des unités motorisées et augmente les dégâts infligés par vos unités (+0.1).</p>
+techno.weapon2.desc: >
+  Vos scientifique redécouvrent certains secrets perdus des armes à feu, vous permettant la création d'armes lourdes ...
+  <p>Les dégâts infligés par vos unités sont égalements légèrement augmentés (+0.2).</p>
+techno.weapon3.desc: >
+  Après de coûteux investissements et de longues recherches, les armes à feu n'ont plus de secret pour vous.
+  <p>Unités blindées avancées débloquées et augmentation du bonus de dégâts de vos unités (+0.4)</p>

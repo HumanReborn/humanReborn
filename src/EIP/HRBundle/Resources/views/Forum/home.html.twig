@@ -1,0 +1,20 @@
+{% extends 'EIPHRBundle::/Forum/forumlayout.html.twig' %}
+{% block content %}
+<div>
+    <h2 class="text-center">Sections</h2>
+    <div class="container-fluid">
+        {% for section in sections %}
+        <div class="row-fluid">
+            <div class='well'>
+                <div class="span6 sectionLink">
+                    <a  href="{{ path('hr_forum_section', { sectionid: section.id }) }}">{{ section.name|trans }}</a>
+                </div>
+                <div class="span6 sectionDescription">
+                    {{section.description|trans}}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

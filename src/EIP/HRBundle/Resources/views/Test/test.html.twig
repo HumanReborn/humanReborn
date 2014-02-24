@@ -1,0 +1,93 @@
+{% extends 'EIPHRBundle::/Test/layout.html.twig' %}
+{% block content %}
+{# logo #}
+<section class='content-section' id='homepage-title'>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span6 text-center">
+                 <img src="{{ asset('bundles/eiphr/images/homepage/whitelogo.png') }}" alt="logo" id="main-logo" />
+            </div>
+            <div class="span6 text-center">
+                <h1>HumanReborn</h1>
+                <h4>{{'online.strategy.game'|trans}}</h4>
+                <div class="links">
+                    {% set params = app.request.get('_route_params')  %}
+                    <a href="{{path(app.request.get('_route'), params | merge({_locale: 'fr'})) }}"><img src="{{asset('bundles/eiphr/images/fr.png')}}" alt="Français"></a>
+                    <a href="{{path(app.request.get('_route'), params | merge({_locale: 'en'})) }}"><img src="{{asset('bundles/eiphr/images/gb.png')}}" alt="English"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# form #}
+<section class='content-section saw'>
+    <div class="container">
+       <div class="row-fluid">
+            <div class='span8'>
+                <h2>18/10/2013</h2>
+                <p>{{'design.re'|trans({}, 'homepagev2')}}</p>
+            </div>
+            <div class='span4'>
+                <form method="post" action="{{ path('hr_login_check') }}" id="login-form">
+                    <input type='hidden' name="_target_path" value="hr_games" />
+                    <div>
+                        <input type="text" name="_username" maxlength="30" placeholder="{{ 'username'|trans }}"   required="required" class='input-xlarge'/>
+                    </div>
+                    <div>
+                        <input type="password" name="_password" maxlength="30" placeholder="{{ 'password'|trans }}" required="required" class='input-xlarge' />
+                    </div>
+                    <div>
+                        <button type="submit" class='btn btn-primary'><i class='icon-ok'></i> {{ 'enter'|trans }}</button>
+                    </div>
+                </form>
+                <div>
+                    <a href="{{ path('hr_register') }}" class='btn btn-small'>
+                        <i class='icon-th-list icon-white'></i> {{ 'register'|trans }}
+                    </a>
+                    <a href="{{ path('hr_lost_credentials') }}" class='btn btn-small'>
+                        <i class='icon-question-sign icon-white'></i> {{ 'credentials.lost'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
+</section>
+
+<section class='content-section saw' id='homepage-what'>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span4 screenshots">
+                <img src="{{ asset('bundles/eiphr/images/homepage/screenshot1.png') }}" alt="humanreborn image"/>
+                <img src="{{ asset('bundles/eiphr/images/homepage/screenshot2.png') }}" alt="humanreborn image"/>
+                <img src="{{ asset('bundles/eiphr/images/homepage/screenshot3.png') }}" alt="humanreborn image"/>
+            </div>
+            <div class="span8">
+                <h4>{{'conquest'|trans({}, 'homepagev2')}}</h4>
+                <p>{{'conquest.text'|trans({}, 'homepagev2')}}</p>
+                <h4>{{'roleplay'|trans({}, 'homepagev2')}}</h4>
+                <p>{{'roleplay.text'|trans({}, 'homepagev2')}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{# eip #}
+<section class='content-section saw' id='homepage-eip'>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="text-center">
+                    <img src="{{ asset('bundles/eiphr/images/homepage/logo_eip.jpg')}}" alt="EIP">
+                </div>
+                <p>{{'eip'|trans({}, 'homepagev2')}}</p>
+            </div>
+            <div class="span6">
+                <div class="text-center">
+                    <img src="{{ asset('bundles/eiphr/images/homepage/logo_epitech.jpg')}}" alt="EPITECH">
+                </div>
+                <p>{{'epitech'|trans({}, 'homepagev2')|raw}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

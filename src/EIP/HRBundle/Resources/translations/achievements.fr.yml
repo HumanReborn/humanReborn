@@ -1,0 +1,40 @@
+game.join1: Recrue
+game.join2: Conquérant
+game.join3: Maître de guerre
+
+units.recruited1: Aux armes !
+units.recruited2: Plus de soldats
+units.recruited3: Toujours plus
+
+buildings1: Château de sable
+buildings2: Bâtisseur
+buildings3: Sim City
+
+units.destroyed1: Meurtrier
+units.destroyed2: Soif de sang
+units.destroyed3: Je vois des morts partout
+
+quests.completed1: Coup de pouce
+quests.completed2: Explorateur
+quests.completed3: "M. Jones"
+
+max.hero.level1: "... Presque ..."
+max.hero.level2: Ca devient sérieux
+max.hero.level3: "La suite ?"
+
+game.join.desc: "Participer à une partie.|Participer à %value% parties."
+units.recruited.desc: "Recruter une unité.|Recruter %value% unités."
+units.destroyed.desc: "Détruire une unité.|Détruire %value% unités."
+buildings.desc: "Construire un bâtiment.|Construire %value% bâtiments."
+quests.completed.desc: "Compléter une quête.|Compléter %value% quêtes."
+max.hero.level.desc: "|Atteindre le niveau %value% avec un héros."
+
+
+
+profile.image: Image de profil
+member.since: Membre depuis
+games.number: Nombre de parties
+achievements.number: Nombre de hauts faits
+victories.number: Nombre de victoires
+achieved.on: Réalisé le
+achievements.none: Aucun haut fait à ce jour

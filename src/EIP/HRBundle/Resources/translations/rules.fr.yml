@@ -1,0 +1,112 @@
+rule.title.goal: But du jeu
+rule.text.goal: >
+  Le but d'une partie d'HumanReborn est de devenir le maître du nouveau monde.
+  Pour accomplir cet objectif, les possibilités suivantes s'offrent à vous:
+  <ul>
+  <li>imposez-vous en tant que conquérant et écrasez vos adversaires</li>
+  <li>Rejoingnez une alliance et faites face ensemble à vos adversaires</li>
+  </ul>
+  Une partie d'HumanReborn se termine lorsqu'un joueur ou une alliance contrôle la totalité de la carte du jeu.
+rule.title.towns: Les villes
+rule.text.towns: >
+  Les villes sont les éléments clefs d'HumanReborn:<br/>
+  Vous y construisez vos bâtiments, y entrainez vos troupes, et vous devez les protéger des attaques ennemies.<br/>
+  Si vous perdez toutes vos villes, la partie est perdue.<br/>
+  Au contraire si vous contrôlez toutes les villes, vous avez gagné la partie.<br/>
+  Accèdez à la gestion des bâtiments d'une ville en cliquant sur 'Bâtiments' dans le menu principal,
+  ou en sélectionnant la ville sur la carte du jeu, puis en cliquant sur le bouton 'construire dans cette ville'. <br/>
+  La gestion des troupes au sein d'une ville se fait en cliquant sur le bouton 'Troupes' dans le menu principal,
+  ou en sélectionnant la ville sur la carte du jeu, puis en cliquant sur le bouton 'Recruter'.
+rule.title.armies: Les armées
+rule.text.armies: >
+  Les armées contiennent vos troupes, il existe deux types d'armées:
+  <ul>
+    <li>
+      Les garnisons: chaque ville dispose d'une garnison, toute unité entrainée dans
+      une ville est automatiquement assignée à sa garnison.
+      Les garnisons ne peuvent pas se déplacer ou attaquer.
+    </li>
+    <li>
+      Les armées régulières: liées à une ville, elles peuvent se déplacer,
+      fusionner avec d'autres armées ou garnisons, et attaquer.
+      Vous pouvez créer des armées depuis la page de gestion des troupes.
+      Une armée doit toujours contenir au moins une unité.
+    </li>
+  </ul>
+rule.title.buildings: Bâtiments
+rule.text.buildings: >
+  Vous pouvez construire des bâtiments dans vos villes. Chaque ville peut contenir 10 bâtiments.<br/>
+  Les bâtiments permettent de récolter des ressources, et de débloquer certaines unités, bâtiments ou technologies.<br/>
+  Cliquez sur 'Bâtiments' dans le menu principal pour accèder à la page de gestion des  bâtiments.
+rule.title.technologies: Les technologies
+rule.text.technologies: >
+  Les technologies vous procurent des bonus passifs pour toute la partie, aussi bien sur l'aspect économique que militaire.<br/>
+  La plupart des technologies ont des prérequis (bâtiments ou autres technologies).<br/>
+  Vous pouvez accèder à la page de gestion des technologies depuis le menu principal en cliquant sur 'Technologies'.
+rule.title.heroes: Le héros
+rule.text.heroes: >
+  Le héros est votre bras droit, il vous apporte son expérience au combat et dans la gestion de vos ressources.<br/>
+  Vous devez choisir un héros pour une partie, parmis quatre héros disponibles. Chaque héros a sa spécialité.<br/>
+  Le héros procure donc des bonus passifs, qui augmenteront avec son niveau. Pour faire monter son héros en niveau, il
+  faut lui faire gagner de l'expérience en gagnant des combat, ou en remplissant des quêtes.
+rule.title.items: Les objets
+rule.text.items: >
+  Les objets sont récupérés suite à la réalisation de quêtes et permettent de profiter d'avantages dans la partie.<br/>
+  On différenciera 3 types d'objets:
+  <ul>
+    <li>Les objets de ressource: leur utilisation donne instantanément une certaine quantité de ressources.</li>
+    <li>Les objets d'invocation: leur utilisation vous permet d'invoquer des troupes gratuitement dans une de vos villes.</li>
+    <li>L'équiment: l'équipement vous procure des bonus; éphémères ou permanents ; ces bonus peuvent être militaires ou économiques.</li>
+  </ul>
+  Les objets sont détruits après utilisation.<br/>
+  La gestion des objets se fait via la page du héros, que vous pouvez rejoindre en cliquant sur "Héros" dans le menu principal.
+rule.title.quests: Les quêtes
+rule.text.quests: >
+  Les quêtes sont des objectifs optionnels.<br/>
+  Elles permettent au héros de gagner de l'expérience et des objets.<br/>
+  Il existe plusieurs types de quête:
+  <ul>
+    <li>Les quêtes de ressources: qui consistent à donner des ressources</li>
+    <li>Les quêtes d'élimination: qui vous demanderont de détruite certaines unités</li>
+    <li>Les quêtes de construction: vous devrez construire certains bâtiments pour compléter la quête</li>
+  </ul>
+  Certaines quêtes ne sont réalisables que par un seul joueur.<br/>
+  Vous pouvez rejoindre la page de gestion des quêtes en cliquant sur "Quêtes" dans le menu principal
+rule.title.alliances: Les alliances
+rule.text.alliances: >
+  Les alliances sont des groupes de joueurs qui se sont unis pour conquérir.<br/>
+  Au cours d'une partie, il vous est possible de créer, rejoindre ou quitter une alliance
+  simplement depuis la page de gestion des alliances. Les chefs ou officiers des alliances peuvent poster
+  des messages à destination des membres de l'alliance.
+rule.title.chat: Les messageries
+rule.text.chat: >
+  HumanReborn intègre trois types de messageries:
+  <ul>
+    <li>
+      Le chat: messagerie instantanée, le chat permet aux joueurs d'une même partie de communiquer entre eux de façon aisée.
+      Le chat dispose de deux onglets, un général pour parler à tous les membres de la partie, et un second réservé aux membre de
+      votre alliance si vous faite partie d'une alliance.
+      Il est également possible de parler à un joueur en particulier à l'aide de la commande: "/w [nom du joueur] message".
+    </li>
+    <li>
+      Les messages: il est possible d'envoyer des messages à n'importe quel joueur à l'aide de la messagerie.
+      Les message reçus sont visibles dans la boite de réception de votre messagerie.
+      Pour atteindre la messagerie cliquez sur 'Messages' dans le menu principal
+    </li>
+    <li>
+      Le forum: le forum permet également de dialoguer avec les autres utilisateur. Vous pouvez y accèder en cliquant
+      sur les options avancées situées en bas de l'écran, à gauche des ressources.
+    </li>
+  </ul>
+rule.title.achievements: Les hauts faits
+rule.text.achievements: >
+  La liste des hauts faits accomplis est consultable sur la page de profil du joueur.<br/>
+  Les hauts faits marquent la progression du joueur au sein du jeu.<br/>
+  Parmis les hauts faits, on retrouve notamment:
+  <ul>
+    <li>Rejoindre un certain nombre de parties</li>
+    <li>Construire un certain nombre de bâtiments</li>
+    <li>Entrainer un certain nombre d'unités</li>
+    <li>Détruire un certain nombre d'unités</li>
+    <li>Accomplir un certain nombre de quêtes</li>
+  </ul>

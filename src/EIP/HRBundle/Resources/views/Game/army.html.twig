@@ -1,0 +1,195 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container">
+        <h2>{{'army.management'|trans}}</h2>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div id='armyPage'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='well'>
+                        <h3 >{{'army.informations'|trans}}</h3>
+                        <div>{{'army'|trans }} : {{ army.id }}</div>
+                        <div>{{'town'|trans}} : {{ army.town.name ~ " [" ~ army.town.xCoord ~ ":" ~ army.town.yCoord ~ "]" }} </div>
+                        <div>
+                            {% if army.moving %}
+                                {{ 'army.moving.true'|trans }}
+                                <div>
+                                    <div>{{ 'to'|trans }} : {{ destination }}</div>
+                                    <div>{{ 'destination.reach.time'|trans }} : {{ remainingTime(reachTime) }}</div>
+                                </div>
+                            {% else %}
+                                {{ 'army.moving.false'|trans }}
+                            {% endif %}
+                        </div>
+                        <div id='armyContent'>
+                            <p class='lead'>{{'units'|trans}}</p>
+                            <div class='text-center'>
+                            {% for unit in armyContent %}
+                                <div class='thumb dib' title='{{unit.name|trans}}' >
+                                    <img src="{{asset('bundles/eiphr/images/schema/units/'~unit.image)}}.jpg" alt="{{unit.name|trans}}"/>
+                                    <p class='text-center'>{{unit.number}}</p>
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+
+                        {% if army.moving %}
+                        <div>
+                            <p class='lead'>{{'actions'|trans}}</p>
+                            <p>{{'army.is.moving'|trans}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                        <div id="controls">
+                            <p class='lead'>{{'actions'|trans}}</p>
+                            <div class='text-center'>
+                                <div>
+                                    <div class='btn-group'>
+                                        <a class='btn ' href="#" data-target="merge" id="mergeLink" >{{ 'army.merge'|trans }}</a>
+                                        <a class='btn ' href="#" data-target="transfer" id="transferLink" >{{ 'army.transfer'|trans }}</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="btn-group mtop">
+                                        <a class='btn ' href="#" data-target="attack" id="attackLink">{{ 'army.attack'|trans }}</a>
+                                        <a class='btn ' href="#" data-target="move" id="moveLink">{{ 'army.move'|trans }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class='span6'>
+                    <div class='armyControls'>
+                        <div id="merge"  class="hidden well" >
+                            <h3 >{{'merge'|trans}}</h3>
+                            <form method="post" action="{{ path('hr_army_merge') }}" class='form-inline'>
+                                <input type="hidden" name="givingArmyID" value="{{army.id}}" />
+                                <p>{{ 'army.merge.form.text'|trans }}</p>
+                                <select name="receivingArmyID">
+                                    {% for a in mergeableArmies %}
+                                        <option value="{{ a.id }}" >{{'army'|trans}} - {{a.id}}</option>
+                                    {% endfor %}
+                                </select>
+                                <input class='btn btn-primary' type="submit" value='{{'merge'|trans}}' />
+                            </form>
+                        </div>
+                        <div id="transfer" class="hidden well" >
+                            <h3 >{{'troop.transfer'|trans}}</h3>
+                            <form method="post" action="{{path('hr_army_transfer')}}" class='form'>
+                                <input type="hidden" name="givingArmyID" value="{{army.id}}" />
+                                <div class='control-group'>
+                                    <label class='lead' for='transferArmy'>{{ 'destination'|trans }}</label>
+                                    <div class='controls'>
+                                        <select id="transferArmy" name="transferArmyID">
+                                            <option value="0">{{'army.select'|trans}}</option>
+                                            {% for a in mergeableArmies %}
+                                                <option value="{{ a.id }}">{{'army'|trans}} - {{a.id}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <p class='lead'>{{'transfer'|trans}}</p>
+                                <table class='table table-bordered table-stripped'>
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'unit.type'|trans }}</th>
+                                            <th>{{ 'unit.number'|trans }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for unit in armyContent  %}
+                                            <tr>
+                                                <td class='transferType'>{{ unit.name|trans }}</td>
+                                                <td class='transferNumber'>
+                                                    <input class='input-small' name="unitTypes[{{ unit.schema }}]" type="number" value="0" />
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div id="destinationArmyContent"></div>
+                                <div class='text-center'>
+                                    <input class='btn btn-primary' type="submit" value='{{'transfer'|trans}}' />
+                                </div>
+                            </form>
+                        </div>
+                        <div id="attack" class="hidden well form-horizontal">
+                            <h3 >{{'army.attack'|trans}}</h3>
+                            <form method="post" action="{{path('hr_army_attack')}}">
+                                <input type="hidden" name="armyID" value="{{army.id}}" />
+                                <p>{{'army.attack.form.text'|trans}}</p>
+                                <select name="targetTownID">
+                                    {% for targetTown in targetTowns %}
+                                    <option value="{{targetTown.id}}">{{targetTown.name ~ " [" ~ targetTown.xCoord ~ ":" ~ targetTown.yCoord ~ "]"}}</option>
+                                    {% endfor %}
+                                </select>
+                                <input class='btn btn-primary' type="submit" />
+                            </form>
+                        </div>
+                        <div id="move" class="hidden well form-horizontal">
+                            <h3 >{{'army.move'|trans}}</h3>
+                            <form method="post" action="{{path('hr_army_move')}}">
+                                <input type="hidden" name="armyID" value="{{army.id}}" />
+                                <p>{{'army.move.form.where'|trans}}</p>
+                                <select name="allyTownID">
+                                    {% for allyTown in allyTowns if allyTown != army.town %}
+                                    <option value="{{allyTown.id}}">{{allyTown.name}} [{{allyTown.xCoord}}:{{allyTown.yCoord}}]</option>
+                                    {% endfor %}
+                                </select>
+                                <input class='btn btn-primary' type="submit" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <div style='margin-top: 30px' class='text-center'><a class='btn btn-small' href="{{path('hr_units')}}" id="closeMerge">{{ 'back'|trans }}</a></div>
+            {% if not army.moving %}
+        </div>
+</section>
+<script>
+$(function(){
+    $('.unitMiniImg').tooltip();
+
+    $("#transferArmy").change(function() {
+        var armyID = parseInt($('#transferArmy').val()) || 0;
+        if (armyID == 0)
+        {
+            $("#destinationArmyContent").html("");
+            return ;
+        }
+        $.ajax({
+            type: "POST",
+            url: "{{ path('hr_get_army_content') }}",
+            data: {'armyid': armyID }
+        }).done(function(data) {
+                $("#destinationArmyContent").html(data);
+            }).fail(function(data) {
+                $("#destinationArmyContent").html("An error happened");
+        });
+    });
+
+    var options = $("#merge form select").find("option");
+    if (options.length == 0)
+        $("#merge form input[type=submit]").attr('disabled', 'disabled');
+
+    $("#controls a").click(function(e){
+        e.preventDefault();
+        var target = $(this).data("target");
+        $(".armyControls > div").addClass("hidden");
+        $('#'+target).removeClass("hidden");
+    });
+
+});
+</script>
+{% endif %}
+
+{% endblock %}

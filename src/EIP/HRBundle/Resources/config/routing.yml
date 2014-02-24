@@ -1,0 +1,785 @@
+#visitor
+
+hr_homepage:
+    pattern:  /
+    defaults: { _controller: EIPHRBundle:Visitor:homePage }
+
+hr_login_check:
+    pattern: /login_check
+
+hr_logout:
+    pattern: /logout
+
+hr_register:
+    pattern: /register
+    defaults: { _controller: EIPHRBundle:Visitor:register }
+
+hr_about:
+    pattern: /about
+    defaults: { _controller: EIPHRBundle:Visitor:about }
+
+hr_contact:
+    pattern: /contact
+    defaults: { _controller: EIPHRBundle:Visitor:contact }
+
+hr_faq:
+    pattern: /faq
+    defaults: { _controller: EIPHRBundle:Visitor:faq }
+
+hr_lost_credentials:
+    pattern: /lostCredentials
+    defaults: { _controller: EIPHRBundle:Visitor:lostCredentials }
+
+hr_reset_password:
+    pattern: /resetPassword
+    defaults: { _controller: EIPHRBundle:Visitor:resetPassword }
+
+hr_how_to_play:
+    pattern: /howToPlay
+    defaults: { _controller: EIPHRBundle:Visitor:howToPlay }
+
+hr_profile:
+    pattern: /profile/{username}
+    defaults: { _controller: EIPHRBundle:Game:profile }
+
+hr_achievements_all:
+    pattern: /achievements
+    defaults: { _controller: EIPHRBundle:Game:achievements }
+
+# Forum
+
+hr_forum_login_check:
+    pattern: /forumLoginCheck
+
+hr_forum_logout:
+    pattern: /forumLogout
+
+hr_forum_home:
+    pattern: /forum
+    defaults: { _controller: EIPHRBundle:Forum:home }
+
+hr_forum_topic:
+    pattern: /forum/topic/{topicid}
+    defaults: { _controller: EIPHRBundle:Forum:topic }
+    requirements:
+        topicid: \d+
+
+hr_forum_post:
+    pattern: /forum/post
+    defaults: { _controller: EIPHRBundle:Forum:post }
+
+hr_forum_add_topic:
+    pattern: /forum/addTopic
+    defaults: { _controller: EIPHRBundle:Forum:addTopic }
+
+hr_forum_topic_search:
+    pattern: /forum/search
+    defaults: { _controller: EIPHRBundle:Forum:searchTopic }
+
+hr_forum_section:
+    pattern: /forum/{sectionid}
+    defaults: { _controller: EIPHRBundle:Forum:section }
+
+# game
+
+hr_games:
+    pattern: /game/games
+    defaults: { _controller: EIPHRBundle:Game:games }
+
+hr_game_join_game:
+    pattern: /game/joinGame/{gameID}
+    defaults: { _controller: EIPHRBundle:Game:joinGame, gameID:1 }
+    requirements:
+        id: \d+
+
+hr_game_select_game:
+    pattern: /game/selectGame/{gameID}
+    defaults: { _controller: EIPHRBundle:Game:selectGame, gameID:1 }
+    requirements:
+        id: \d+
+
+hr_game_dashboard:
+    pattern: /game/dashboard
+    defaults: { _controller: EIPHRBundle:Game:dashboard }
+
+hr_map_players_info:
+    pattern: /game/map/playersInfo
+    defaults: { _controller: EIPHRBundle:Game:mapPlayersInfo }
+
+hr_map:
+    pattern: /game/map
+    defaults: { _controller: EIPHRBundle:Game:map }
+
+hr_notifications:
+    pattern: /game/notifications/{page}
+    defaults: { _controller: EIPHRBundle:Game:notifications, page: 1 }
+    requirements:
+        page: \d+
+
+hr_battle_reports:
+    pattern: /game/battleReports/{page}
+    defaults: { _controller: EIPHRBundle:Game:battleReports, page: 1 }
+    requirements:
+        page: \d+
+
+#hero
+
+hr_hero_selection:
+    pattern: /game/heroSelection/{gameid}
+    defaults: { _controller: EIPHRBundle:Game:heroSelection }
+    requirements:
+        gameid: \d+
+
+hr_hero_confirm_selection:
+    pattern: /game/heroConfirmSelection/{heroid}/{gameid}
+    defaults: { _controller: EIPHRBundle:Game:heroConfirmSelection }
+    requirements:
+        heroid: \d+
+        gameid: \d+
+
+hr_hero_selection_confirmed:
+    pattern: /game/heroSelectionConfirmed/{heroid}/{gameid}
+    defaults: { _controller: EIPHRBundle:Game:heroSelectionConfirmed }
+    requirements:
+        heroid: \d+
+        gameid: \d+
+
+hr_hero:
+    pattern: /game/hero
+    defaults: { _controller: EIPHRBundle:Game:hero }
+
+hr_use_item:
+    pattern: /game/useItem/{itemid}
+    defaults: { _controller: EIPHRBundle:Game:useItem }
+    requirements:
+        itemid: \d+
+
+hr_summon_units:
+    pattern: /game/summonUnits/{itemid}
+    defaults: { _controller: EIPHRBundle:Game:summonUnit }
+    requirements:
+        itemid: \d+
+
+hr_item_details:
+    pattern: /item/{id}
+    defaults: { _controller: EIPHRBundle:Game:itemDetails }
+    requirements:
+        _method:  GET
+        id: \d+
+    options:
+        expose: true
+
+#game message
+
+hr_messages:
+    pattern: /game/messages
+    defaults: { _controller: EIPHRBundle:Game:messages }
+
+hr_read_message:
+    pattern: /game/readMessage
+    defaults: { _controller: EIPHRBundle:Game:readMessage }
+
+#game buildings
+
+hr_towns:
+    pattern: /game/towns
+    defaults: { _controller: EIPHRBundle:Game:towns }
+
+hr_town_detail:
+    pattern: /game/town/{townid}
+    defaults: { _controller: EIPHRBundle:Game:townDetail }
+    requirements:
+        townid: \d+
+    options:
+        expose: true
+
+hr_build:
+    pattern: /game/build/{townid}/{schemaid}
+    defaults: { _controller: EIPHRBundle:Game:build, schemaid:0 }
+    requirements:
+        townid: \d+
+        schemaid: \d+
+    options:
+        expose: true
+
+hr_build_schema:
+    pattern: /game/buildSchema/{townid}/{schemaid}
+    defaults:  { _controller: EIPHRBundle:Game:buildSchema }
+    requirements:
+        townid: \d+
+        schemaid: \d+
+
+hr_build_requirement:
+    pattern: /game/buildRequirement/{schemaid}
+    defaults: { _controller: EIPHRBundle:Game:buildRequirement }
+    options:
+        expose: true
+
+hr_destroy_building:
+    pattern: /game/destroyBuilding/{buildingId}
+    defaults: { _controller: EIPHRBundle:Game:destroyBuilding }
+    requirements:
+        buildingId: \d+
+
+#game units
+
+hr_units:
+    pattern: /game/units
+    defaults: { _controller: EIPHRBundle:Game:units }
+
+hr_recruit:
+    pattern: /game/recruit/{townid}/{schemaid}
+    defaults: { _controller: EIPHRBundle:Game:recruit, schemaid:0, townid:0 }
+    options:
+        expose: true
+
+hr_recruit_unit:
+    pattern: /game/recruitUnit/{townid}/{schemaid}/{quantity}
+    defaults: { _controller: EIPHRBundle:Game:recruitSchema, quantity: 1 }
+    requirements:
+        townid: \d+
+        schemaid: \d+
+    options:
+        expose: true
+
+#army
+
+hr_army_merge:
+    pattern: /game/armyMerge
+    defaults: { _controller: EIPHRBundle:Game:armyMerge }
+
+hr_army:
+    pattern: /game/army/{armyid}
+    defaults: { _controller: EIPHRBundle:Game:army, armyid: 0 }
+    requirements:
+        armyid: \d+
+    options:
+        expose: true
+
+hr_add_army:
+    pattern: /game/addArmy/{townid}
+    defaults: { _controller: EIPHRBundle:Game:addArmy, townid:0 }
+    requirements:
+        townid: \d+
+
+hr_add_new_army:
+    pattern: /game/addNewArmy
+    defaults: { _controller: EIPHRBundle:Game:addNewArmy }
+
+
+hr_move_army:
+    pattern: /game/moveArmy/{armyid}/{toX}/{toY}
+    defaults: { _controller: EIPHRBundle:Game:moveArmy }
+    requirements:
+        armyid: \d+
+        toX: \d+
+        toY: \d+
+
+hr_army_move:
+    pattern: /game/armyMove
+    defaults: { _controller: EIPHRBundle:Game:armyMove }
+
+hr_get_army_content:
+    pattern: /game/armyContent
+    defaults: { _controller: EIPHRBundle:Game:armyContent }
+
+hr_army_transfer:
+    pattern: /game/armyTransfer
+    defaults: { _controller: EIPHRBundle:Game:armyTransfer }
+
+hr_army_attack:
+    pattern: /game/armyAttack
+    defaults: { _controller: EIPHRBundle:Game:armyAttack }
+
+hr_unit_detail:
+    pattern: /game/unitDetail
+    defaults: { _controller: EIPHRBundle:Game:unitDetail }
+
+#game clan
+
+hr_clan:
+    pattern: /game/clan
+    defaults: { _controller: EIPHRBundle:Game:clan }
+
+hr_clan_detail:
+    pattern: /game/clan/{clanname}
+    defaults: { _controller: EIPHRBundle:Game:clanDetail }
+
+hr_clan_admin:
+    pattern: /game/clan/{clanname}/admin
+    defaults: { _controller: EIPHRBundle:Game:clanAdmin }
+
+hr_clan_refuse_candidature:
+    pattern: /game/clan/{clanname}/admin/refuscand/{idcand}
+    defaults: { _controller: EIPHRBundle:Game:refusCandidature }
+
+hr_clan_accept_candidature:
+    pattern: /game/clan/{clanname}/admin/acceptcand/{idcand}
+    defaults: { _controller: EIPHRBundle:Game:acceptCandidature }
+
+hr_clan_create_rank:
+    pattern: /game/clan/{clanname}/admin/createrank
+    defaults: { _controller: EIPHRBundle:Game:createRank }
+
+hr_clan_delete_rank:
+    pattern: /game/clan/{clanname}/admin/deleterank/{idRank}
+    defaults: { _controller: EIPHRBundle:Game:deleteRank }
+
+hr_clan_edit_clan:
+    pattern: /game/clan/{clanname}/admin/editclan/{id}
+    defaults: { _controller: EIPHRBundle:Game:editClan }
+
+hr_clan_fire_member:
+    pattern: /game/clan/{clanname}/admin/firemember/{id}
+    defaults: { _controller: EIPHRBundle:Game:fireMember }
+
+hr_clan_update_rank:
+    pattern: /game/clan/{clanname}/admin/UpdateRank
+    defaults: { _controller: EIPHRBundle:Game:UpdateRank }
+
+hr_clan_leave:
+    pattern: /game/clan/leave/{idUser}
+    defaults: { _controller: EIPHRBundle:Game:leaveClan }
+
+hr_clan_delete:
+    pattern: /game/clan/delete/{idClan}
+    defaults: { _controller: EIPHRBundle:Game:deleteClan }
+
+#game technology
+
+hr_technology:
+    pattern: /game/technology/{schemaid}
+    defaults: { _controller: EIPHRBundle:Game:technology, schemaid:0 }
+    requirements:
+        schemaid: \d+
+    options:
+        expose: true
+
+hr_technology_research_start:
+    pattern: /game/researchStart/{id}
+    defaults: { _controller: EIPHRBundle:Game:researchStart }
+    requirements:
+        id: \d+
+    options:
+        expose: true
+
+hr_technology_research_started:
+    pattern: /game/researchStarted/{schemaid}
+    defaults: { _controller: EIPHRBundle:Game:researchStarted }
+
+hr_technology_schemaviews:
+    pattern: /game/technologySchemaViews
+    defaults: { _controller: EIPHRBundle:Game:technologySchemaViews }
+
+#adm
+
+hr_adm:
+    pattern: /hradm
+    defaults: { _controller: EIPHRBundle:Admin:login }
+
+hr_adm_login_check:
+    pattern: /hradm_login_check
+
+hr_adm_dashboard:
+    pattern: /hradm/dashboard
+    defaults: { _controller: EIPHRBundle:Admin:dashboard }
+
+#users
+
+hr_adm_users:
+    pattern: /hradm/users
+    defaults: { _controller: EIPHRBundle:Admin:users }
+
+hr_adm_user_edit:
+    pattern: /hradm/user/{id}
+    defaults: { _controller: EIPHRBundle:Admin:userEdit, id:1 }
+    requirements:
+        id: \d+
+
+hr_adm_user_games:
+    pattern: /hradm/userGameList/{userid}
+    defaults: { _controller: EIPHRBundle:Admin:usergameList }
+    requirements:
+        userid: \d+
+
+hr_adm_user_game_detail:
+    pattern: /hradm/userGameDetail/{userid}/{gameid}
+    defaults: { _controller: EIPHRBundle:Admin:userGameDetail }
+    requirements:
+        userid: \d+
+        gameid: \d+
+
+# games
+
+hr_adm_games:
+    pattern: /hradm/games
+    defaults: { _controller: EIPHRBundle:Admin:games }
+
+hr_adm_add_game:
+    pattern: /hradm/game/add
+    defaults: { _controller: EIPHRBundle:Admin:gameAdd }
+
+hr_adm_game_edit:
+    pattern: /hradm/game/{id}
+    defaults: { _controller: EIPHRBundle:Admin:gameEdit, id:1 }
+    requirements:
+        id:   \d+
+
+# buildings
+
+hr_adm_buildings:
+    pattern: /hradm/buildings
+    defaults: { _controller: EIPHRBundle:Admin:buildings }
+
+hr_adm_add_building:
+    pattern: /hradm/addBuilding
+    defaults: { _controller: EIPHRBundle:Admin:addBuilding }
+
+hr_adm_edit_building:
+    pattern: /hradm/building/{id}
+    defaults: { _controller: EIPHRBundle:Admin:editBuilding }
+    requirements:
+        id: \d+
+
+hr_adm_delete_building:
+    pattern: /hradm/deleteBuilding/{id}
+    defaults: { _controller: EIPHRBundle:Admin:deleteBuilding }
+    requirements:
+        id: \d+
+
+# clans
+
+hr_adm_clans:
+    pattern: /hradm/clans
+    defaults: { _controller: EIPHRBundle:Admin:clans }
+
+hr_clan_detail:
+    pattern: /game/clan/{clanname}
+    defaults: { _controller: EIPHRBundle:Game:clanDetail }
+
+hr_clan_admin:
+    pattern: /game/clan/{clanname}/admin
+    defaults: { _controller: EIPHRBundle:Game:clanAdmin }
+
+hr_clan_refuse_candidature:
+    pattern: /game/clan/{clanname}/admin/refuscand/{idcand}
+    defaults: { _controller: EIPHRBundle:Game:refusCandidature }
+
+hr_clan_accept_candidature:
+    pattern: /game/clan/{clanname}/admin/acceptcand/{idcand}
+    defaults: { _controller: EIPHRBundle:Game:acceptCandidature }
+
+# buffs
+
+hr_current_buffs:
+    pattern: /game/currentBuffs
+    defaults: { _controller: EIPHRBundle:Game:currentBuffs }
+
+# messages
+
+hr_adm_messages:
+    pattern: /hradm/messages
+    defaults: { _controller: EIPHRBundle:Admin:messages }
+
+hr_adm_add_message:
+    pattern: /hradm/addMessage
+    defaults: { _controller: EIPHRBundle:Admin:addMessage }
+
+hr_adm_edit_message:
+    pattern: /hradm/editMessage/{id}
+    defaults: { _controller: EIPHRBundle:Admin:editMessage }
+    requirements:
+        id: \d+
+
+hr_adm_delete_message:
+    pattern: /hradm/deleteMessage/{id}
+    defaults: { _controller: EIPHRBundle:Admin:deleteMessage }
+    requirements:
+        id: \d+
+
+  # technologies
+
+hr_adm_technologies:
+    pattern: /hradm/technologies
+    defaults: { _controller: EIPHRBundle:Admin:technologies }
+
+hr_adm_add_techno:
+    pattern: /hradm/addTechno
+    defaults: { _controller: EIPHRBundle:Admin:addTechnology }
+
+hr_adm_edit_techno:
+    pattern: /hradm/editTechno/{technoid}
+    defaults: { _controller: EIPHRBundle:Admin:editTechnology }
+    requirements:
+        technoid: \d+
+
+hr_adm_delete_techno:
+    pattern: /hradm/deleteTechno/{technoid}
+    defaults: { _controller: EIPHRBundle:Admin:deleteTechnology }
+    requirements:
+        technoid: \d+
+
+# towns
+
+hr_adm_towns:
+    pattern: /hradm/towns
+    defaults: { _controller: EIPHRBundle:Admin:towns }
+
+hr_adm_add_town:
+    pattern: /hradm/addTown
+    defaults: { _controller: EIPHRBundle:Admin:addTown }
+
+hr_adm_edit_town:
+    pattern: /hradm/town/{id}
+    defaults: { _controller: EIPHRBundle:Admin:editTown }
+    requirements:
+        id: \d+
+
+hr_adm_delete_town:
+    pattern: /hradm/deleteTown/{townid}
+    defaults: { _controller: EIPHRBundle:Admin:deleteTown }
+    requirements:
+        townid: \d+
+
+
+# armies
+
+hr_adm_armies:
+    pattern: /hradm/armies
+    defaults: { _controller: EIPHRBundle:Admin:armies }
+
+hr_adm_add_army:
+    pattern: /hradm/addArmy
+    defaults: { _controller: EIPHRBundle:Admin:addArmy }
+
+hr_adm_edit_army:
+    pattern: /hradm/army/{armyid}
+    defaults: { _controller: EIPHRBundle:Admin:editArmy }
+    requirements:
+        armyid: \d+
+
+hr_adm_delete_army:
+    pattern: /hradm/deleteArmy/{armyid}
+    defaults: { _controller: EIPHRBundle:Admin:deleteArmy }
+    requirements:
+        armyid: \d+
+
+#units
+
+hr_adm_units:
+    pattern: /hradm/units
+    defaults: { _controller: EIPHRBundle:Admin:units }
+
+hr_adm_add_unit:
+    pattern: /hradm/addUnit
+    defaults: { _controller: EIPHRBundle:Admin:addUnit }
+
+hr_adm_edit_unit:
+    pattern: /hradm/unit/{schemaid}
+    defaults: { _controller: EIPHRBundle:Admin:editUnit }
+    requirements:
+        schemaid: \d+
+
+hr_adm_delete_unit:
+    pattern: /hradm/deleteUnit/{schemaid}
+    defaults: { _controller: EIPHRBundle:Admin:deleteUnit }
+    requirements:
+        schemaid: \d+
+
+# adm heroes
+
+hr_adm_heroes:
+    pattern: /hradm/heroes
+    defaults: { _controller: EIPHRBundle:Admin:heroes }
+
+hr_adm_add_hero:
+    pattern: /hradm/addHero
+    defaults: { _controller: EIPHRBundle:Admin:addHero }
+
+hr_adm_edit_hero:
+    pattern: /hradm/editHero/{id}
+    defaults: { _controller: EIPHRBundle:Admin:editHero }
+    requirements:
+        id: \d+
+
+# adm forum
+
+hr_adm_forum:
+    pattern: /hradm/forum
+    defaults: { _controller: EIPHRBundle:Admin:forum }
+
+hr_adm_forum_section:
+    pattern: /hradm/forumSection/{sectionid}
+    defaults: { _controller: EIPHRBundle:Admin:forumSection }
+
+hr_adm_forum_topic:
+    pattern: /hradm/forumTopic/{topicid}
+    defaults: { _controller: EIPHRBundle:Admin:forumTopic }
+
+hr_adm_forum_delete_topic:
+    pattern: /hradm/deleteTopic/{topicid}
+    defaults: { _controller: EIPHRBundle:Admin:forumDeleteTopic }
+
+hr_adm_forum_delete_post:
+    pattern: /hradm/deletePost/{postid}
+    defaults: { _controller: EIPHRBundle:Admin:forumDeletePost }
+
+# adm items
+
+hr_adm_items:
+    pattern: /hradm/items
+    defaults: { _controller: EIPHRBundle:Admin:items }
+
+hr_adm_add_item:
+    pattern: /hradm/addItem
+    defaults: { _controller: EIPHRBundle:Admin:addItem }
+
+hr_adm_edit_item:
+    pattern: /hradm/editItem/{schemaid}
+    defaults: { _controller: EIPHRBundle:Admin:editItem }
+    requirements:
+      schemaid: \d+
+
+hr_adm_delete_item:
+    pattern: /hradm/deleteItem/{schemaid}
+    defaults: { _controller: EIPHRBundle:Admin:deleteItem }
+    requirements:
+      schemaid: \d+
+
+# adm buffs
+
+hr_adm_buffs:
+    pattern: /hradm/buffs
+    defaults: { _controller: EIPHRBundle:Admin:buffs }
+
+hr_adm_add_buff:
+    pattern: /hradm/addBuff
+    defaults: { _controller: EIPHRBundle:Admin:addBuff }
+
+hr_adm_edit_buff:
+    pattern: /hradm/editBuff/{schemaid}
+    defaults: { _controller: EIPHRBundle:Admin:editBuff }
+    requirements:
+      schemaid: \d+
+
+hr_adm_delete_buff:
+    pattern: /hradm/deleteBuff/{schemaid}
+    defaults: { _controller: EIPHRBundle:Admin:deleteBuff }
+    requirements:
+      schemaid: \d+
+
+# quest adm
+
+hr_adm_quests:
+    pattern: /hradm/quests
+    defaults: { _controller:EIPHRBundle:Admin:quests }
+
+hr_adm_add_quest:
+    pattern: /hradm/addQuest
+    defaults: { _controller:EIPHRBundle:Admin:addQuest }
+
+hr_adm_edit_quest:
+    pattern: /hradm/editQuest/{schemaid}
+    defaults: { _controller:EIPHRBundle:Admin:editQuest }
+    requirements:
+        schemaid: \d+
+
+hr_adm_delete_quest:
+    pattern: /hradm/deleteQuest/{schemaid}
+    defaults: { _controller:EIPHRBundle:Admin:deleteQuest }
+    requirements:
+        schemaid: \d+
+
+hr_adm_edit_quest_data:
+    pattern: /hradm/editQuestData/{schemaid}
+    defaults: { _controller:EIPHRBundle:Admin:editQuestData }
+    requirements:
+        schemaid: \d+
+
+#popup chat
+
+hr_popup_chat:
+    pattern: /game/popupChat
+    defaults: { _controller: EIPHRBundle:Game:popupChat }
+
+hr_popup_chat_validate:
+    pattern: /validateChatToken
+    defaults: { _controller: EIPHRBundle:Game:validateCredentials }
+
+
+# preferences
+
+hr_preferences:
+    pattern: /game/preferences
+    defaults: { _controller: EIPHRBundle:Game:updatePreferences }
+
+# battlereports
+hr_battle_report:
+    pattern: /game/battleReport/{id}
+    defaults: { _controller: EIPHRBundle:Game:battleReport }
+    requirements:
+        id: \d+
+
+# quests
+hr_quests:
+    pattern: /game/quests
+    defaults: { _controller: EIPHRBundle:Game:quests }
+
+hr_quest_details:
+    pattern: /game/quest/{schemaid}
+    defaults: { _controller: EIPHRBundle:Game:quest }
+    requirements:
+        schemaid: \d+
+
+hr_quest_join:
+    pattern: /game/joinQuest/{schemaid}
+    defaults: { _controller: EIPHRBundle:Game:joinQuest }
+    requirements:
+        schemaid: \d+
+
+hr_quest_give_resources:
+    pattern: /game/giveResources
+    defaults: { _controller: EIPHRBundle:Game:giveResources }
+
+#locale
+
+hr_change_locale:
+    pattern: /game/changeLocale/{locale}
+    defaults: { _controller: EIPHRBundle:Game:changeLocale, locale: en }
+    requirements:
+        locale: fr|en
+        _method: POST
+
+# test game
+
+hr_test_game:
+    pattern: /game/testGame
+    defaults: { _controller: EIPHRBundle:Game:testGame }
+
+# game result
+
+hr_game_result:
+    pattern: /game/gameResult/{gameid}
+    defaults: { _controller: EIPHRBundle:Game:gameResult }
+    requirements:
+        gameid: \d+
+
+
+#test
+
+hr_test3_route:
+    pattern: /test3
+    defaults: { _controller: EIPHRBundle:Game:test3 }
+
+hr_test2_route:
+    pattern: /test2
+    defaults: { _controller: EIPHRBundle:Game:test2 }
+
+hr_test_route:
+    pattern: /test
+    defaults: { _controller: EIPHRBundle:Game:test }
+
+# JSON
+hr_get_usernames:
+    pattern: /game/usernames
+    defaults: { _controller: EIPHRBundle:Game:getUsernames }

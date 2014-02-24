@@ -1,0 +1,12 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<h3>{{formType}} {{entityType}}</h3>
+<div>
+    <form method='post' action=''>
+        {{form_widget(form)}}
+            <input class='btn btn-primary' type='submit' />
+    </form>
+</div>
+
+{% endblock %}

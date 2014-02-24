@@ -1,0 +1,176 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'buffs.current'|trans}}</h2>
+        <div class="pull-right"><i class="fa fa-external-link fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+<div class='container'>
+    <div id='totalBuff'>
+        <h4>{{'buffs.total'|trans}}</h4>
+            <table class='table table-condensed'>
+                <tr>
+                    <td>{{'unit.hp'|trans}}</td>
+                    <td>{{totals.health + hero.totalBonusHealth}}</td>
+                </tr>
+                <tr>
+                    <td>{{'unit.attack'|trans}}</td>
+                    <td>{{totals.attack + hero.totalBonusAttack}}</td>
+                </tr>
+                <tr>
+                    <td>{{'unit.armor'|trans}}</td>
+                    <td>{{totals.armor + hero.totalBonusArmor}}</td>
+                </tr>
+                <tr>
+                    <td>{{'unit.speed'|trans}}</td>
+                    <td>{{totals.speed + hero.totalBonusSpeed}}</td>
+                </tr>
+                <tr>
+                    <td>{{'resources'|trans}}</td>
+                    <td>{{totals.resources + hero.totalBonusCollectRate}} %</td>
+                </tr>
+            </table>
+    </div>
+</div>
+</section>
+<section class="content-section saw">
+<div class='container'>
+    <div id='activeBuffsList'>
+        <h4>{{'buffs'|trans}}</h4>
+            <p>{{'buffs.type.health'|trans}}</p>
+            <ul>
+            {% for buff in sortedBuffs.health %}
+                <li>
+                    {{buff.schema.name|trans}} : (+{{buff.schema.value}})
+                    {% if buff.schema.permanent %}
+                        {{ 'buff.permanent'|trans }}
+                        {% else %}
+                        {{ 'time.remaining'|trans }} {{remainingTime(buff.validUntil - currentTime)}}
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>{{'buff.none'|trans}}</li>
+            {%  endfor %}
+            </ul>
+            <p>{{'buffs.type.attack'|trans}}</p>
+            <ul>
+            {% for buff in sortedBuffs.attack %}
+                <li>
+                    {{buff.schema.name|trans}} : (+{{buff.schema.value}})
+                    {% if buff.schema.permanent %}
+                    {{ 'buff.permanent'|trans }}
+                    {% else %}
+                    {{ 'time.remaining'|trans }} {{remainingTime(buff.validUntil - currentTime)}}
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>{{'buff.none'|trans}}</li>
+            {%  endfor %}
+            </ul>
+            <p>{{'buffs.type.armor'|trans}}</p>
+            <ul>
+            {% for buff in sortedBuffs.armor %}
+                <li>
+                    {{buff.schema.name|trans}} : (+{{buff.schema.value}})
+                    {% if buff.schema.permanent %}
+                        {{ 'buff.permanent'|trans }}
+                        {% else %}
+                        {{ 'time.remaining'|trans }} {{remainingTime(buff.validUntil - currentTime)}}
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>{{'buff.none'|trans}}</li>
+            {%  endfor %}
+            </ul>
+            <p>{{'buffs.type.speed'|trans}}</p>
+            <ul>
+            {% for buff in sortedBuffs.speed %}
+                <li>
+                    {{buff.schema.name|trans}} : (+{{buff.schema.value}})
+                    {% if buff.schema.permanent %}
+                        {{ 'buff.permanent'|trans }}
+                        {% else %}
+                        {{ 'time.remaining'|trans }} {{remainingTime(buff.validUntil - currentTime)}}
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>{{'buff.none'|trans}}</li>
+            {%  endfor %}
+            </ul>
+            <p>{{'buffs.type.resources'|trans}}</p>
+            <ul>
+            {% for buff in sortedBuffs.resources %}
+                <li>
+                    {{buff.schema.name|trans}} : (+{{buff.schema.value}}%)
+                    {% if buff.schema.permanent %}
+                        {{ 'buff.permanent'|trans }}
+                        {% else %}
+                        {{ 'time.remaining'|trans }} {{remainingTime(buff.validUntil - currentTime)}}
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>{{'buff.none'|trans}}</li>
+            {%  endfor %}
+            </ul>
+            <p>{{'buffs.type.buildingTime'|trans}}</p>
+            <ul>
+            {% for buff in sortedBuffs.buildingTime %}
+                <li>
+                    {{buff.schema.name|trans}} : (+{{buff.schema.value}}%)
+                    {% if buff.schema.permanent %}
+                        {{ 'buff.permanent'|trans }}
+                        {% else %}
+                        {{ 'time.remaining'|trans }} {{remainingTime(buff.validUntil - currentTime)}}
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>{{'buff.none'|trans}}</li>
+            {%  endfor %}
+            </ul>
+            <p>{{'buffs.type.trainingTime'|trans}}</p>
+            <ul>
+            {% for buff in sortedBuffs.trainingTime %}
+                <li>
+                    {{buff.schema.name|trans}} : (+{{buff.schema.value}}%)
+                    {% if buff.schema.permanent %}
+                        {{ 'buff.permanent'|trans }}
+                        {% else %}
+                        {{ 'time.remaining'|trans }} {{remainingTime(buff.validUntil - currentTime)}}
+                    {% endif %}
+                </li>
+            {% else %}
+                <li>{{'buff.none'|trans}}</li>
+            {%  endfor %}
+            </ul>
+    </div>
+</div>
+</section>
+<section class="content-section">
+<div class='container'>
+    <div>
+        <h4>{{'hero'|trans}}</h4>
+        {% set heroBonuses = [
+            { label:'bonus.health', value: hero.totalBonusHealth },
+            { label:'bonus.attack', value: hero.totalBonusAttack },
+            { label:'bonus.armor', value: hero.totalBonusArmor },
+            { label:'bonus.speed', value: hero.totalBonusSpeed },
+            { label:'bonus.collect', value: hero.totalBonusCollectRate }
+        ] %}
+        <div>
+            <table class='table table-condensed'>
+            {% for hb in heroBonuses %}
+                <tr>
+                    <td>{{ hb.label|trans }}</td>
+                    <td>{{ hb.value }} {% if loop.last %}%{%endif%}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock %}

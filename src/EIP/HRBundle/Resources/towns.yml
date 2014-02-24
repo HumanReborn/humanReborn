@@ -1,0 +1,400 @@
+-
+    name: Morley
+    x: 25
+    y: 162
+-
+    name: Clearbush
+    x: 33
+    y: 117
+-
+    name: Wilderiver
+    x: 80
+    y: 126
+-
+    name: Landbarrow
+    x: 80
+    y: 26
+-
+    name: Mallowcrest
+    x: 159
+    y: 30
+-
+    name: Glasslea
+    x: 235
+    y: 38
+-
+    name: Glassford
+    x: 253
+    y: 114
+-
+    name: Valville
+    x: 326
+    y: 110
+-
+    name: Dracley
+    x: 364
+    y: 157
+-
+    name: Griffinpond
+    x: 428
+    y: 14
+-
+    name: Brightmallow
+    x: 543
+    y: 50
+-
+    name: Wayfield
+    x: 541
+    y: 8
+-
+    name: Erivale
+    x: 647
+    y: 19
+-
+    name: Glassapple
+    x: 600
+    y: 52
+-
+    name: Northbush
+    x: 731
+    y: 74
+-
+    name: Wheatland
+    x: 839
+    y: 51
+-
+    name: Beechbridge
+    x: 904
+    y: 61
+-
+    name: Glassshore
+    x: 852
+    y: 103
+-
+    name: Bellmere
+    x: 915
+    y: 125
+-
+    name: Shadowbay
+    x: 857
+    y: 221
+-
+    name: Greyhill
+    x: 935
+    y: 223
+-
+    name: Snowport
+    x: 741
+    y: 154
+-
+    name: Shadowhedge
+    x: 768
+    y: 210
+-
+    name: Ashlake
+    x: 717
+    y: 235
+-
+    name: Westcoast
+    x: 796
+    y: 270
+-
+    name: Waywynne
+    x: 849
+    y: 314
+-
+    name: Elfbarrow
+    x: 795
+    y: 331
+-
+    name: Coastwynne
+    x: 825
+    y: 406
+-
+    name: Coldhill
+    x: 877
+    y: 414
+-
+    name: Stonemarsh
+    x: 853
+    y: 462
+-
+    name: Whitewood
+    x: 951
+    y: 458
+-
+    name: Woodlyn
+    x: 953
+    y: 545
+-
+    name: Mapledell
+    x: 913
+    y: 621
+-
+    name: Beechmere
+    x: 856
+    y: 539
+-
+    name: Falconcliff
+    x: 807
+    y: 598
+-
+    name: Cormere
+    x: 885
+    y: 674
+-
+    name: Southflower
+    x: 736
+    y: 903
+-
+    name: Wellrose
+    x: 612
+    y: 915
+-
+    name: Greenloch
+    x: 697
+    y: 855
+-
+    name: Watermont
+    x: 609
+    y: 835
+-
+    name: Lightdeer
+    x: 691
+    y: 797
+-
+    name: Woodmage
+    x: 785
+    y: 787
+-
+    name: Greengriffin
+    x: 800
+    y: 858
+-
+    name: Lightdell
+    x: 940
+    y: 885
+-
+    name: Lorlyn
+    x: 901
+    y: 852
+-
+    name: Aldholt
+    x: 908
+    y: 805
+-
+    name: Merrifield
+    x: 881
+    y: 761
+-
+    name: Wellwald
+    x: 824
+    y: 739
+-
+    name: Merrivale
+    x: 661
+    y: 673
+-
+    name: Icecrest
+    x: 647
+    y: 565
+-
+    name: Morfield
+    x: 711
+    y: 467
+-
+    name: Eriacre
+    x: 580
+    y: 209
+-
+    name: Elfden
+    x: 521
+    y: 179
+-
+    name: Silvergrass
+    x: 479
+    y: 127
+-
+    name: Westermoor
+    x: 391
+    y: 122
+-
+    name: Faymage
+    x: 381
+    y: 217
+-
+    name: Aellake
+    x: 313
+    y: 225
+-
+    name: Snowden
+    x: 259
+    y: 186
+-
+    name: Summercliff
+    x: 247
+    y: 271
+-
+    name: Iceloch
+    x: 341
+    y: 291
+-
+    name: Mallowshadow
+    x: 205
+    y: 218
+-
+    name: Deepbridge
+    x: 164
+    y: 219
+-
+    name: Faywheat
+    x: 121
+    y: 285
+-
+    name: Deepoak
+    x: 68
+    y: 278
+-
+    name: Valgate
+    x: 117
+    y: 343
+-
+    name: Spellacre
+    x: 240
+    y: 334
+-
+    name: Erikeep
+    x: 68
+    y: 413
+-
+    name: Ironedge
+    x: 47
+    y: 585
+-
+    name: Witchcastle
+    x: 281
+    y: 486
+-
+    name: Havenden
+    x: 19
+    y: 494
+-
+    name: Merrowcliff
+    x: 179
+    y: 550
+-
+    name: Summerwind
+    x: 124
+    y: 727
+-
+    name: Cormount
+    x: 95
+    y: 653
+-
+    name: Sagebarrow
+    x: 292
+    y: 742
+-
+    name: Eastness
+    x: 425
+    y: 699
+-
+    name: Foxwall
+    x: 496
+    y: 728
+-
+    name: Woodmoor
+    x: 446
+    y: 836
+-
+    name: Wolfholt
+    x: 337
+    y: 799
+-
+    name: Coastpond
+    x: 325
+    y: 902
+-
+    name: Northhedge
+    x: 256
+    y: 883
+-
+    name: Whiteston
+    x: 170
+    y: 822
+-
+    name: Lightmont
+    x: 125
+    y: 910
+-
+    name: Mallowpine
+    x: 57
+    y: 789
+-
+    name: Wellwood
+    x: 217
+    y: 697
+-
+    name: Southelf
+    x: 467
+    y: 219
+-
+    name: Lighthaven
+    x: 567
+    y: 258
+-
+    name: Pineburn
+    x: 448
+    y: 325
+-
+    name: Janbank
+    x: 397
+    y: 507
+-
+    name: Maplelyn
+    x: 463
+    y: 590
+-
+    name: Lochbay
+    x: 705
+    y: 351
+-
+    name: Crystalland
+    x: 561
+    y: 373
+-
+    name: Courtville
+    x: 536
+    y: 466
+-
+    name: Valburn
+    x: 557
+    y: 655
+-
+    name: Whitecliff
+    x: 363
+    y: 658
+-
+    name: Linden
+    x: 291
+    y: 601
+-
+    name: Applebarrow
+    x: 337
+    y: 366
+-
+    name: Dragonhollow
+    x: 689
+    y: 153
+-
+    name: Blueglass
+    x: 850
+    y: 143
+-
+    name: Greymeadow
+    x: 740
+    y: 638
+-
+    name: Ironville
+    x: 271
+    y: 839

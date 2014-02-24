@@ -1,0 +1,65 @@
+security:
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, main_provider]
+        in_memory:
+            memory:
+                users:
+                    hradmin: { password: d4tFATPa$$, roles: 'ROLE_ADMIN' }
+        main_provider:
+            entity: { class: EIP\HRBundle\Entity\HRUser }
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        EIP\HRBundle\Entity\HRUser: sha512
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            pattern: ^/hradm
+            form_login:
+                provider: in_memory
+                login_path: /hradm
+                check_path: /hradm_login_check
+                default_target_path: /hradm/dashboard
+            anonymous: ~
+            logout:          true
+
+        forum:
+            pattern: ^/(en|fr)/forum
+            form_login:
+                provider: main_provider
+                login_path: hr_forum_home
+                check_path: hr_forum_login_check
+            anonymous: ~
+            logout:
+                path: hr_forum_logout
+                target: hr_forum_home
+
+        main:
+            pattern:    ^/
+            form_login:
+                provider: main_provider
+                login_path: hr_homepage
+                check_path: hr_login_check
+                default_target_path: hr_games
+                always_use_default_target_path: true
+            anonymous: ~
+            logout:
+                path: hr_logout
+                target: hr_homepage
+
+    access_control:
+        - { path: ^/hradm/, roles: ROLE_ADMIN }
+        - { path: ^/(fr|en)/game/, roles: ROLE_USER }
+        - { path: ^/(fr|en)/forum/post, roles: ROLE_USER }
+        - { path: ^/(fr|en)/forum/addTopic, roles: ROLE_USER }
+
+

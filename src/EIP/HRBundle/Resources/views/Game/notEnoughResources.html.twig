@@ -1,0 +1,33 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<div class='container-fluid'>
+    <h1 class='page-header'>{{ 'resources.not.enough'|trans }}</h1>
+    
+    <div class='well text-center not-enough-resource resource-tab'>
+        <h4>{{ 'cost'|trans }}</h4>
+        <table class='table table-bordered'>
+            <tr>
+                <td><img src='{{asset('bundles/eiphr/images/waterInverted.png')}}' alt='{{'resource.water'|trans}}' title='{{'resource.water'|trans}}' />
+                <td>{{ count * schema.waterCost }}</td>
+            </tr>
+            <tr>
+                <td><img src='{{asset('bundles/eiphr/images/pureWaterInverted.png')}}' alt='{{'resource.water.pure'|trans}}' title='{{'resource.water.pure'|trans}}' />
+                <td>{{ count * schema.pureWaterCost }}</td>
+            </tr>
+            <tr>
+                <td><img src='{{asset('bundles/eiphr/images/metalInverted.png')}}' alt='{{'resource.steel'|trans}}' title='{{'resource.steel'|trans}}' />
+                <td>{{ count * schema.steelCost }}</td>
+            </tr>
+            <tr>
+                <td><img src='{{asset('bundles/eiphr/images/fuelInverted.png')}}' alt='{{'resource.fuel'|trans}}' title='{{'resource.fuel'|trans}}' />
+                <td>{{ count * schema.fuelCost }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('.table img').tooltip({placement:'right'});
+    });
+</script>
+{% endblock %}

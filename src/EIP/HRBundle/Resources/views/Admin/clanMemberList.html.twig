@@ -1,0 +1,7 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+<h2>{{clan.id }} : {{ clan.name }} - Members :</h2>
+<div>
+{% include 'EIPHRBundle::/Admin/_userList.html.twig' %}
+</div>
+{% endblock %}

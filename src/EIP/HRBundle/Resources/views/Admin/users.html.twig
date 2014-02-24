@@ -1,0 +1,33 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+<h3>Users list</h3>
+<div id="userList">
+    <table class='table table-striped table-bordered'>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>username</th>
+            <th>createdOn</th>
+            <th>status</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {%  set tab = [ 'closed', 'pending', 'confirmed' ] %}
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.createdOn|date() }}</td>
+            <td>{{ tab[user.status + 1] }}</td>
+            <td><a href="{{ path('hr_adm_user_games', { userid: user.id })  }}">games</a></td>
+            <td><a href="{{ path('hr_adm_user_edit', {'id': user.id} ) }}">edit</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+{% endblock %}

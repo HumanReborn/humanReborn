@@ -1,0 +1,22 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+
+{% block content %}
+
+<ul>
+<li>{{ user.username }}</li>
+<li>{{ game.name }}</li>
+<li>towns</li>
+{% for town in towns %}
+<li>{{ town.name }}</li>
+{% endfor %}
+<li>technologies</li>
+{% for tech in technologies %}
+<li>{{ tech.id  }}</li>
+{% endfor %}
+<li>armies</li>
+{% for army in armies %}
+<li>{{ army.id }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

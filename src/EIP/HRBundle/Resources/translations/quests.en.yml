@@ -1,0 +1,23 @@
+type.give.resources: Resources
+type.destroy.unit: Destruction
+type.build: Construction
+
+destroy.q1: Blood bath
+quest.completed: "'%questName%' quest accomplished !"
+resources.q1: "Gohl's caravan"
+
+quest.finished: Finished
+quest.victory: Completed
+quest.ongoing: Ongoing
+quest.not.followed: "You have not accepted this quest."
+
+item.reward.none: No item
+
+one.desc: >
+  <h3>Almost anything you want !</h3>
+  <p>Gohl's caravan is passing by and offers you once more its amazing wares ! Today for sales : a very usefull portable well, a pack of old vinyl records as good as new and tons of tanks remnants gathered from old battlefields the caravan came across. All theses goods for "the best price out there", or so Gohl says. Will resist the temptation ?</p>
+two.desc: >
+  <h3>Bounty hunter</h3>
+  <p>Your agents told you there are bounties for capturing or taking out some of your enemies ... If you come to cross their pass, think twice ! Is it worth it ? Can you take them out ? Are you strong enough to handle them while keeping your clan safe from possible external attacks ?</p>
+
+

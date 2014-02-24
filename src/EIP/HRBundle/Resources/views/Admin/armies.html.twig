@@ -1,0 +1,35 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<h3>armies</h3>
+
+<a class='btn' href="{{ path('hr_adm_add_army') }}">create army</a>
+
+<table class='table table-striped table-bordered'>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>game</th>
+            <th>player</th>
+            <th>position</th>
+            <th>moving</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for army in armies %}
+            <tr>
+                <td>{{ army.id }}</td>
+                <td>{{ army.game.name }}</td>
+                <td>{{ army.user.username }}</td>
+                <td>POS</td>
+                <td>{% if army.moving %} true {% else %} false {%endif%}</td>
+                <td><a href="{{ path('hr_adm_edit_army', { 'armyid': army.id }) }}">Edit</a></td>
+                <td><a href="javascript:void(0)" attr-path="{{ path('hr_adm_delete_army', { 'armyid': army.id }) }}" onclick="confirmDelete(this)">delete</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

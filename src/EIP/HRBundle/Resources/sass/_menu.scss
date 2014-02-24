@@ -1,0 +1,327 @@
+@import "compass/css3";
+@import "variables";
+
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+body{
+  padding-top:$menuHeight;
+  padding-bottom: 60px;
+}
+
+#menu {
+  z-index: 20;
+  ul{list-style:none;}
+  & *{margin: 0;padding: 0;}
+  @include box-sizing(border-box);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height:$menuHeight;
+  color:#eee;
+  background-color: $leftMenuBackgroundColor;
+
+
+
+  .opener,.queues-opener{
+    width: $leftMenuIconWidth;
+    height: $menuHeight;
+
+    vertical-align: middle;
+    text-align: center;
+    &:hover {
+      display: inline-block;
+      background-color: $leftMenuHoverBackgroundColor;
+      color: $leftMenuHoverColor;
+    }
+    .fa {line-height: $menuHeight;}
+  }
+
+  #top-menu {
+    height: $menuHeight;
+    li {
+      vertical-align: top;
+      display: inline-block;
+      a{
+        display: block;
+        vertical-align: middle;
+        line-height: $menuHeight;
+        color: $leftMenuColor;
+        height: $menuHeight;
+        padding:0px 20px;
+        text-decoration: none;
+        &:hover {
+          color: $leftMenuHoverColor;
+          background-color: $leftMenuHoverBackgroundColor;
+        }
+      }
+    }
+    .logo{
+      width: 200px;
+      text-align: center;
+      height: $menuHeight;
+      border-left: 1px #444 solid;
+      border-right: 1px #444 solid;
+      img {
+        @include box-sizing(border-box);
+        height: $menuHeight;
+        padding: 8px;
+      }
+      @media (max-width: 790px) {
+        display: none;
+      }
+    }
+  }
+
+  .resources{
+    text-align: center;
+    li {
+      height:$menuHeight;
+      display: inline-block;
+      padding: 1px 20px;
+      @media (max-width: 790px) {
+        font-size: 11px;
+        line-height: 14px;
+        padding:1px 10px;
+      }
+      img {
+        height: 30px;
+        @media (max-width: 790px) {
+          height:18px;
+        }
+      }
+      span {
+        @media (max-width: 790px) {
+          display: block;
+        }
+        color: #9ca;
+      }
+    }
+  }
+}
+
+
+#left-menu:hover a:hover {
+  color: $leftMenuHoverColor;
+  background-color: $leftMenuHoverBackgroundColor;
+}
+
+#left-menu{
+  overflow: auto;
+  position:fixed;
+  background-color: $leftMenuBackgroundColor;
+  color:#eee;
+  left:-($leftMenuIconWidth+1);
+  top: $menuHeight;
+  width: $leftMenuIconWidth;
+  height: 100%;
+  &.opened {
+    left:0px;
+    a {
+      color:$leftMenuColor;
+    }
+  }
+
+  @include transition(all 500ms cubic-bezier(0.230, 1.000, 0.320, 1.000));
+  &:hover, &.opened.full {
+    left:0px;
+    width:$leftMenuTotalWidth;
+    a {
+      color:$leftMenuColor;
+    }
+  }
+  li {
+    @include box-shadow(0px 0px 1px #999);
+  }
+  li, a{
+    display:block;
+  }
+  a{
+    overflow: hidden;
+    color: rgba(0,0,0,0);
+    text-decoration: none;
+    line-height: $leftMenuCellHeight;
+    height:$leftMenuCellHeight;
+    vertical-align: middle;
+    .icon {
+      display: inline-block;
+      text-align: center;
+      width:$leftMenuIconWidth;
+      font-size: 1.5em;
+    }
+  }
+}
+
+// QUEUES
+#queues {
+
+  position:fixed;
+  right:-($queuesWidth+1);
+  top:$menuHeight;
+  bottom:0;
+  width: $queuesWidth;
+  background-color: $leftMenuBackgroundColor;
+  @include transition(0.3s);
+  &.opened{
+    right:0;
+  }
+
+  .queueSelector{border-top:1px #555 solid;}
+  .queueSelector a{
+    display: inline-block;
+    width:33.3%;
+    text-align: center;
+    height:$queueSelectorHeight;
+    line-height:$queueSelectorHeight;
+    vertical-align: middle;
+    text-decoration: none;
+    color:$leftMenuColor;
+    &:hover, &.opened{
+      color:$leftMenuHoverColor;
+      background-color:$leftMenuHoverBackgroundColor;
+    }
+  }
+
+  .queue{
+    display: none;
+    margin:10px;
+    &.opened {
+      display: block;
+    }
+    li {
+      &:nth-child(1){color:rgb(17,230,17);}
+      &:nth-child(2){color:rgb(40,220,17);}
+      &:nth-child(3){color:rgb(65,210,17);}
+      &:nth-child(4){color:rgb(100,180,17);}
+      &:nth-child(5){color:rgb(115,160,17);}
+      &:nth-child(6){color:rgb(135,150,17);}
+      &:nth-child(7){color:rgb(155,150,17);}
+      &:nth-child(8){color:rgb(170,120,17);}
+      &:nth-child(9){color:rgb(200,130,17);}
+      &:nth-child(10){color:rgb(230,110,17);}
+    }
+  }
+
+}
+
+
+// CIRCULAR
+
+#options {
+  visibility: hidden;
+  & *{@include box-sizing(border-box);}
+  position:fixed;
+  bottom: -$circMenuTotalWidth/2;
+  left: 50%;
+  margin-top: ($circMenuTotalWidth/2);
+  margin-left: -($circMenuTotalWidth/2);
+  width: $circMenuTotalWidth;
+  height: $circMenuTotalWidth;
+  z-index:1; // a fix ...
+
+  ul{
+    @include box-shadow(0px 0px 4px #555);
+    @include border-radius(50%);
+    overflow: hidden;
+    width: $circMenuTotalWidth;
+    height: $circMenuTotalWidth;
+    position:relative;
+    @include transition(0.25s);
+    @include transform(scale(0.1));
+    background-color:#000;
+  }
+  &.opened {
+    z-index: 20;
+    visibility: visible;
+    ul {
+      @include transform(scale(1));
+    }
+  }
+
+  li {
+    overflow: hidden;
+    position:absolute;
+    width: ($circMenuTotalWidth/2);
+    height: ($circMenuTotalWidth/2);
+    top: 0;
+    left: 0;
+    @include transform-origin(100%, 100%);
+    background-color: $leftMenuBackgroundColor;
+
+    &:nth-child(2n) {
+      background-color: lighten($leftMenuBackgroundColor, 8%);
+    }
+
+    &:hover {
+      background-color: $leftMenuHoverBackgroundColor;
+      a {
+        color: $leftMenuHoverColor;
+      }
+    }
+
+    &:first-child{
+      @include transform(rotate(0deg) skew($skewValue) );
+    }
+    &:nth-child(2){
+      @include transform(rotate($angleValue * 1) skew($skewValue) );
+    }
+    &:nth-child(3){
+      @include transform(rotate($angleValue * 2) skew($skewValue) );
+    }
+    &:nth-child(4){
+      @include transform(rotate($angleValue * 3) skew($skewValue) );
+    }
+    &:nth-child(5){
+      @include transform(rotate($angleValue * 4) skew($skewValue) );
+    }
+    &:nth-child(6){
+      @include transform(rotate($angleValue * 5) skew($skewValue) );
+    }
+
+    a {
+      color: $leftMenuColor;
+      position:absolute;
+      text-align: center;
+      width: $circMenuTotalWidth/2;
+      height: $circMenuTotalWidth/2;
+      bottom:-72px; // no idea what i'm doing here o//
+      right:-52px; // same here
+      padding-top:15px;
+      @include transform(skew(-$skewValue) rotate(-75deg) );
+      text-decoration: none;
+      i {
+        font-size:2em;
+      }
+      img {
+        width: 50px;
+      }
+    }
+  }
+
+  #toggle-button {
+    visibility: visible;
+    width: $circMenuTotalWidth/4;
+    height: $circMenuTotalWidth/4;
+    line-height: $circMenuTotalWidth/6;
+    font-size: 3em;
+    vertical-align: middle;
+    text-align: center;
+    color: $leftMenuColor;
+    background-color: #000;
+    @include box-shadow(0px 0px 5px #fff);
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -($circMenuTotalWidth/8);
+    margin-top: -($circMenuTotalWidth/8);
+    @include border-radius(50%);
+    z-index:10;
+    cursor: pointer;
+  }
+ }

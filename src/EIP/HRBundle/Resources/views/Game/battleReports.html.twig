@@ -1,0 +1,86 @@
+{% extends 'EIPHRBundle:Game:layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'battle.reports'|trans}}</h2>
+        <div class="pull-right"><i class="fa fa-file-text fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section">
+    <div class="container">
+        <div class='text-center'>
+        <ul class='unstyled'>
+        {% for report in battleReports %}
+
+            {% if report.winner.id == app.user.id %}
+                {% set badgeClass = 'badge-success' %}
+                {% set iconClass = 'fa-check' %}
+            {%else%}
+                {% set badgeClass = 'badge-error' %}
+                {% set iconClass = 'fa-times' %}
+            {%endif%}
+
+            <li>
+                {% spaceless %}
+               <div class='darken-background dib margin-sm battle-report'>
+                        <div class="padding-sm">
+                            <div class="clearfix">
+                                <div class="badge {{ badgeClass }} pull-left"><i class="fa {{ iconClass }}"></i></div>
+                                <div class='underlined pull-right'>{{report.time|date('Y-m-d H:i:s')}}</div>
+                            </div>
+                            <div class="mtop">
+                                <ul class='unstyled'>
+                                    <li>
+                                        {{'place'|trans}} : {{ report.place.name }}
+                                        [ {{report.place.xCoord}}:{{report.place.yCoord}} ]
+                                    </li>
+                                    <li>{{'winner'|trans}} : {{ report.winner.username }}</li>
+                                </ul>
+                                <div class='btnContainer mtop-sm'>
+                                    <a class='btn btn-small btn-inverse' href='{{path('hr_battle_report', {id: report.id})}}'>{{'battle.report.read'|trans}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endspaceless %}
+            </li>
+        {% else %}
+            <li>{{'battle.report.none'|trans}}</li>
+        {% endfor %}
+        </ul>
+        </div>
+        <div class="pagination text-center">
+            <ul>
+                {% if currentPage <= 1 %}
+                <li class="disabled">
+                    <a>&laquo;</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{{path('hr_notifications', {page: (currentPage-1)})}}">&laquo;</a>
+                </li>
+                {% endif %}
+
+                {% for i in 1..maxPage %}
+                    <li {% if i == currentPage %}class="active"{%endif%}>
+                        <a href="{{path('hr_notifications', {page: i})}}">{{i}}</a>
+                    </li>
+                {% endfor %}
+
+                {% if currentPage == maxPage %}
+                <li class="disabled">
+                    <a>&raquo;</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{{path('hr_notifications', {page: (currentPage+1)})}}">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class='text-center'>
+            <a href='{{path('hr_game_dashboard')}}' class='btn'>{{'back'|trans}}</a>
+        </div>
+</div>
+</section>
+{% endblock %}

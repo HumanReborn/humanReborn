@@ -1,0 +1,23 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<h2>Clan edit : {{ clan.id }} :: {{ clan.name }} - {{ clan.game.name }}</h2>
+<form method="post" action="" class="adm-form">
+    <div class="error-msg">
+        {{ form_errors(form) }}
+    </div>
+        {{ form_widget(form._token) }}
+        <div>
+            <label>Name</label>
+            {{ form_widget(form.name) }}
+        </div>
+        <div>
+            <label>Game</label>
+            {{ form_widget(form.game) }}
+        </div>
+        <div>
+            <input type="submit" />
+        </div>
+</form>
+
+{% endblock %}

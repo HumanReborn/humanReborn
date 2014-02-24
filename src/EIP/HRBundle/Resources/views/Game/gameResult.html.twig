@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>~</title>
+	{% stylesheets filter='cssrewrite'
+					'bundles/eiphr/bootstrap/css/theme.min.css'
+                    'bundles/eiphr/bootstrap/css/bootstrap-responsive.min.css'
+					'bundles/eiphr/css/main.css'
+					'bundles/eiphr/css/gameLayout.css'
+	%}
+	<link rel='stylesheet' href='{{ asset_url }}' />
+	{% endstylesheets %}
+</head>
+<body>
+	<div id="game-result-header" class="text-center">{{game.name}}</div>
+	<section class="content-section saw">
+		<div class="container">
+			<h2 class="text-center">
+				{% if victory %}
+				{{ 'victory'|trans }}
+				{% else %}
+				{{ 'defeat'|trans }}
+				{% endif %}
+				-
+				{{ score.endedOn|date('Y-m-d H:i:s') }}
+			</h2>
+		</div>
+	</section>
+	<section class="content-section saw">
+		<div class="container">
+				<img src="{{asset('bundles/eiphr/images/homepage/whitelogo.png')}}" alt="logo" class='bottom-logo' />
+		</div>		
+		<div class="text-center">
+			<a href="{{path('hr_games')}}" class="btn btn-small">{{'back'|trans}}</a>
+		</div>
+	</section>		
+</body>
+</html>

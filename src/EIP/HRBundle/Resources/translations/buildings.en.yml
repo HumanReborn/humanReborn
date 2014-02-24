@@ -1,0 +1,16 @@
+water.well: "Water extractor"
+water.well.desc: "Water has become a rare good, but remains essential to human activity. Water extractors pump water from underground lakes, where the pollution is lesser. Build more water extractors to increase the amount of water gained each minute."
+decontamination.center: "Decontamination center"
+decontamination.center.desc: "Decontamination centers clean the polluted water and give you pure water, required to train most units."
+refinery: Refinery
+refinery.desc: "End of the world or not, machines still need fuel to perform. Refineries extract fuel from the soil and brings it to you at regular intervals. Build more refinery to increase the amount of fuel collected each minute."
+barracks: Barracks
+barracks.desc: "Your units need lodging and training. Barracks answer to these requirements and will allow the training of soldiers."
+research.center: Research center
+research.center.desc: "Research centers become necessary when you want to develop the technologies of your clan. It offers a clean workplace to your scientists who may be able to bring you wonders."
+mine: Mine
+mine.desc: "Ore is gathered in the mines and turned into metal. The creation of most of your armored units and buildings will require metal. Build more mines to increase the metal collected each minute."
+factory: Factory
+factory.desc: "Factories allow you to build armored units such as buggies and humvees, if you own the required technologies."
+factory.advanced: "Specialized factory"
+factory.advanced.desc: "Specialized factories are required to build advanced armored units and robots. These elite units need the latest technologies and production techniques to be fully operational."

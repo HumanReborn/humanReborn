@@ -1,0 +1,438 @@
+@import "menu";
+@import "variables";
+
+html,body{
+    height:100%;
+}
+ul,ol{
+    list-style: none;
+}
+
+// current buff list
+#activeBuffsList p {
+    text-decoration: underline;
+    margin-top: 25px;
+}
+
+
+// hero
+.hero-image {
+    line-height: 282px;
+    vertical-align: middle;
+    img{
+        @include border-radius;
+        @include box-shadow(0px 0px 8px #000);
+    }
+}
+#hero-stats-table{
+    tr:first-child td{
+        border-top:0;
+    }
+}
+#heroProgressBar {
+    position: relative;
+    top: 15px;
+    #heroExperience {
+        width: 100%;
+        text-align: center;
+        line-height: 30px;
+        vertical-align: middle;
+    }
+}
+#items {
+    .item {
+        display: inline-block;
+        img {
+            width: 80px;
+            height: 80px;
+        }
+        .name {
+            margin:10px 0px;
+        }
+        .img-container {
+            background-color: rgba(0,0,0,0.2);
+        }
+    }
+}
+#itemDetailsModal{
+    .itemImg {
+        margin:20px 0px;
+        img {
+            width: 80px;
+            height: 80px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.2);
+            border:2px #888 solid;
+        }
+    }
+}
+// towns
+.town-info {
+    margin: 0;
+    padding: 0;
+    line-height: 51px;
+    vertical-align: middle;
+    a:not(.btn) {
+        color:$headersColor;
+    }
+}
+.town-detail-build {
+    a {
+        img {
+            height:40px;
+            width:40px;
+        }
+        span {
+            line-height: 40px;
+            vertical-align:middle;
+            margin-left: 20px;
+        }
+    }
+}
+
+.thumb {
+    @include box-sizing(border-box);
+    border: $thumbBorders;
+    cursor:pointer;
+    position:relative;
+    width:  $thumbSize;
+    height: $thumbSize;
+    img {
+        position:absolute;
+        top: 0;
+        left: 0;
+    }
+    &.selected {
+        border: $thumbSelectedBorders;
+    }
+    p{
+        position: absolute;
+        height: 20px;
+        line-height:20px;
+        width: 100%;
+        top: 50%;
+        margin-top:-10px;
+        font-weight: bold;
+        color:#fff;
+        font-size:2.5em;
+        @include text-shadow(0px 0px 8px #fff);
+    }
+    &.big{
+        width:$thumbBigSize;
+        height:$thumbBigSize;
+    }
+}
+.building-details, .unit-details, .technology-details {
+    .small-lead{font-size:15px;margin:4px 0px;font-weight: bold;}
+    .requirements-title {
+        margin-top:30px;
+    }
+    .requirements {
+        margin-bottom:30px;
+        background-color: $requirementsBackgroundColor;
+        padding:10px;
+        .thumb {
+            width: $requirementsThumbsSize;
+            height: $requirementsThumbsSize;
+            vertical-align: middle;
+        }
+    }
+
+    .cost, .collect-rate, .building-time, .stats{
+        text-align: center;
+        img{
+            height:30px;
+        }
+    }
+    .controls {
+        height:59px;
+        line-height:59px;
+        vertical-align: middle;
+    }
+
+    .recruit-number{
+        margin-bottom:0px;
+        width:40px;
+    }
+}
+
+.thumb-text-placeholder {
+    height:100px;
+    line-height:100px;
+    vertical-align:middle;
+    text-align:center;
+}
+
+
+// units
+#armies, #garrisons {
+    .active a {
+        color:$infoColor;
+    }
+    a {
+        cursor: pointer;
+    }
+    .thumb.dib {
+        margin:15px;
+    }
+}
+// quest
+.resource-tab {
+    td {
+        background-color: rgba(255,255,255,0.05);
+        text-align: center;
+        vertical-align: middle;
+    }
+    img {
+        width: 45px;
+        height: 45px;
+    }
+}
+// technologies
+
+.technoTreeContainer{
+    background:rgba(0,0,0,0.4);
+    padding:7px;
+    width:396px;
+    border:2px #888 solid;
+    .technoTree{
+        position:relative;
+        height:380px;
+        width:382px;
+        margin:auto;
+        i.treeConnection{position:absolute;}
+        .techno {
+            width:76px;
+            height:76px;
+            position: absolute;
+            cursor:pointer;
+            border:2px #333 solid;
+            & > div {
+                line-height:20px;
+                width:20px;
+                margin:30px auto;
+            }
+            &.selected {
+                width:76px;
+                height:76px;
+                border:2px orange solid;
+            }
+        }
+    }
+}
+.currentTechnology{
+    margin: 0px 20px;
+    max-width: 500px;
+    .technology-description > p{margin-top: 15px;}
+    .building-time .content {
+        height:60px;
+        line-height: 60px;
+    }
+    #technologyRequirements {
+        a {
+            img {
+                width:76px;
+                height:76px;
+                border:2px #000 solid;
+                box-shadow: 0px 0px 5px #000;
+            }
+            span {
+                display: inline-block;
+                margin-bottom:5px;
+            }
+            &:hover{
+                text-decoration: none;
+            }
+        }
+    }
+}
+// map
+#myMap{
+    width:1000px;
+    height:1000px;
+    position:relative;
+    left:-1px;
+    margin:0px auto 20px auto;
+    background: url('../images/map/map.jpg') no-repeat;
+    background-size:100%;
+    border:2px #333 solid;
+    box-shadow:0px 0px 15px grey;
+    .town {
+        width:25px;
+        height:25px;
+        position:absolute;
+        display:inline-block;
+        background:#000;
+        z-index:2;
+        border-radius:50%;
+        padding:1px;
+        cursor:pointer;
+        transition: 0.3s all ease-in-out;
+        &:hover {
+            width: 30px;
+            height: 30px;
+        }
+        &.ally {
+            box-shadow: 0px 0px 10px #0f0;
+            border:2px #0f0 solid;
+        }
+        &.ally.selected,&.enemy.selected,&.clanMember.selected {
+            box-shadow: 0px 0px 10px #fff;
+        }
+        &.enemy {
+            box-shadow: 0px 0px 10px #f00;
+            border:2px #f00 solid;
+        }
+        &.clanMember {
+            border:2px #6B6BEB solid;
+            box-shadow: 0px 0px 10px #6B6BEB;
+        }
+    }
+    #actionInfo{
+        width:400px;
+    }
+}
+.unitImage{
+    position:relative;
+    display:inline-block;
+    margin:0px 5px;
+    img {
+        width:46px;
+        height:46px;
+        border:2px #333 solid;
+    }
+    & > div {
+        position:absolute;
+        top:0px;
+        left:0px;
+        width:100%;
+        line-height:50px;
+        font-size:20px;
+        font-weight:bold;
+        color:#fff;
+        text-shadow:0px 0px 3px #fff;
+        text-align:center;
+    }
+}
+.townArmy {
+    display:inline-block;
+    margin:0px 10px;
+    .badge {
+        cursor: pointer;
+    }
+    .armyContent{
+        display: none;
+        background:#222;
+        border:2px #555 solid;
+        padding:5px;
+        margin-top:5px;
+        position: absolute;
+        top:-80px;
+        width:400px;
+        text-align:center;
+    }
+    &:hover .armyContent{
+        display: block;
+    }
+}
+@media(max-width:767px){
+    #armyModal .modal-footer .span6:nth-child(n+2){
+        margin-top:10px;
+    }
+}
+#currentTown {
+    position:fixed;
+    bottom:60px;
+    left:5px;
+    width:500px;
+    z-index:3;
+    .dragHandle {
+        cursor:move;
+        background:#1f252a;
+    }
+}
+.buildingsButton{margin-left:25px;}
+.garrisonContentContainer .btn{margin:15px 0px 0px 25px;}
+#actionInfo{width:500px;bottom:60px; right:5px; position:fixed;z-index:3;}
+.armyBadge{display:inline-block;position:relative;}
+// message
+#messages{
+    form {
+        max-width: 500px;
+        margin:auto;
+        input[type="text"], textarea{
+            width:100%;
+        }
+    }
+}
+//profile
+#profileImg {
+    img {
+        background:#000;
+        width: 200px;
+        height: 200px;
+        @include box-shadow(0px 0px 8px #000);
+    }
+}
+
+.achievement{
+    margin-top: 10px;
+    .achievement-image-container{
+        width: 76px;
+        height: 76px;
+        background:#000;
+        border:2px #888 solid;
+        text-align: center;
+        line-height: 80px;
+        position:relative;
+        @include box-shadow(0px 0px 8px #000);
+        img{
+            width:50px;
+            height:50px;
+            display: inline;
+        }
+        .stars{position:absolute;
+            top:0px;left:0px;
+            line-height:14px;
+            width:100%;
+        }
+        .stars img{
+            width:12px;
+            height:12px;
+            margin:3px;
+        }
+    }
+    .media-body{
+        padding-left:20px;
+    }
+}
+
+.achievements-list {
+    text-align: center;
+    .achievement {
+        display: inline-block;
+        width: 300px;
+    }
+}
+
+// battlereports
+.battle-report,.notification {
+    min-width: 250px;
+    margin-top:15px;
+    &:first-of-type{
+        margin-top:0px;
+    }
+}
+
+#game-result-header{
+    position:fixed;
+    top:0;
+    left: 0;
+    right:0;
+    height:55px;
+    line-height: 55px;
+    vertical-align: middle;
+    font-size: 2em;
+}
+
+

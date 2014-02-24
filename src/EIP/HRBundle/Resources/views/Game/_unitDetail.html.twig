@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h2 class='page-header'>{{schema.name|trans({},'units')}}</h2>
+</div>
+<div class="modal-body">
+	<div class='container-fluid'>
+		<h4 class='text-center'>{{'stats'|trans}}</h4>
+		<div class='row-fluid'>
+			<div class='span4'>				
+				<div class='well'>
+				{% set labels = ['unit.hp', 'unit.attack', 'unit.armor', 'unit.speed', 'unit.type'] %}
+				{% set images = ['heartInversed.png', 'swordInversed.png', 'shieldInversed.png', 'speedInversed.png', 'pyramidsInversed.png'] %}
+				{% set values = [schema.hp, schema.attack, schema.armor, schema.speed, schema.type] %}
+				<table class='unitStatTable'>
+				{% for i in 0..4 %} 
+				<tr>
+                                    <td><img src='{{asset('bundles/eiphr/images/unit_detail/') ~ images[i] }}' 
+                                             alt='{{labels[i]|trans}}' title='{{labels[i]|trans}}' style='height:30px;margin-right: 5px;' /></td>
+                                    <td><span class='span6' style='vertical-align:middle;line-height:35px;margin-left:10px;'>{{values[i]}}</span></td>
+				</tr>
+				{% endfor %}  
+				</table>
+				</div>
+			</div>
+			<div class='span8'>
+				<div class='text-center well' id='unitDetailImgContainer' >
+					<img src='{{asset('bundles/eiphr/images/schema/units/') ~ schema.img ~ '.jpg'}}' alt='{{schema.name|trans}} image' />
+				</div>
+			</div>
+		</div>
+		<h4 class='text-center'>{{ 'unit.description'|trans }}</h4>
+		<div class='text-justify well'>
+			{{ schema.description.content|trans({},'units') }}
+		</div>
+	</div>
+</div>
+<div class="modal-footer text-center">
+	<a data-dismiss="modal" class='btn btn-small'>{{'close'|trans}}</a>
+</div>

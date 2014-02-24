@@ -1,0 +1,20 @@
+{% extends 'EIPHRBundle::/Visitor/layout.html.twig' %}
+{% block content %}
+{% set qa = ['what.is.human.reborn', 'game.rules', 'game.moderator',
+                'i.meet.a.bug', 'about.game', 'forum', 'do.i.need.to.pay',
+                'which.browser', 'mobile.app', 'site.subscription'] %}
+
+<section class="content-section first">
+    <div class="container">
+        <h2>FAQ</h2>
+    </div>
+</section>
+{% for e in qa %}
+<section class='content-section saw'>
+    <div class="container">
+        <h2>{{ loop.index }} - {{ ('faq.question.'~e)|trans|raw }}</h2>
+        <p>{{ ('faq.answer.'~e)|trans|raw }}</p>
+    </div>
+</section>
+{% endfor %}
+{% endblock %}

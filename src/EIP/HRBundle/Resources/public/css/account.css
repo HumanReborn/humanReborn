@@ -1,0 +1,21 @@
+/* line 1, ../../sass/account.scss */
+#register-form {
+  margin: auto;
+  padding: 30px 20px;
+}
+
+/* line 5, ../../sass/account.scss */
+.bottom-logo {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  /* line 9, ../../sass/account.scss */
+  .bottom-logo {
+    margin-top: 20px;
+  }
+}
+/* line 13, ../../sass/account.scss */
+ul {
+  list-style: none;
+}

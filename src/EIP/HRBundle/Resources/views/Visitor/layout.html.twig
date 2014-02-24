@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% block html %}<html>{% endblock %}
+<head>
+    <title>{% block title %}HumanReborn{% endblock %}</title>
+    <meta name="description" content="{{ 'humanreborn.description'|trans }}" />
+    <meta name="keywords" content="{{ 'humanreborn.keywords'|trans }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset='utf-8' />
+    {% block stylesheets %}
+        {% stylesheets  filter='cssrewrite'
+                        'bundles/eiphr/bootstrap/css/theme.min.css'
+                        'bundles/eiphr/bootstrap/css/bootstrap-responsive.min.css'
+                        'bundles/eiphr/css/main.css'
+                        'bundles/eiphr/css/visitor.css'
+
+         %}
+            <link rel="stylesheet" href="{{asset_url}}" />
+        {% endstylesheets %}
+    {% endblock %}
+    {% block javascripts %}
+        {% javascripts
+                        'bundles/eiphr/js/jquery.js'
+                        'bundles/eiphr/bootstrap/js/bootstrap.min.js'
+        %}
+            <script src="{{asset_url}}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>
+{# top menu #}
+<div class="navbar navbar-fixed-top" id="visitor-menu">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class='brand' href='{{path('hr_homepage')}}'><img src="{{asset('bundles/eiphr/images/homepage/hr.png')}}" alt="logo"></a>
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="nav-collapse collapse">
+                <ul class='nav pull-right'>
+                    <li><a href='{{path('hr_contact')}}'>{{'contact'|trans}}</a></li>
+                    <li><a href='{{path('hr_faq')}}'>FAQ</a></li>
+                    <li><a href='{{path('hr_how_to_play')}}'>{{'rule.title'|trans}}</a></li>
+                    <li><a href='{{path('hr_about')}}'>{{'about'|trans}}</a></li>
+                    <li><a href='{{path('hr_forum_home')}}'>Forum</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% block content %}{%endblock %}
+{# social #}
+<section class='content-section' id='social-buttons'>
+    <div class="container">
+        <div class="row-fluid text-center">
+            <div class='span4'>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr" data-count="none">Tweeter</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+            <div class='span4'>
+                <div class="g-plusone" data-size="standard" data-annotation='none' ></div>
+                <script type="text/javascript">
+                  (function() {
+                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                })();
+                </script>
+            </div>
+            <div  class='span4'>
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                  fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));</script>
+              <div class="fb-like" data-href="http://developers.facebook.com/docs/reference/plugins/like" data-width="450" data-colorscheme="dark" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

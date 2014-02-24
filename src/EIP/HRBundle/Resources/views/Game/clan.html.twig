@@ -1,0 +1,18 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/css/smoothness/jquery-ui-1.10.0.custom.min.css') }}" />
+{% endblock %}
+{% block content %}
+<div id="Clan">
+    <h2 class="title-spec">{{ 'clan.myclan'|trans }}</h2>
+    <ul>
+        <li>{{ 'clan.myclan.name'|trans }} : {{ myClan.name }}</li>
+        <li>{{ 'clan.myclan.acro'|trans }} : {{ myClan.acronym }}</li>
+        <li>{{ 'clan.myclan.banner'|trans }} : {{ myClan.banner }}</li>
+        <li>{{ 'clan.myclan.public'|trans }} : {{ myClan.publicPresentation }}</li>
+        <li>{{ 'clan.myclan.private'|trans }} : {{ myClan.privatePresentation }}</li
+        
+    </ul>
+</div>
+{% endblock %}

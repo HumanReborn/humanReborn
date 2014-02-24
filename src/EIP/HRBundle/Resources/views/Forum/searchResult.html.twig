@@ -1,0 +1,21 @@
+{% extends 'EIPHRBundle::/Forum/forumlayout.html.twig' %}
+{% block content %}
+<div>
+    <h3>{{ 'forum.search.result'|trans }} : {{ needle }}</h3>
+</div>
+{% for topic in topics %}
+<div class='row-fluid topic-entry'>
+    <div class="span4 text-left">
+        <a class="btn btn-link" href="{{path('hr_forum_topic',{topicid:topic.id})}}">{{ topic.title }}</a>
+    </div>
+    <div class="span4 text-center">
+        {{ 'forum.created.by'|trans~' '~topic.user.username }}
+    </div>
+    <div class="span4 text-right">
+        {{'forum.last.message.data'|trans}} {{ topic.lastPostOn|date }}
+    </div>
+</div>
+{% else %}
+    <div class='span12'>{{'forum.topic.none'|trans}}</li>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/bootstrap/css/theme.min.css')  }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/bootstrap/css/bootstrap-responsive.min.css')  }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/css/main.css')  }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/eiphr/css/heroSelection.css')  }}" />
+    <title>HumanReborn - {{ 'hero.selection'|trans }}</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div id="menu">
+        <div class="text-center">
+            <a href="{{path('hr_homepage')}}"><img src="{{asset('bundles/eiphr/images/homepage/hr.png')}}" alt="hr"/></a>
+        </div>
+    </div>
+    <section class="content-section header">
+        <div class="container clearfix">
+            <h2 class="pull-left">{{heroschema.name|trans({},'heroes')}}</h2>
+            <a class="pull-right" href='{{path('hr_homepage')}}'><img src='{{asset('bundles/eiphr/images/homepage/whitelogo.png')}}' alt='Humanreborn'/></a>
+        </div>
+    </section>
+    <section class="content-section saw">
+        <div class="container">
+            <div class='row-fluid'>
+                <div class='span4 text-center'>
+                    <div id='detailImg'>
+                        <img src='{{asset('bundles/eiphr/images/schema/heros/' ~ heroschema.img ~ '.jpg')}}' alt='{{heroschema.name|trans({},'heroes')}}' />
+                    </div>
+                    <p class='text-justify darken-background mtop' >{{heroschema.description|trans({},'heroes')}}</p>
+                </div>
+                <div class='span8'>
+                    <div id="heroStats" >
+                        <table class='table table-bordered table-striped table-condensed' style="margin-top:0px;">
+                            <thead>
+                                <tr>
+                                    <th>{{'bonus'|trans|capitalize}}</th>
+                                    <th>{{'bonus.initial'|trans}}</th>
+                                    <th>{{'bonus.per.level'|trans}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src='{{asset('bundles/eiphr/images/unit_detail/heartInversed.png')}}' alt='{{'bonus.health'|trans}}' /></td>
+                                    <td>{{heroschema.bonusHealth}}</td>
+                                    <td>{{heroschema.bonusHealthPerLevel}}</td>
+                                </tr>
+                                <tr>
+                                    <td><img src='{{asset('bundles/eiphr/images/unit_detail/swordInversed.png')}}' alt='{{'bonus.attack'|trans}}' /></td>
+                                    <td>{{heroschema.bonusAttack}}</td>
+                                    <td>{{heroschema.bonusAttackPerLevel}}</td>
+                                </tr>
+                                <tr>
+                                    <td><img src='{{asset('bundles/eiphr/images/unit_detail/shieldInversed.png')}}' alt='{{'bonus.armor'|trans}}' /></td>
+                                    <td>{{heroschema.bonusArmor}}</td>
+                                    <td>{{heroschema.bonusArmorPerLevel}}</td>
+                                </tr>
+                                <tr>
+                                    <td><img src='{{asset('bundles/eiphr/images/unit_detail/speedInversed.png')}}' alt='{{'bonus.speed'|trans}}' /></td>
+                                    <td>{{heroschema.bonusSpeed}}</td>
+                                    <td>{{heroschema.bonusSpeedPerLevel}}</td>
+                                </tr>
+                                <tr>
+                                    <td><img src='{{asset('bundles/eiphr/images/unit_detail/moneyInversed.png')}}' alt='{{'bonus.collect'|trans}}' /></td>
+                                    <td>{{heroschema.bonusCollectRate}} %</td>
+                                    <td>{{heroschema.bonusCollectRatePerLevel}} %</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div  class='text-center'>
+                <div class='links darken-background' style='padding:12px;'>
+                    <a class='btn btn-large' href='{{ path('hr_hero_selection',{ gameid: game.id }) }}' >{{'back'|trans}}</a>
+                    <a class='btn btn-large btn-success' href='{{ path('hr_hero_selection_confirmed', {heroid: heroschema.id, gameid: game.id}) }}'>
+                        {{'confirm'|trans|capitalize}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <img src='{{asset('bundles/eiphr/images/homepage/whitelogo.png')}}' alt='logo' class="bottom-logo" />
+</body>
+</html>

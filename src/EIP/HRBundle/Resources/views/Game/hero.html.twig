@@ -1,0 +1,111 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class='container clearfix'>
+        <h2 class="pull-left">{{'hero'|trans}}</h2>
+        <div class="pull-right"><i class="fa fa-male fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class='container'>
+        <h3>{{'hero.stats'|trans}}</h3>
+        <div class='row-fluid'>
+            <div class='clearfix'>
+                <div class='span4 text-center hero-image'>
+                    <img src='{{asset('bundles/eiphr/images/schema/heros/' ~ hero.schema.image ~ '.jpg' )}}' alt='{{hero.schema.name}} image' />
+                </div>
+                <div class='span8'>
+                    <div class="well">
+                        <table class='table table-condensed' id='hero-stats-table'>
+                            <tr>
+                                <td><h3>{{ hero.schema.name|trans({}, 'heroes') }}</h3></td>
+                                <td style='vertical-align:middle;'>{{ 'hero.level'|trans }} : {{ hero.level }}</td>
+                            </tr>
+                            {% set heroBonuses = [
+                                    { label:'bonus.health', value: hero.totalBonusHealth },
+                                    { label:'bonus.attack', value: hero.totalBonusAttack },
+                                    { label:'bonus.armor', value: hero.totalBonusArmor },
+                                    { label:'bonus.speed', value: hero.totalBonusSpeed },
+                                    { label:'bonus.collect', value: hero.totalBonusCollectRate },
+                                ] %}
+                            {% for attr in heroBonuses %}
+                            <tr>
+                                <td>{{attr.label|trans}}</td>
+                                <td>{{attr.value}}{% if loop.last %} %{%endif%}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class='container'>
+        <h3>{{'hero.level.progression'|trans}}</h3>
+        <div class='row-fluid'>
+            <div class='progress progress-striped span9' id='heroProgressBar'>
+                <div class='bar'></div>
+                <div id='heroExperience'>{{hero.currentXp}} {{'xp.point'|trans}}</div>
+            </div>
+            <div class='alert alert-info span3 text-center' ><i class='icon-circle-arrow-up icon-white'></i> {{'hero.level.up'|trans}} {{hero.xpToNextLevel}} {{'xp.point'|trans}}</div>
+        </div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class='container'>
+        <div id='items'>
+        <h3>{{'hero.items'|trans}}</h3>
+            <ul class='unstyled'>
+            {% for item in hero.items %}
+                <li class='item well text-center'>
+                    <div class='img-container'><img src='{{asset('bundles/eiphr/images/schema/items/')~item.schema.image }}' alt='{{item.schema.name|trans({}, 'items')}}' /></div>
+                    <div class='name'>{{ item.schema.name|trans({},'items') }}</div>
+                    <div class='description hide'> {{item.schema.description|trans({}, 'items')|raw}} </div>
+                     <div class='btn-group'>
+                        <a class='btn btn-info btn-small' onclick='showItemDetails(this)'><i class='icon-question-sign icon-white'></i> {{'details'|trans}}</a>
+                        <a class='btn btn-small' href='{{path('hr_use_item', {itemid: item.id})}}'>{{'use'|trans}} <i class='icon-ok-circle icon-white'></i></a>
+                     </div>
+                </li>
+            {% else %}
+                <li>{{'hero.items.none'|trans}}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+<div id='itemDetailsModal' class="modal hide fade">
+<div class='modal-header'>
+<h2>{{'item.details'|trans}}</h2>
+</div>
+<div class='modal-body'>
+<h4 class='itemName text-center'></h4>
+<div class='itemImg text-center'><img src='' alt='' /></div>
+<p class='itemDesc well' ></p>
+</div>
+<div class='modal-footer'>
+    <button class='btn btn-small' data-dismiss='modal'>{{'close'|trans}}</button>
+</div>
+</div>
+<script>
+var detailModal = $('#itemDetailsModal');
+function showItemDetails(elem) {
+    var e = $(elem).parents('.item');;
+    var itemName = e.find('.name').html();
+    var itemDesc = e.find('.description').html();
+    var itemImg = e.find('img').attr('src');
+
+    detailModal.find('.itemName').html(itemName);
+    detailModal.find('.itemDesc').html(itemDesc);
+    detailModal.find('.itemImg img').attr('src', itemImg).attr('alt', itemName);
+
+    detailModal.modal('show');
+}
+$(function() {
+    setTimeout(function() {
+        $('#heroProgressBar > .bar').delay(5200).css('width', '{{hero.levelProgression}}%');
+        }, 500);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,111 @@
+rule.title.goal: Goal
+rule.text.goal: >
+  In a HumanReborn game, your goal is to become the ruler of the new world.
+  There are several ways to reach that objective:
+  <ul>
+    <li>Become a conqueror and crush all your enemies</li>
+    <li>Join an alliance and conquer the world together</li>
+  </ul>
+  A HumanReborm game is over once a player or an alliance controls all of the game board.
+rule.title.towns: Towns
+rule.text.towns: >
+  Towns are key points in HumanReborn:<br/>
+  In town you build buildings, train units and you must protect them from enemy attacks.<br/>
+  If you lose all your towns, the game is lost.<br/>
+  On the contrary, if you gain control over all the towns, you win the game.<br/>
+  Reach the buildings management page buy clicking on 'Buildings' in the mail menu,
+  or by selecting the town on the map, then hit the 'build in this town' button.<br/>
+  Reach the units management page for a town by clicking on 'Units' in the main menu,
+  or by selecting the town on the map, then hit the 'Recruit' button.
+rule.title.armies: Armies
+rule.text.armies: >
+  Armies contain your units, there are two types of armies
+  <ul>
+    <li>
+      The garrisons: each town owns a garrison, all units trained in this town
+      are automatically assigned to its garrison. Garrison cannot attack or be
+      moved, but they can be empty.
+    </li>
+    <li>
+      Regular armies: linked to a town, they can move, merge with
+      other armies or garrisons and attack. You can create armies from the
+      units management page. An army must alway contain at least one unit.
+    </li>
+  </ul>
+rule.title.buildings: Buildings
+rule.text.buildings: >
+  You can build buildings in your towns. Each town can contain up to 10 buildings.<br/>
+  Buildings allow you to collect resources, and to unlock particular units, buildings or technologies.<br/>
+  Click on 'Buildings' in the main menu to reach the buildings management page.
+rule.title.technologies: Technologies
+rule.text.technologies: >
+  Technologies grant you permanent passive bonuses in a game, there are economic and military technologies<br/>
+  Most of the technologies have requirements (buildings or other technologies).<br/>
+  You can reach the technologies management page by clicking or 'Technologies' in the main menu.
+rule.title.heroes: The hero
+rule.text.heroes: >
+  The hero is your right hand. His/her experience is at your service, and he will help you during fights and resources gathering.<br/>
+  You must chose one among four hero per game. Each hero has a specialty.<br/>
+  The hero grants you passive bonuses, which will increase when he levels up. To level up your hero,
+  you must earn experience points by winning fights or completing quests.
+rule.title.items: Items
+rule.text.items: >
+  Items are obtained by completing quests. They grant you advantage in the game.<br/>
+  There are three different kinds of items:
+  <ul>
+    <li>Resources items: using them instantly gives you a certain amount of resources.</li>
+    <li>Summoning items: by using a summoning item, you can create free units in one of your town.</li>
+    <li>Equipment: equipment grant you bonuses - temporary or permanent - military or economic.</li>
+  </ul>
+  Items are destroyed after being used once.<br/>
+  Items management can be reached on the hero page, by clicking 'Hero' in the main menu.
+rule.title.quests: Quests
+rule.text.quests: >
+  Quests are optional objectives.<br/>
+  Completing a quest grants experience points to your hero, and items.<br/>
+  There are several kinds of quests:
+  <ul>
+    <li>Resources quests: in which you must give away a certain amount of resources</li>
+    <li>Elimination quests: in which you have to take out specified units</li>
+    <li>Building quests: you have to build specific buildings to complete the quest</li>
+  </ul>
+  Some quests are achievable only once in a game.<br/>
+  You can reach the quests management page by clicking on 'Quests' in the main menu
+rule.title.alliances: Alliances
+rule.text.alliances: >
+  Alliances are groups of players that are decided to conquer together.<br/>
+  During a game, you can create, join or leave an alliance easily using the alliances management page.
+  Alliance chief or officers can post messages for the members to see.
+rule.title.chat: Communication
+rule.text.chat: >
+  HumanReborn uses three communication mediums:
+  <ul>
+    <li>
+      The chat: instant messenger, the chat allows players of a same game to communicate easily.
+      The chat has two tabs, the general tab to speak to all the players in the game, and the alliance tab, to speak
+      to the members of your alliance if you have one.
+      It's also possible to speak to a particular player by using the following command: "/w [player's username] message".
+    </li>
+    <li>
+      Messages: it is possible to send message to any player at any time by using the messenger.
+      Received messages can be read in the inbox.
+      To reach the messenger, click on 'Messages' in the main menu
+    </li>
+    <li>
+      The forum: the forum is used to have talks with the other players. You can reach the forum
+      by clicking on the advanced options button located at the bottom left of the screen.
+    </li>
+  </ul>
+rule.title.achievements: Achievements
+rule.text.achievements: >
+  The list of the achievements completed by a player can be seen on its profile page.<br/>
+  Achievements show a player's progression and experience in HumanReborn.<br/>
+  There are many types of achievements:
+  <ul>
+    <li>Join a certain number of games</li>
+    <li>Build a certain number of buidings</li>
+    <li>Train a certain number of buidings</li>
+    <li>Eliminate a certain number of buidings</li>
+    <li>Complete a certain amount of quests</li>
+    <li>...</li>
+  </ul>

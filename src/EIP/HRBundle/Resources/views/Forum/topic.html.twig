@@ -1,0 +1,37 @@
+{% extends 'EIPHRBundle::/Forum/forumlayout.html.twig' %}
+{% block content %}
+<div>
+    <h5>{{topic.title}}</h5>
+    {# posts #}
+    {# pagination ? #}
+    <div>
+    {% for post in topic.posts %}
+    <div class="row-fluid post-row">
+        <div class="span2">
+            <p class="text-center"><strong>{{ post.user.username }}</strong></p>
+            <p class="text-center">{{post.postedOn|date('Y-m-d')}}</p>
+        </div>
+        <div class="span10 well well-small">{{ post.content }}</div>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="post-answer">
+        {% if is_granted('ROLE_USER') %}
+        <form method="post" action="{{ path('hr_forum_post') }}">
+            <input type="hidden" name="topicID" value="{{topic.id}}" />
+            <h3 class="text-center vmargin-medium">{{'forum.post.answer'|trans}}</h3>
+            <div class="text-center">
+                <textarea name="content" class=""></textarea>
+                <br/>
+                <input type='submit' class="btn" />
+            </div>
+        </form>
+        {% else %}
+            <p class="text-center margin-small">
+                <a href="#loginModal" role="button"  class="btn btn-link" data-toggle="modal">{{ 'forum.login.to.answer'|trans }}</a>
+            </p>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

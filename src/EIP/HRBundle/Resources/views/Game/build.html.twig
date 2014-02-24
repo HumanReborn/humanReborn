@@ -1,0 +1,149 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{town.name}} <small>{{'buildings'|trans}}</small></h2>
+        <div class="pull-right"><i class="fa fa-building fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div id='buildings-list' class='text-center'>
+            {% for sv in schemaViews %}
+            <div  title='{{ sv.schema.name|trans({}, 'buildings') }}' class="dib thumb {% if loop.index0 == 0 %}selected{%endif%}" data-schemaid="{{sv.schema.id}}">
+                {% set selected = sv.schema.id == selectedSchemaID ? 'selected' : '' %}
+                <img class='{{selected}}' src='{{ asset('bundles/eiphr/images/schema/buildings/') ~ sv.schema.rValue }}.jpg' alt='{{ sv.schema.name|trans({}, 'buildings') }}'  />
+                {% if sv.errors %}
+                <img class='unavailable' src='{{ asset('bundles/eiphr/images/schema/error.png')  }}' alt='{{ 'requirements.missing'|trans }}' />
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+    {% for sv in schemaViews %}
+    {% set hide = sv.schema.id == selectedSchemaID ? '' : 'hide' %}
+    <div class="building-details {{hide}}" data-schemaid='{{sv.schema.id}}'>
+        <h3 class="building-name">{{ sv.schema.name|trans({}, 'buildings') }}</h3>
+        <div class="building-description text-justify">{{ (sv.schema.name~'.desc')|trans({}, 'buildings') }}</div>
+        {% if sv.errors %}
+        <h6 class="small-lead requirements-title">{{'requirements.missing'|trans}}</h6>
+        <div class="requirements text-center">
+            {% if sv.errors.buildings %}
+            <div class="buildings">
+                {% for bError in sv.errors.buildings %}
+                <a href='{{ path('hr_build', {townid: town.id, schemaid: bError.id }) }}' title='{{ bError.name|trans({}, 'buildings') }}' class='dib thumb'>
+                    <img src='{{asset('bundles/eiphr/images/schema/buildings/') ~ bError.rValue}}.jpg' alt='{{ bError.name|trans({}, 'buildings') }}'  />
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if sv.errors.technologies %}
+            <div class="technologies">
+                {% for tError in sv.errors.technologies %}
+                <a href='{{ path('hr_technology', {schemaid: tError.id}) }}' title='{{ tError.name|trans({}, 'technologies') }}' class='dib thumb'>
+                    <img src='{{asset('bundles/eiphr/images/schema/technologies/') ~ tError.rValue}}.jpg' alt='{{ tError.name|trans({}, 'technologies') }}'  />
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        <div class="row-fluid mtop">
+            <div class="cost darken-background span6 text-center">
+                <div class='small-lead'>{{'cost'|trans}}</div>
+                {% spaceless %} {# remove spaces between lines #}
+                <ul class='inline'>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/pureWaterInverted.png') }}" alt="{{'resource.water.pure'|trans}}" title="{{'resource.water.pure'|trans}}">
+                        {% set cl = (sv.schema.pureWaterCost > layoutResources.pureWater) ? 'text-danger' : '' %}
+                        <div class="{{cl}}">{{ sv.schema.pureWaterCost }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/waterInverted.png') }}" alt="{{'resource.water'|trans}}" title="{{'resource.water'|trans}}">
+                        {% set cl = (sv.schema.waterCost > layoutResources.water) ? 'text-danger' : '' %}
+                        <div class="{{cl}}">{{ sv.schema.waterCost }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/metalInverted.png') }}" alt="{{'resource.steel'|trans}}" title="{{'resource.water'|trans}}">
+                        {% set cl = (sv.schema.steelCost > layoutResources.steel) ? 'text-danger' : '' %}
+                        <div class="{{cl}}">{{ sv.schema.steelCost }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/fuelInverted.png') }}" alt="{{'resource.fuel'|trans}}" title="{{'resource.fuel'|trans}}">
+                        {% set cl = (sv.schema.fuelCost > layoutResources.fuel) ? 'text-danger' : '' %}
+                        <div class="{{cl}}">{{ sv.schema.fuelCost }}</div>
+                    </li>
+                </ul>
+                {% endspaceless %}
+            </div>
+            <div class="collect-rate darken-background span6 text-center">
+                <div class='small-lead'>{{'town.building.production'|trans}}</div>
+                {% spaceless %} {# remove spaces between lines #}
+                <ul class='inline'>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/pureWaterInverted.png') }}" alt="{{'resource.water.pure'|trans}}" title="{{'resource.water.pure'|trans}}">
+                        <div>{{ sv.schema.pureWaterCollectRate }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/waterInverted.png') }}" alt="{{'resource.water'|trans}}" title="{{'resource.water'|trans}}">
+                        <div>{{ sv.schema.waterCollectRate }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/metalInverted.png') }}" alt="{{'resource.steel'|trans}}" title="{{'resource.water'|trans}}">
+                        <div>{{ sv.schema.steelCollectRate }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/fuelInverted.png') }}" alt="{{'resource.fuel'|trans}}" title="{{'resource.fuel'|trans}}">
+                        <div>{{ sv.schema.fuelCollectRate }}</div>
+                    </li>
+                </ul>
+                {% endspaceless %}
+            </div>
+        </div>
+        <div class="row-fluid text-center mtop">
+            <div class="building-time darken-background span6">
+                <div class="small-lead">{{'unit.time'|trans}}</div>
+                <img src="{{asset('bundles/eiphr/images/timeInverted.png')}}" alt="buildingtime" />
+                <span>{{ remainingTimeFormat(sv.schema.buildingTime - (sv.schema.buildingTime * buildingTimeReduction/100.0))  }}</span>
+            </div>
+            <div class="controls span6">
+                <div class="darken-background">
+                    {% if sv.errors
+                        or sv.schema.pureWaterCost > layoutResources.pureWater
+                        or sv.schema.waterCost > layoutResources.water
+                        or sv.schema.steelCost > layoutResources.steel
+                        or sv.schema.fuelCost > layoutResources.fuel
+                     %}
+                    <button class='btn btn-danger disabled'>{{'town.building.build'|trans}}</button>
+                    {% else %}
+                    <a href='{{path('hr_build_schema', {townid: town.id, schemaid: sv.schema.id })}}' class='btn btn-success'>{{'town.building.build'|trans}}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+</section>
+<script>
+$(function() {
+    $('#buildings-list .thumb').click(function(e) {
+        var $elem = $(this);
+        if ($elem.hasClass('selected'))
+            return ;
+        var $oldSelected = $('#buildings-list .selected');
+        $oldSelected.removeClass('selected');
+        $elem.addClass('selected');
+        var schemaid = $elem.data('schemaid');
+        var oldSchemaid = $oldSelected.data('schemaid');
+        $('.building-details[data-schemaid="'+schemaid+'"], .building-details[data-schemaid="'+oldSchemaid+'"]').toggleClass('hide');
+        e.preventDefault();
+        e.stopPropagation();
+    });
+    $('*[title]').tooltip();
+});
+</script>
+{% endblock %}

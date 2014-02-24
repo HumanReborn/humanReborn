@@ -1,0 +1,394 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block html %}<html data-ng-app='mapModule'>{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+<script src='{{asset('bundles/eiphr/js/angular.min.js')}}'></script>
+<script src="{{asset('bundles/eiphr/js/ui-bootstrap-tpls-0.5.0.min.js')}}"></script>
+<script src="{{asset('bundles/eiphr/js/angularStrap.min.js')}}"></script>
+<script src="{{asset('bundles/eiphr/js/bootbox.min.js')}}" ></script>
+<script src='{{asset('bundles/eiphr/js/jquery-ui-1.10.3.draggable.min.js')}}'></script>
+{% endblock %}
+{% block container %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'map'|trans}}</h2>
+        <div class="pull-right"><i class="fa fa-globe fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div style='min-width:520px;' data-ng-controller='mapCtrl'>
+            <div id="myMap">
+                <div id='actionInfo'>
+                    <div class='alert alert-info' data-ng-show='showActionInfoDiv()' >
+                        <p class="text-center">{[{ getInfoMessage() }]}</p>
+                        <p class="text-center">{[{ getCancelMessage() }]}</p>
+                        <button class='btn' data-ng-click='resetActionManager()'>{{'cancel'|trans}}</button>
+                    </div>
+                </div>
+                <img data-ng-repeat='town in towns'
+                     data-ng-style='{left: town.x, top: town.y}'
+                     data-ng-class='{selected: (currentTown == town),
+                                     ally: (town.ownerid == {{ app.user.id }}),
+                                     enemy: (town.ownerid != {{ app.user.id }}),
+                                     clanMember: (town.clanMember)}'
+                     data-ng-click='townClicked(town)'
+                     tooltip-html-unsafe='{[{ getTownTooltip(town) }]}'
+                     data-ng-src='{{asset('bundles/eiphr/images/map/town.png')}}'
+                     class='town'/>
+            </div>
+            <div id='currentTown'>
+                <div class='well well-small'>
+                    <div class='dragHandle'><i class='icon-white icon-move'></i> Drag me</div>
+                    <h4>{[{currentTown.townname}]}</h4>
+                    <div>
+                        <span>{[{currentTown.ownername}]} : [{[{currentTown.x}]}:{[{currentTown.y}]}]</span>
+                        <span ng-show='!currentTown.isOwned'> {[{ currentTown.hero.name }]} {[{ currentTown.hero.level }]}</span>
+                        <a class='btn btn-info btn-small buildingsButton'
+                            href='#/' data-ng-show='currentTown.owned'
+                            data-ng-href='{[{ getTownDetailLink() }]}'>{{ 'build.in.this.town'|trans }}</a>
+                    </div>
+                    <div data-ng-show='hasGarrison()'>
+                        <h5>{{'garrison'|trans}}</h5>
+                        <div class='clearfix garrisonContentContainer'>
+                            <div class='armyContent pull-left' data-unit-image=''
+                                         data-units='currentTown.garrison' data-get-unit-name='getUnitName'
+                                         data-get-unit-image-path='getUnitImagePath'></div>
+                            <a ng-href='{[{ getRecruitLink() }]}' class='btn pull-left'>{{'units.recruit'|trans}}</a>
+                        </div>
+                    </div>
+                    <div data-ng-show='currentTown.armies.length > 0'>
+                        <h5>{{'armies'|trans}}</h5>
+                        <ul class='unstyled'>
+                            <li data-ng-repeat='army in currentTown.armies' class='townArmy'>
+                                <div data-ng-class='{"badge-important": army.moving }'
+                                      class='badge armyBadge' data-target='#armyModal' data-toggle='modal'
+                                      data-ng-click='changeCurrentArmy(army)'
+                                      >{{'army'|trans}} {[{ army.armyid }]}
+                                    <div class='armyContent' data-unit-image=''
+                                         data-units='army.units' data-get-unit-name='getUnitName'
+                                         data-get-unit-image-path='getUnitImagePath'></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class='modal hide fade' id='armyModal'>
+                <div class='modal-header'>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>{{ 'army'|trans|capitalize }} {[{ currentArmy.armyid }]}</h3>
+                </div>
+                <div class='modal-body'>
+                    <p>{{'units'|trans}}</p>
+                    <div style='background:#191d22;padding:5px 0px;' data-unit-image=''
+                         data-units='currentArmy.units' data-get-unit-name='getUnitName'
+                         data-get-unit-image-path='getUnitImagePath'></div>
+                    <div data-ng-show='currentArmy.moving'>
+                        <div>
+                            <div>{{ 'to'|trans }} : {[{ currentArmy.destination }]}</div>
+                            <div>{{ 'destination.reach.time'|trans }} : {[{ currentArmy.timeToArrival.toHHMMSS() }]}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <div class='row-fluid text-center'>
+                        <div class='span6'>
+                            <a class='btn' data-dismiss='modal' href='#/'>{{'close'|trans}}</a>
+                            <a class='btn btn-info' href=''
+                               data-ng-show='!currentArmy.moving'
+                               data-ng-href='{[{ getArmyManageLink() }]}'>{{'units.army.manage'|trans}}</a>
+                        </div>
+                        <div class='span6' data-ng-show='!currentArmy.moving'>
+                            <a class='btn btn-danger' href='#/' data-ng-click='attackArmy()' >{{'attack'|trans}}</a>
+                            <a class='btn btn-primary' href='#/' data-ng-click='moveArmy()'>{{'army.move'|trans}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% autoescape true js %}
+<script>
+//
+$('#currentTown').draggable({handle:'.dragHandle'});
+// util
+function isFunction(functionToCheck) {
+ return Object.prototype.toString.call(functionToCheck) == '[object Function]';
+}
+// angular
+var app = angular.module('mapModule',['ui.bootstrap', '$strap.directives']);
+app.config(['$interpolateProvider', function ($interpolateProvider) {
+    $interpolateProvider.startSymbol('{[{');
+    $interpolateProvider.endSymbol('}]}');
+}]);
+app.directive('unitImage', function() {
+   return {
+      restrict: 'A',
+      scope: { units: '=', getUnitName: '=',  getUnitImagePath: '=' },
+      template:
+              '<ul class="unstyled">'+
+                '<li class="unitImage" data-ng-repeat="(unitKey, unitValue) in units" >'+
+                    '<img data-ng-src="{[{ getUnitImagePath(unitKey) }]}" alt="{[{ getUnitName(unitKey) }]}" tooltip="{[{ getUnitName(unitKey) }]}" />'+
+                    '<div>{[{ unitValue }]}</div>'+
+                '</li>'+
+              '</ul>',
+      replace:true
+   };
+});
+
+function getCurrentClan(towns) {
+    for (var i = towns.length - 1; i >= 0; i--) {
+        if (towns[i].owned)
+            return towns[i].clan;
+    };
+    return null;
+}
+function ColorAlliedTowns(towns) {
+    var clan = getCurrentClan(towns);
+    if (!clan)
+        return;
+    for (var i = towns.length - 1; i >= 0; i--) {
+        towns[i].clanMember = (!towns[i].owned && towns[i].clan === clan);
+    };
+}
+function getMovementTime(from, to) {
+    var duration;
+    if (to.x == from.x && to.y == from.y)
+        duration = 0;
+    else {
+        duration = Math.abs(to.x - from.x) + Math.abs(to.y - from.y);
+        if (duration > 100)
+        {
+            if (duration > 500)
+                duration *= 50;
+            else if (duration > 200)
+                duration *= 20;
+            else
+                duration *= 5;
+        }
+    }
+    return duration;
+}
+function arrayContains(value, arr) {
+    for (var i = arr.length - 1; i >= 0; i--) {
+        if (arr[i] === value) {
+            return true;
+        }
+    };
+    return false;
+}
+function updateTownsHeroInformation(towns, heroesInfo) {
+    for (var i = towns.length - 1; i >= 0; i--) {
+        for (var j = heroesInfo.length - 1; j >= 0; j--) {
+            if (towns[i].ownerid === heroesInfo[j].userId)
+            {
+                towns[i].hero = {
+                    name: heroesInfo[j].heroName,
+                    level: heroesInfo[j].level
+                };
+                continue;
+            }
+        };
+    };
+}
+function getPlayersInformation(towns) {
+    var ids = [];
+    for (var i = towns.length - 1; i >= 0; i--) {
+        if (!towns[i].owned
+            && (arrayContains(towns[i].ownerid, ids) === false))
+        {
+            ids.push(towns[i].ownerid);
+        }
+    };
+    $.ajax({
+        url: '{{ path('hr_map_players_info') }}',
+        method: 'GET',
+        data: { idArray: JSON.stringify(ids) }
+    }).done(function(data){
+        updateTownsHeroInformation(towns, data);
+        console.log(towns);
+    }).error(function() {
+        console.error('Failed to retrieve map hero related information');
+    });
+}
+
+var mapCtrl = function($scope, $http) {
+    var unitsSchemas = {{ unitSchemas|raw }};
+    $scope.towns = {{towns|raw}};
+    $scope.currentTown = $scope.towns[0];
+    ColorAlliedTowns($scope.towns);
+    getPlayersInformation($scope.towns);
+    console.log($scope.towns);
+
+    $scope.getUnitName = function(key) {
+        for (var i = 0, max = unitsSchemas.length; i < max; i++)
+        {
+            if (unitsSchemas[i].id == key)
+                return unitsSchemas[i].name;
+        }
+        return '';
+    };
+
+    $scope.getUnitImagePath = function(key) {
+        for (var i = 0, max = unitsSchemas.length; i < max; i++)
+        {
+             if (unitsSchemas[i].id == key)
+                return '{{asset('bundles/eiphr/images/schema/units/')}}' + unitsSchemas[i].image + '.jpg';
+        }
+        return '';
+    };
+
+    $scope.changeCurrentArmy = function(armyinfos) { $scope.currentArmy = armyinfos; };
+    $scope.getTownDetailLink = function() { return Routing.generate('hr_town_detail', {townid: $scope.currentTown.townid, _locale: "{{ app.request.locale }}" }); };
+    $scope.getArmyManageLink = function() { return $scope.currentArmy ? Routing.generate('hr_army', {armyid: $scope.currentArmy.armyid, _locale: "{{ app.request.locale }}" }) : ''; };
+    $scope.getRecruitLink = function() { return Routing.generate('hr_recruit', {townid: $scope.currentTown.townid, _locale: "{{ app.request.locale }}" }); };
+
+    //
+    var SELECT_ALLY_MODE = 1, SELECT_ENEMY_MODE = 2, NONE = 3;
+    var actionManager = {
+        mode: NONE,
+        targetTown: null,
+        army: null,
+        handleClick: function(town) {
+            if (this.mode === SELECT_ALLY_MODE && town.owned) {
+                this.targetTown = town;
+                this.confirmMove();
+            }
+            else if (this.mode === SELECT_ENEMY_MODE && !town.owned) {
+                this.targetTown = town;
+                this.confirmAttack();
+            }
+            else
+                this.targetTown = null;
+        },
+        moveArmy: function(army) {
+            this.mode = SELECT_ALLY_MODE;
+            this.army = army;
+            this.cancelMessage = '{{ 'click.to.cancel.movement'|trans }}';
+            this.infoMessage = '{{ 'map.movement.info'|trans }}';
+        },
+        attack: function(army){
+            this.mode = SELECT_ENEMY_MODE;
+            this.army = army;
+            this.cancelMessage = '{{ 'click.to.cancel.attack'|trans}}';
+            this.infoMessage = '{{ 'map.attack.info'|trans }}';
+        },
+        reset: function() {
+            this.mode = NONE;
+            this.army = null;
+            this.targetTown = null;
+            this.cancelMessage = '';
+        },
+        confirmMove: function() {
+            var tta = getMovementTime($scope.currentTown, actionManager.targetTown)
+            bootbox.confirm('<h4 class="page-header">{{ 'confirm.movement'|trans }}</h4>' +
+                            '<div class="text-center">{{'army'|trans}} '+actionManager.army.armyid+' => '+actionManager.targetTown.townname+'</div>' +
+                            '<div class="text-center">{{ 'time'|trans }}: ' + tta.toHHMMSS() + '</div>',
+                    function(result){
+                if (result) {
+                    var tmpArmy = actionManager.army;
+                    $http({
+                        url: '{{path('hr_army_move')}}',
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                        data: $.param({armyID: actionManager.army.armyid, allyTownID: actionManager.targetTown.townid })
+                    }).error(function() {
+                        console.log("Move error");
+                        tmpArmy.moving = false;
+                    });
+                    // notification
+                    $scope.$apply(function() {
+                        actionManager.army.moving = true;
+                        actionManager.army.destination = actionManager.targetTown.townname;
+                        actionManager.army.timeToArrival = tta;
+                    });
+                }
+                actionManager.reset();
+            });
+        },
+        confirmAttack: function() {
+            var tta = getMovementTime($scope.currentTown, actionManager.targetTown)
+            bootbox.confirm('<h4 class="page-header">{{ 'confirm.attack'|trans }}</h4>' +
+                            '<div class="text-center">{{'army'|trans}} '+actionManager.army.armyid+' => '+actionManager.targetTown.townname+'</div>'+
+                            '<div class="text-center">{{ 'time'|trans }}: ' + tta.toHHMMSS() + '</div>',
+                    function(result){
+                if (result) {
+                    var tmpArmy = actionManager.army;
+                    $http({
+                        url: '{{path('hr_army_attack')}}',
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                        data: $.param({armyID: actionManager.army.armyid, targetTownID: actionManager.targetTown.townid })
+                    }).error(function() {
+                        console.log('attack error');
+                        tmpArmy.moving = false;
+                    });
+                    // notification
+                    $scope.$apply(function() {
+                        actionManager.army.moving = true;
+                        actionManager.army.destination = actionManager.targetTown.townname;
+                        actionManager.army.timeToArrival = tta;
+                    });
+                }
+                actionManager.reset();
+            });
+        }
+    };
+
+    $scope.townClicked = function(town) {
+        if (actionManager.mode !== NONE)
+            actionManager.handleClick(town);
+        else
+            $scope.currentTown = town;
+    };
+
+    $scope.moveArmy = function() {
+        actionManager.moveArmy($scope.currentArmy);
+        $('#armyModal').modal('hide');
+    };
+
+    $scope.attackArmy = function() {
+        actionManager.attack($scope.currentArmy);
+        $('#armyModal').modal('hide');
+    };
+
+    $scope.hasGarrison = function() {
+        for (var tmp in $scope.currentTown.garrison) {
+            if ($scope.currentTown.garrison.hasOwnProperty(tmp))
+                return true;
+        }
+        return false;
+    };
+
+    $scope.getCancelMessage = function() {
+        return actionManager.cancelMessage;
+    };
+
+    $scope.getInfoMessage = function() {
+        return actionManager.infoMessage;
+    };
+
+    $scope.resetActionManager = function() {
+        actionManager.reset();
+    };
+
+    $scope.showActionInfoDiv = function() {
+        return actionManager.mode !== NONE;
+    };
+
+    $scope.getTownTooltip = function(town) {
+        var clan = town.clan ? '<br/>&lt;'+town.clan+'&gt;' : '';
+        var heroStr = (town.hero) ? (town.hero.name + ' ' + town.hero.level) : '';
+        return town.townname  +  '<br/>[' + town.x + ':' + town.y + ']<br/><strong>' + town.ownername + '</strong>' + clan + '<br/>' + heroStr;
+    };
+
+};
+
+</script>
+{% endautoescape %}
+{% endblock %}

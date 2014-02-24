@@ -1,0 +1,88 @@
+{% set resources = [{name:'resource.water', image:'waterInverted', inputID: 'water'},
+                    {name:'resource.water.pure', image:'pureWaterInverted', inputID: 'pureWater'},
+                    {name:'resource.steel', image: 'metalInverted', inputID: 'steel'},
+                    {name:'resource.fuel', image:'fuelInverted', inputID: 'fuel'} ] %}
+<div class='row-fluid resource-tab'>
+    <div id='given' class='span6'>
+        <h4 class='page-header'>{{'progression'|trans}}</h4>
+        {% if quest %}
+        <table class='table table-bordered table-condensed'>
+            {% for r in resources %}
+            <tr>
+                <td>
+                    <img src='{{asset('bundles/eiphr/images/'~r.image)}}.png' alt='{{r.name|trans}}' title='{{r.name|trans}}' />
+                </td>
+                <td>
+                    {{ quest.data[r.inputID] }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p class='lead text-center quest-not-followed'>{{'quest.not.followed'|trans({}, 'quests') }}</p>
+        {% endif %}
+    </div>
+    <div id='goal' class='span6'>
+        <h4 class='page-header'>{{'goal'|trans}}</h4>
+        <table  class='table table-bordered table-condensed'>
+            {% for r in resources %}
+            <tr>
+                <td>
+                    <img src='{{asset('bundles/eiphr/images/'~r.image)}}.png' alt='{{r.name|trans}}' title='{{r.name|trans}}' />
+                </td>
+                <td>
+                    {{ schema.data[r.inputID] }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div id='errorDisplay' class='alert alert-danger hide text-center'></div>
+{% if quest and quest.state == 1 %} {# ongoing #}
+<p class='links text-center'>
+    <a class='btn btn-primary' href='#' data-toggle='modal' data-target='#resourcesModal'>{{'resources.give'|trans}}</a>
+</p>
+{# resource modal #}
+<div class='modal fade hide' id='resourcesModal' >
+    <form id='giveResourcesForm' class='resource-tab'>
+    <input type='hidden' name='schemaid' value='{{quest.schema.id}}' />
+    <div class='modal-header'>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class='page-header'>{{'resources.give'|trans}}</h4>
+    </div>
+    <div class='modal-body'>
+        <p class='text-center'>{{'resources.give.warning'|trans}}</p>
+        <p class='text-center'>{{'resources.give.text'|trans}} :</p>
+        <table class='table table-bordered'>
+            {% for r in resources %}
+            <tr>
+                <td>
+                    <img src='{{asset('bundles/eiphr/images/'~r.image)}}.png' alt='{{r.name|trans}}' title='{{r.name|trans}}' />
+                </td>
+                <td>
+                    <input type='number' id='{{r.inputID}}' name='{{r.inputID}}' value='0' max='{{layoutResources[r.inputID]}}' min='0' />
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class='modal-footer'>
+        <button class='btn' data-dismiss='modal'>{{'close'|trans}}</button>
+        <input type='submit' class='btn btn-primary' value='{{'validate'|trans}}'>
+    </div>
+    </form>
+</div>
+{% endif %}
+{# end resource modal #}
+<script>
+    $('.resource-tab img').tooltip({placement:'right'});
+    $('#giveResourcesForm').submit(function(e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        $.post('{{path('hr_quest_give_resources')}}',data)
+                .done(function(){ location.reload(); })
+                .fail(function(message,a,b,c){ $('#errorDisplay').html(message.responseText).toggleClass('hide'); });
+        $('#resourcesModal').modal('hide');
+    });
+</script>

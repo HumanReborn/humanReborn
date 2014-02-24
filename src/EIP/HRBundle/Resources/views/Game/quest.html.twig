@@ -1,0 +1,134 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'quest'|trans}} <small>
+        -
+        {{schema.name|trans({}, 'quests')}}
+        {% if hasQuest %}
+        {% if quest.state == 1 %}
+        {% set class = 'badge-info' %}
+        {% elseif quest.state == 2 %}
+        {% set class = 'badge-success' %}
+        {% else %}
+        {% set class = 'badge-danger' %}
+        {% endif %}
+        <span class='badge {{ class }}'>{{quest.stateName|trans({}, 'quests')}}</span>
+        {% endif %}
+        </small></h2>
+        <div class="pull-right"><i class="fa fa-trophy fa-5x"></i></div>
+    </div>
+</section>
+
+<section class="content-section saw">
+    <div class="container">
+        <div class='row-fluid'>
+            <div class='span4'>
+                <h3>{{ schema.typeName|trans({},'quests') }}</h3>
+                <img class='thumb big' src='{{ asset('bundles/eiphr/images/schema/quests/types/' ~ schema.type) }}.jpg'
+                alt='{{ schema.typeName|trans({},'quests') }}' title='{{ schema.typeName|trans({},'quests') }}' />
+            </div>
+            <div class='span8'>
+                <div class='text-justify'>
+                    {{ schema.description|trans({}, "quests")|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <h4 class='page-header'>{{'quest.rewards'|trans}}</h4>
+        <div class='row-fluid'>
+            <div class='span6 text-center'>
+                <p class='lead'>{{schema.xpReward}} {{ 'xp.point'|trans }}</p>
+            </div>
+            <div class='span6  text-center'>
+                <div class='questItems'>
+                    {% for itemSchema in schema.itemReward %}
+                    <div>
+                        <a href='#' class='itemSchemaDetailsLink' data-id='{{itemSchema.id}}' >{{itemSchema.name|trans({}, 'items')}}</a>
+                    </div>
+                    {% else %}
+                    <p class='lead'>{{'item.reward.none'|trans({}, 'quests')}}</p>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        {% if hasQuest %}
+        {% set q = quest %}
+        {% else %}
+        {% set q = null %}
+        {% endif %}
+
+        {% if schema.type == 1 %} {# give resources #}
+        {% include 'EIPHRBundle:Game:_resourceQuest.html.twig' with {schema: schema, quest: q, layoutResources: layoutResources} %}
+        {% elseif schema.type == 2 %} {# destroy #}
+        {% include 'EIPHRBundle:Game:_destroyQuest.html.twig' with {schema: schema, quest: q, unitSchemaInfo: additionalInformation } %}
+        {% elseif schema.type == 3 %} {# goto #}
+        {# goto #}
+        {% elseif schema.type == 4 %} {# build #}
+        {% include 'EIPHRBundle:Game:_buildQuest.html.twig' with {schema: schema, quest: q, buildingSchemaInfo: additionalInformation } %}
+        {% endif %}
+        <p class='links text-center mtop'>
+            <a class='btn' href='{{path('hr_quests')}}'>{{'back'|trans}}</a>
+        </p>
+    </div>
+</section>
+
+<div class='modal hide fade' id='itemDetailsModal'>
+    <div class='modal-header'>
+
+    </div>
+    <div class='modal-body'>
+
+    </div>
+    <div class='modal-footer'>
+        <button data-dismiss='modal' class='btn'>{{'close'|trans}}</button>
+    </div>
+</div>
+
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+<script>
+    $('.quest-type-img').tooltip({placement:'right'});
+
+    var currentItem = 0;
+    $('.itemSchemaDetailsLink').click(function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        currentItem = id;
+        $('#itemDetailsModal').modal('show');
+    });
+
+
+    $('#itemDetailsModal').on('show', function() {
+        var modalDiv = $(this);
+        var loadingGif = "<div style='height:200px;text-align:center;'>\
+        <h4>{{'loading'|trans}}</h4>    \
+        <img src='{{asset('bundles/eiphr/images/ajax-loader.gif')}}' alt='{{'loading'|trans}}' style='margin:90px auto;' /> \
+    </div>";
+
+    modalDiv.find('.modal-body').html(loadingGif);
+
+
+    $.ajax({
+        url: Routing.generate('hr_item_details', {id: currentItem, _locale: "{{ app.request.locale }}" }),
+        method: 'GET'
+    }).done(function(data){
+        modalDiv.find('.modal-header').html('<h2>{{'item.details'|trans}}</h2>');
+        modalDiv.find('.modal-body').html('<p class="lead text-center">'+data.name+'</p><div class="itemImg text-center"> \
+                                          <img src="{{asset('bundles/eiphr/images/schema/items/')}}'+data.img+'" alt="'+data.name+'" title="'+data.name+'" /> \
+                                      </div>'
+                                      +'<div class="well itemDesc">'+data.desc+'</div>');
+    }).fail(function() {
+        console.log('Failed to fetch item details');
+    });
+});
+</script>
+
+{% endblock %}

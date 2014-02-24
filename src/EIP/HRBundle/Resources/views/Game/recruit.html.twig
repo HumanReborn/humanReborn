@@ -1,0 +1,171 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{asset('bundles/fosjsrouting/js/router.js')}}"></script>
+<script src="{{path('fos_js_routing_js', {"callback": "fos.Router.setData"})}}"></script>
+{% endblock %}
+{% block content %}
+<section class="content-section">
+    <div class="container">
+        <h2>{{town.name}} <small>{{'units'|trans}}</small></h2>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <div id="units-list" class="text-center">
+            {% for sv in schemaViews %}
+            <div class="dib thumb unit {% if loop.index0 == 0 %}selected{%endif%}"  title='{{ sv.schema.name|trans({}, 'units') }}' data-schemaid="{{sv.schema.id}}">
+                {% set selected = sv.schema.id == selectedSchemaID ? 'selected' : '' %}
+                <img class='{{selected}}' src='{{ asset('bundles/eiphr/images/schema/units/') ~ sv.schema.img }}.jpg' alt='{{ sv.schema.name|trans({}, 'units') }}' />
+                {% if sv.errors %}
+                <img class='unavailable' src='{{ asset('bundles/eiphr/images/schema/error.png')  }}' alt='{{ 'requirements.missing'|trans }}' />
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+</div>
+</section>
+    <section class="content-section saw">
+    <div class="container">
+    {% for sv in schemaViews %}
+    {% set hide = sv.schema.id == selectedSchemaID ? '' : 'hide' %}
+    <div class="unit-details {{hide}}" data-schemaid='{{sv.schema.id}}'>
+        <h3 class="unit-name">{{ sv.schema.name|trans({}, 'units') }}</h3>
+        <div class="unit-description text-justify">{{ (sv.schema.name~'.desc')|trans({}, 'units') }}</div>
+        {% if sv.errors %}
+
+            <h6 class="small-lead requirements-title">{{'requirements.missing'|trans}}</h6>
+            <div class="requirements text-center">
+            {% if sv.errors.buildings %}
+            <div class="buildings">
+                {% for bError in sv.errors.buildings %}
+                <a href='{{ path('hr_build', {townid: town.id, schemaid: bError.id }) }}' title='{{ bError.name|trans({}, 'buildings') }}' class='dib thumb'>
+                    <img src='{{asset('bundles/eiphr/images/schema/buildings/') ~ bError.rValue}}.jpg' alt='{{ bError.name|trans({}, 'buildings') }}'  />
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if sv.errors.technologies %}
+            <div class="technologies mtop">
+                {% for tError in sv.errors.technologies %}
+                <a href='{{ path('hr_technology', {schemaid: tError.id}) }}' title='{{ tError.name|trans({}, 'technologies') }}' class='dib thumb'>
+                    <img src='{{asset('bundles/eiphr/images/schema/technologies/') ~ tError.rValue}}.jpg' alt='{{ tError.name|trans({}, 'technologies') }}'  />
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        {% endif %}
+        <div class="row-fluid mtop">
+            <div class="cost darken-background span6 text-center">
+                <div class='small-lead'>{{'cost'|trans}}</div>
+                {% spaceless %} {# remove spaces between lines -> awaited render with display inline-block #}
+                <ul class='inline'>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/pureWaterInverted.png') }}" alt="{{'resource.water.pure'|trans}}" title="{{'resource.water.pure'|trans}}">
+                        {% set cl = (sv.schema.pureWaterCost > layoutResources.pureWater) ? 'text-danger' : '' %}
+                        <div class="{{cl}}">{{ sv.schema.pureWaterCost }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/waterInverted.png') }}" alt="{{'resource.water'|trans}}" title="{{'resource.water'|trans}}">
+                        {% set cl = (sv.schema.waterCost > layoutResources.water) ? 'text-danger' : '' %}
+                        <div class="{{cl}}">{{ sv.schema.waterCost }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/metalInverted.png') }}" alt="{{'resource.steel'|trans}}" title="{{'resource.water'|trans}}">
+                        {% set cl = (sv.schema.steelCost > layoutResources.steel) ? 'text-danger' : '' %}
+                        <div class="{{cl}}">{{ sv.schema.steelCost }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/fuelInverted.png') }}" alt="{{'resource.fuel'|trans}}" title="{{'resource.fuel'|trans}}">
+                        {% set cl = (sv.schema.fuelCost > layoutResources.fuel) ? 'text-danger' : '' %}
+                        <div class="{{cl}}">{{ sv.schema.fuelCost }}</div>
+                    </li>
+                </ul>
+                {% endspaceless %}
+            </div>
+            <div class="stats darken-background span6 text-center">
+                <div class='small-lead'>{{'stats'|trans}}</div>
+                {% spaceless %} {# remove spaces between lines -> awaited render with display inline-block #}
+                <ul class='inline'>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/unit_detail/heartInversed.png') }}" alt="{{'unit.hp'|trans}}" title="{{'unit.hp'|trans}}">
+                        <div>{{ sv.schema.hp }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/unit_detail/swordInversed.png') }}" alt="{{'unit.attack'|trans}}" title="{{'unit.attack'|trans}}">
+                        <div>{{ sv.schema.attack }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/unit_detail/shieldInversed.png') }}" alt="{{'unit.armor'|trans}}" title="{{'unit.armor'|trans}}">
+                        <div>{{ sv.schema.armor }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/unit_detail/speedInversed.png') }}" alt="{{'unit.speed'|trans}}" title="{{'unit.speed'|trans}}">
+                        <div>{{ sv.schema.speed }}</div>
+                    </li>
+                    <li>
+                        <img src="{{ asset('bundles/eiphr/images/unit_detail/pyramidsInversed.png') }}" alt="{{'unit.type'|trans}}" title="{{'unit.type'|trans}}">
+                        <div>{{ sv.schema.type }}</div>
+                    </li>
+                </ul>
+                {% endspaceless %}
+            </div>
+        </div>
+        <div class="row-fluid text-center mtop">
+            <div class="building-time darken-background span6">
+                <div class="small-lead">{{'unit.time'|trans}}</div>
+                 <div>
+                    <img src="{{asset('bundles/eiphr/images/timeInverted.png')}}" alt="buildingtime" />
+                    <span>{{ remainingTimeFormat(sv.schema.buildingTime - (sv.schema.buildingTime * trainingTimeReduction/100.0))  }}</span>
+                </div>
+            </div>
+            <div class="controls span6">
+                <div class="darken-background">
+                    {% if sv.errors
+                        or sv.schema.pureWaterCost > layoutResources.pureWater
+                        or sv.schema.waterCost > layoutResources.water
+                        or sv.schema.steelCost > layoutResources.steel
+                        or sv.schema.fuelCost > layoutResources.fuel
+                     %}
+                        <button class='btn btn-danger disabled'>{{'units.recruit'|trans}}</button>
+                    {% else %}
+                        <input type="number" max="10" min="1" value="1" class="recruit-number" onchange='updateRecruitLink(this, {{ town.id }}, {{ sv.schema.id }})' />
+                        <a href='{{path('hr_recruit_unit', {townid: town.id, schemaid: sv.schema.id })}}' class='btn btn-success'>{{'units.recruit'|trans}}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    </div>
+</section>
+<script>
+$(function() {
+    $('#units-list .thumb').click(function(e) {
+        var $elem = $(this);
+        if ($elem.hasClass('selected'))
+            return ;
+        var $oldSelected = $('#units-list .selected');
+        $oldSelected.removeClass('selected');
+        $elem.addClass('selected');
+        var schemaid = $elem.data('schemaid');
+        var oldSchemaid = $oldSelected.data('schemaid');
+        $('.unit-details[data-schemaid="'+schemaid+'"], .unit-details[data-schemaid="'+oldSchemaid+'"]').toggleClass('hide');
+        e.preventDefault();
+        e.stopPropagation();
+    });
+    $('*[title]').tooltip();
+});
+function updateRecruitLink(e, townid, schemaid) {
+    var elem = $(e);
+    var nb = e.value;
+    if (!nb)
+        nb = 1;
+    var newHref = Routing.generate('hr_recruit_unit', {townid: townid, schemaid: schemaid, quantity: nb, _locale: '{{ app.request.locale }}' });
+    $(e).next('a').attr('href', newHref);
+}
+
+</script>
+{% endblock %}

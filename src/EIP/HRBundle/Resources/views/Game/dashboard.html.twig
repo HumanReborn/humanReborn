@@ -1,0 +1,84 @@
+{% extends "EIPHRBundle::/Game/layout.html.twig" %}
+{% block content %}
+<section class='content-section'>
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'game'|trans}}</h2>
+        <div class="pull-right"><i class="fa fa-align-justify fa-5x"></i></div>
+    </div>
+</section>
+<section class='content-section saw'>
+<div class='container'>
+    <div class='row-fluid'>
+        <div class='span6'>
+                <h4>{{'dashboard.last.notifications'|trans}}</h4>
+            {% for notification in notifications %}
+                <div class='darken-background notification'>
+                    <div class="padding-sm">
+                        <div class="clearfix">
+                            <div class='badge badge-{{ getNotificationClass(notification) }} pull-left'><i class="fa {{ getNotificationIcon(notification) }}"></i></div>
+                            <div class="pull-right underlined">{{ notification.time|date('Y-m-d H:i:s') }}</div>
+                        </div>
+                        <p class='text-justify mtop'>
+                            {{ notification.content }}
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <p>{{ 'notification.none'|trans }}</p>
+            {% endfor %}
+                <p class="mtop">
+                    <a class='btn btn-small' href='{{path('hr_notifications', {page: 1})}}'>{{'notifications.all'|trans}}</a>
+                </p>
+
+
+        </div>
+
+{% spaceless %}
+        <div class='span6'>
+                <h4>{{'battle.reports'|trans}}</h4>
+                {% for report in battleReports %}
+                    {% if report.winner.id == app.user.id %}
+                        {% set badgeClass = 'badge-success' %}
+                        {% set iconClass = 'fa-check' %}
+                    {%else%}
+                        {% set badgeClass = 'badge-error' %}
+                        {% set iconClass = 'fa-times' %}
+                    {%endif%}
+                    <div class='darken-background battle-report'>
+                        <div class="padding-sm">
+                            <div class="clearfix">
+                                <div class="badge {{ badgeClass }} pull-left"><i class="fa {{ iconClass }}"></i></div>
+                                <div class='underlined pull-right'>{{report.time|date('Y-m-d H:i:s')}}</div>
+                            </div>
+                            <div class="mtop">
+                                <ul class='unstyled'>
+                                    <li>
+                                        {{'place'|trans}} : {{ report.place.name }}
+                                        [ {{report.place.xCoord}}:{{report.place.yCoord}} ]
+                                    </li>
+                                    <li>{{'winner'|trans}} : {{ report.winner.username }}</li>
+                                </ul>
+                                <div class='btnContainer mtop-sm'>
+                                    <a class='btn btn-small btn-inverse' href='{{path('hr_battle_report', {id: report.id})}}'>{{'battle.report.read'|trans}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {%  else %}
+                    <p>{{ 'battle.report.none'|trans }}</p>
+                {% endfor %}
+                <p class="mtop">
+                    <a class='btn btn-small' href='{{path('hr_battle_reports')}}'>{{'battle.reports.all'|trans}}</a>
+                </p>
+        </div>
+{% endspaceless %}
+    </div>
+</div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+        <h2>{{'buffs'|trans}}</h2>
+        <div class='text-center'><a class='btn btn-large btn-info' href='{{path('hr_current_buffs')}}'>{{'view.buffs.current'|trans}}</a></div>
+    </div>
+</section>
+{% endblock %}

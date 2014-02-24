@@ -1,0 +1,78 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+
+<div>
+    <p>Type {{ schema.typeName }}</p>
+</div>
+<form method='post' action='' class='form-horizontal'>
+    {% if schema.type == 1 %} {# resources #}
+        {% set resources = ['water', 'pureWater', 'steel', 'fuel'] %}
+        <div class='control-group'>
+        {% for r in resources %}
+        <div>
+            <label class='control-label' for='{{r}}'>{{r}}</label>
+            <div class='controls'>
+                {% if schema.data[r] is not defined %}
+                    {% set val = 0 %}
+                {% else %}
+                    {% set val = schema.data[r] %}
+                {% endif %}
+                <input type='number' value='{{val}}' id='{{r}}' name='data[{{r}}]' />
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    {% elseif schema.type == 2 %} {# destroy #}
+        {% for us in unitSchemas %}
+        <div class='control-group'>
+            <label class='control-label'>{{us.name|trans({}, 'units')}}</label>
+            <div class='controls'>
+                {% if schema.data[us.id] is not defined %}
+                    {% set val = 0 %}
+                {% else %}
+                    {% set val = schema.data[us.id] %}
+                {% endif %}
+                <input type='number' name='data[{{us.id}}]' value='{{val}}' />
+            </div>
+        </div>
+        {% endfor %}
+    {% elseif schema.type == 3 %} {# goto #}
+        <div class='control-group'>
+            <label class='control-label' for='x'>X</label>
+            <div class='controls'>
+                {% if schema.data.xCoord is not defined %}
+                    {% set val = 0 %}
+                {% else %}
+                    {% set val = schema.data.xCoord %}
+                {% endif %}
+                <input type='number' id='x' value='{{val}}' name='data[xCoord]' />
+            </div>
+            <label class='control-label' for='y'>Y</label>
+            <div class='controls'>
+                {% if schema.data.yCoord is not defined %}
+                    {% set val = 0 %}
+                {% else %}
+                    {% set val = schema.data.yCoord %}
+                {% endif %}
+                <input type='number' id='y' value='{{val}}' name='data[yCoord]' />
+            </div>
+        </div>
+    {% elseif schema.type == 4 %} {# build #}
+        {% for bs in buildingSchemas %}
+        <div class='control-group'>
+            <label class='control-label'>{{bs.name|trans({}, 'buildings')}}</label>
+            <div class='controls'>
+                {% if schema.data[bs.id] is not defined %}
+                    {% set val = 0 %}
+                {% else %}
+                    {% set val = schema.data[bs.id] %}
+                {% endif %}
+                <input type='number' name='data[{{bs.id}}]' value='{{val}}' />
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    <input type='submit' class='btn btn-primary' />
+</form>
+<a class='btn' href='{{path('hr_adm_quests')}}'>Back</a>
+{% endblock %}

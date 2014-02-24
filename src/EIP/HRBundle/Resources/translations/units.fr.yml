@@ -1,0 +1,10 @@
+mercenary: Mercenaire
+soldier: Soldat
+buggy: Buggy
+humvee: Humvee
+tank: Tank
+mercenary.desc: "Très nombreux à parcourir le nouveau monde depuis l'Effondrement, les mercenaires sont généralement indisciplinés et mal entrainés mais le coût de leur service est bas, leur formation est rapide et ils ne nécessitent aucune infrastructure pour être opérationnels. Ils représentent une bonne option pour commencer à former vos armées."
+soldier.desc: "Entrainés dans les casernes, possédant du matériel entretenu, les soldats seront de meilleurs atout que les mercenaires tout en conservant un coût relativement faible."
+buggy.desc: "Unité motorisée rapide, très adaptée aux routes brisées du nouveau monde. La force réelle des Buggy est dans leur vitesse qui leur permet de rejoindre les champs de batailles les plus éloignés dans des temps records."
+humvee.desc: "Unité blindé légère, les humvees sont polyvalents. Leur création requiert des investissements non négligeables, mais la puissance et la mobilité de ces unités se révèleront sans aucun doute de puissants atouts."
+tank.desc: "Blindés lourds possédant une puissance de feu inégalée, les tanks sont maîtres des champs de batailles. La construction de tank est longue, coûteuse et nécessitera de dangereux sacrifices, mais une fois sur le champ de bataille, peu résistent à leur implacable avancée."

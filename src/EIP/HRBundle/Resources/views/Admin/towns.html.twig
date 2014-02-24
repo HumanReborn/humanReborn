@@ -1,0 +1,38 @@
+{% extends 'EIPHRBundle::/Admin/layout.html.twig' %}
+{% block content %}
+<h3>Towns</h3>
+
+<a class='btn' href="{{ path('hr_adm_add_town') }}">add a town</a>
+
+<table class='table table-striped table-bordered'>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>x</th>
+            <th>y</th>
+            <th>town</th>
+            <th>owner</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        {% for result in towns %}
+            <tr>
+                <td>{{ result.town.id }}</td>
+                <td>{{ result.town.name }}</td>
+                <td>{{ result.town.xCoord }}</td>
+                <td>{{ result.town.yCoord }}</td>
+                <td>{{ result.game_name }}</td>
+                <td>{{ result.owner_username }}</td>
+                <td><a href="{{ path('hr_adm_edit_town', {'id':result.town.id} ) }}">Edit</a></td>
+                <td><a href="javascript:void(0)" attr-path="{{ path('hr_adm_delete_town', { 'townid': result.town.id }) }}" onclick="confirmDelete(this)">delete</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

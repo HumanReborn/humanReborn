@@ -1,0 +1,54 @@
+{% extends 'EIPHRBundle::/Forum/forumlayout.html.twig' %}
+{% block content %}
+<div>
+    <h3>{{ section.name|trans }}</h3>
+</div>
+<div>
+    <div class="vmargin-medium">
+        {% if is_granted('ROLE_USER') %}
+        <a href="#newTopicModal" role="button" class="btn btn-primary btn-small" data-toggle="modal">{{'forum.topic.create.link'|trans}}</a>
+        {% endif %}
+    </div>
+    {% for topic in section.topics %}
+    <div class='row-fluid topic-entry'>
+        <div class="span4 text-left">
+            <a class="lead" href="{{path('hr_forum_topic',{topicid:topic.id})}}">{{ topic.title }}</a>
+        </div>
+        <div class="span4 text-center">
+            {{ 'forum.created.by'|trans~' '~topic.user.username }}
+        </div>
+        <div class="span4 text-right">
+            {{'forum.last.message.date'|trans}} {{ topic.lastPostOn|date("Y/m/d H:i") }}
+        </div>
+    </div>
+    {% else %}
+        <div class='span12'>{{'forum.topic.none'|trans}}</li>
+    {% endfor %}
+</div>
+
+<div id="newTopicModal" class="modal hide fade">
+<form method="post" action="{{ path('hr_forum_add_topic') }}">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>{{'forum.topic.new'|trans}}</h3>
+  </div>
+  <div class="modal-body">
+        <input type="hidden" name="sectionID" value="{{section.id}}" />
+        <div>
+            <label>{{'title'|trans}}</label>
+            <input type='text' name="title" maxlength="80"  />
+        </div>
+        <div>
+            <label>{{'content'|trans}}</label>
+            <textarea name="content" ></textarea>
+        </div>
+  </div>
+  <div class="modal-footer">
+    <a data-dismiss='modal' class="btn">{{'close'|trans}}</a>
+    <input type="submit" class="btn btn-primary"  />
+  </div>
+</form>
+</div>
+
+
+{% endblock %}

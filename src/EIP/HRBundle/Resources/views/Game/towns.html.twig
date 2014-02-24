@@ -1,0 +1,30 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{ 'towns'|trans }}</h2>
+        <div class="pull-right"><i class="fa fa-building fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+<div class='container'>
+    <div class='text-center'>
+    <p class="lead">{{'your.towns'|trans}}</p>
+    {% for town in towns %}
+        <div class='town well clearfix'>
+            <div class='row-fluid'>
+                <h4  class="span3 town-info"><a href='{{path('hr_town_detail', {townid: town.id})}}'>{{ town.name }}</a></h4>
+                <div class="span3 town-info">[ {{ town.xCoord }} : {{ town.yCoord }} ]</div>
+                <div class="span3 town-info">{{ 'town.free.slots'|trans }} : {{ town.freeSlotsNumber }}</div>
+                <div class="span3 town-info">
+                    <a class='btn btn-info' href='{{path('hr_town_detail', {townid: town.id})}}'>{{'details'|trans}}</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+</section>
+
+
+{% endblock %}

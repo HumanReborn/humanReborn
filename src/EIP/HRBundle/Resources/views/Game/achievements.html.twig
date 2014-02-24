@@ -1,0 +1,41 @@
+{% extends loggedIn ? 'EIPHRBundle::/Game/layout.html.twig' : 'EIPHRBundle::/Visitor/layout.html.twig' %}
+{% block content %}
+<section class="content-section">
+    <div class="container clearfix">
+        <h2 class="pull-left">{{'achievements'|trans}}</h2>
+        <div class="pull-right"><i class="fa fa-user fa-5x"></i></div>
+    </div>
+</section>
+<section class="content-section saw">
+    <div class="container">
+
+    <div class="achievements-list">
+    {% for achievement in schemas %}
+        <div class="achievement">
+            <div class='media clearfix'>
+                <div class='pull-left achievement-image-container'>
+                    <img src='{{asset('bundles/eiphr/images/schema/achievements/' ~ achievement.type)}}.png'
+                    class='media-object'
+                    alt='{{ achievement.name|trans({}, 'achievements') }}'
+                    title='{{ achievement.name|trans({}, 'achievements') }}' />
+                    <div class='stars'>
+                        {% for i in 0..achievement.step %}
+                        <img src='{{asset('bundles/eiphr/images/schema/achievements/star.png')}}' alt='star' />
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class='media-body'>
+                    <div class='clearfix'>
+                        <p class='lead pull-left'>{{achievement.name|trans({}, 'achievements')}}</p>
+                    </div>
+                    <p>
+                        {{achievement.descriptionString|transchoice(achievement.value, {'%value%':achievement.value}, 'achievements')}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'EIPHRBundle::/Game/layout.html.twig' %}
+{% block content %}
+
+{% if errors | length == 0 %}
+<div>
+    <p>
+    {{ schema.name }} {{ 'recruit.begin'|trans }} {{ 'at'|trans }} {{ town.name }}
+    </p>
+    <a href="{{ path('hr_units') }}">{{ 'units.back.to.dashboard' }}</a>
+</div>
+{% else %}
+<div class="error-msg">
+    <ul>
+    {% for error in errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+{% endblock %}

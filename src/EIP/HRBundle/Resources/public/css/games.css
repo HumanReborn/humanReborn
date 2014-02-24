@@ -1,0 +1,483 @@
+/* line 4, ../../sass/_menu.scss */
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+/* line 13, ../../sass/_menu.scss */
+body {
+  padding-top: 55px;
+  padding-bottom: 60px;
+}
+
+/* line 18, ../../sass/_menu.scss */
+#menu {
+  z-index: 20;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 55px;
+  color: #eee;
+  background-color: black;
+}
+/* line 20, ../../sass/_menu.scss */
+#menu ul {
+  list-style: none;
+}
+/* line 21, ../../sass/_menu.scss */
+#menu * {
+  margin: 0;
+  padding: 0;
+}
+/* line 32, ../../sass/_menu.scss */
+#menu .opener, #menu .queues-opener {
+  width: 60px;
+  height: 55px;
+  vertical-align: middle;
+  text-align: center;
+}
+/* line 38, ../../sass/_menu.scss */
+#menu .opener:hover, #menu .queues-opener:hover {
+  display: inline-block;
+  background-color: #efefef;
+  color: #333333;
+}
+/* line 43, ../../sass/_menu.scss */
+#menu .opener .fa, #menu .queues-opener .fa {
+  line-height: 55px;
+}
+/* line 46, ../../sass/_menu.scss */
+#menu #top-menu {
+  height: 55px;
+}
+/* line 48, ../../sass/_menu.scss */
+#menu #top-menu li {
+  vertical-align: top;
+  display: inline-block;
+}
+/* line 51, ../../sass/_menu.scss */
+#menu #top-menu li a {
+  display: block;
+  vertical-align: middle;
+  line-height: 55px;
+  color: #cccccc;
+  height: 55px;
+  padding: 0px 20px;
+  text-decoration: none;
+}
+/* line 59, ../../sass/_menu.scss */
+#menu #top-menu li a:hover {
+  color: #333333;
+  background-color: #efefef;
+}
+/* line 65, ../../sass/_menu.scss */
+#menu #top-menu .logo {
+  width: 200px;
+  text-align: center;
+  height: 55px;
+  border-left: 1px #444 solid;
+  border-right: 1px #444 solid;
+}
+/* line 71, ../../sass/_menu.scss */
+#menu #top-menu .logo img {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 55px;
+  padding: 8px;
+}
+@media (max-width: 790px) {
+  /* line 65, ../../sass/_menu.scss */
+  #menu #top-menu .logo {
+    display: none;
+  }
+}
+/* line 82, ../../sass/_menu.scss */
+#menu .resources {
+  text-align: center;
+}
+/* line 84, ../../sass/_menu.scss */
+#menu .resources li {
+  height: 55px;
+  display: inline-block;
+  padding: 1px 20px;
+}
+@media (max-width: 790px) {
+  /* line 84, ../../sass/_menu.scss */
+  #menu .resources li {
+    font-size: 11px;
+    line-height: 14px;
+    padding: 1px 10px;
+  }
+}
+/* line 93, ../../sass/_menu.scss */
+#menu .resources li img {
+  height: 30px;
+}
+@media (max-width: 790px) {
+  /* line 93, ../../sass/_menu.scss */
+  #menu .resources li img {
+    height: 18px;
+  }
+}
+/* line 99, ../../sass/_menu.scss */
+#menu .resources li span {
+  color: #9ca;
+}
+@media (max-width: 790px) {
+  /* line 99, ../../sass/_menu.scss */
+  #menu .resources li span {
+    display: block;
+  }
+}
+
+/* line 110, ../../sass/_menu.scss */
+#left-menu:hover a:hover {
+  color: #333333;
+  background-color: #efefef;
+}
+
+/* line 115, ../../sass/_menu.scss */
+#left-menu {
+  overflow: auto;
+  position: fixed;
+  background-color: black;
+  color: #eee;
+  left: -61px;
+  top: 55px;
+  width: 60px;
+  height: 100%;
+  -webkit-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  -moz-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  -o-transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+/* line 124, ../../sass/_menu.scss */
+#left-menu.opened {
+  left: 0px;
+}
+/* line 126, ../../sass/_menu.scss */
+#left-menu.opened a {
+  color: #cccccc;
+}
+/* line 132, ../../sass/_menu.scss */
+#left-menu:hover, #left-menu.opened.full {
+  left: 0px;
+  width: 250px;
+}
+/* line 135, ../../sass/_menu.scss */
+#left-menu:hover a, #left-menu.opened.full a {
+  color: #cccccc;
+}
+/* line 139, ../../sass/_menu.scss */
+#left-menu li {
+  -webkit-box-shadow: 0px 0px 1px #999999;
+  -moz-box-shadow: 0px 0px 1px #999999;
+  box-shadow: 0px 0px 1px #999999;
+}
+/* line 142, ../../sass/_menu.scss */
+#left-menu li, #left-menu a {
+  display: block;
+}
+/* line 145, ../../sass/_menu.scss */
+#left-menu a {
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0);
+  text-decoration: none;
+  line-height: 60px;
+  height: 60px;
+  vertical-align: middle;
+}
+/* line 152, ../../sass/_menu.scss */
+#left-menu a .icon {
+  display: inline-block;
+  text-align: center;
+  width: 60px;
+  font-size: 1.5em;
+}
+
+/* line 162, ../../sass/_menu.scss */
+#queues {
+  position: fixed;
+  right: -251px;
+  top: 55px;
+  bottom: 0;
+  width: 250px;
+  background-color: black;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+/* line 171, ../../sass/_menu.scss */
+#queues.opened {
+  right: 0;
+}
+/* line 175, ../../sass/_menu.scss */
+#queues .queueSelector {
+  border-top: 1px #555 solid;
+}
+/* line 176, ../../sass/_menu.scss */
+#queues .queueSelector a {
+  display: inline-block;
+  width: 33.3%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #cccccc;
+}
+/* line 185, ../../sass/_menu.scss */
+#queues .queueSelector a:hover, #queues .queueSelector a.opened {
+  color: #333333;
+  background-color: #efefef;
+}
+/* line 191, ../../sass/_menu.scss */
+#queues .queue {
+  display: none;
+  margin: 10px;
+}
+/* line 194, ../../sass/_menu.scss */
+#queues .queue.opened {
+  display: block;
+}
+/* line 198, ../../sass/_menu.scss */
+#queues .queue li:nth-child(1) {
+  color: #11e611;
+}
+/* line 199, ../../sass/_menu.scss */
+#queues .queue li:nth-child(2) {
+  color: #28dc11;
+}
+/* line 200, ../../sass/_menu.scss */
+#queues .queue li:nth-child(3) {
+  color: #41d211;
+}
+/* line 201, ../../sass/_menu.scss */
+#queues .queue li:nth-child(4) {
+  color: #64b411;
+}
+/* line 202, ../../sass/_menu.scss */
+#queues .queue li:nth-child(5) {
+  color: #73a011;
+}
+/* line 203, ../../sass/_menu.scss */
+#queues .queue li:nth-child(6) {
+  color: #879611;
+}
+/* line 204, ../../sass/_menu.scss */
+#queues .queue li:nth-child(7) {
+  color: #9b9611;
+}
+/* line 205, ../../sass/_menu.scss */
+#queues .queue li:nth-child(8) {
+  color: #aa7811;
+}
+/* line 206, ../../sass/_menu.scss */
+#queues .queue li:nth-child(9) {
+  color: #c88211;
+}
+/* line 207, ../../sass/_menu.scss */
+#queues .queue li:nth-child(10) {
+  color: #e66e11;
+}
+
+/* line 216, ../../sass/_menu.scss */
+#options {
+  visibility: hidden;
+  position: fixed;
+  bottom: -200px;
+  left: 50%;
+  margin-top: 200px;
+  margin-left: -200px;
+  width: 400px;
+  height: 400px;
+  z-index: 1;
+}
+/* line 218, ../../sass/_menu.scss */
+#options * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 228, ../../sass/_menu.scss */
+#options ul {
+  -webkit-box-shadow: 0px 0px 4px #555555;
+  -moz-box-shadow: 0px 0px 4px #555555;
+  box-shadow: 0px 0px 4px #555555;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 400px;
+  height: 400px;
+  position: relative;
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  -o-transform: scale(0.1);
+  transform: scale(0.1);
+  background-color: #000;
+}
+/* line 239, ../../sass/_menu.scss */
+#options.opened {
+  z-index: 20;
+  visibility: visible;
+}
+/* line 242, ../../sass/_menu.scss */
+#options.opened ul {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+/* line 247, ../../sass/_menu.scss */
+#options li {
+  overflow: hidden;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  top: 0;
+  left: 0;
+  -webkit-transform-origin: 100% 100%;
+  -moz-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  -o-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+  background-color: black;
+}
+/* line 257, ../../sass/_menu.scss */
+#options li:nth-child(2n) {
+  background-color: #141414;
+}
+/* line 261, ../../sass/_menu.scss */
+#options li:hover {
+  background-color: #efefef;
+}
+/* line 263, ../../sass/_menu.scss */
+#options li:hover a {
+  color: #333333;
+}
+/* line 268, ../../sass/_menu.scss */
+#options li:first-child {
+  -webkit-transform: rotate(0deg) skew(60deg);
+  -moz-transform: rotate(0deg) skew(60deg);
+  -ms-transform: rotate(0deg) skew(60deg);
+  -o-transform: rotate(0deg) skew(60deg);
+  transform: rotate(0deg) skew(60deg);
+}
+/* line 271, ../../sass/_menu.scss */
+#options li:nth-child(2) {
+  -webkit-transform: rotate(30deg) skew(60deg);
+  -moz-transform: rotate(30deg) skew(60deg);
+  -ms-transform: rotate(30deg) skew(60deg);
+  -o-transform: rotate(30deg) skew(60deg);
+  transform: rotate(30deg) skew(60deg);
+}
+/* line 274, ../../sass/_menu.scss */
+#options li:nth-child(3) {
+  -webkit-transform: rotate(60deg) skew(60deg);
+  -moz-transform: rotate(60deg) skew(60deg);
+  -ms-transform: rotate(60deg) skew(60deg);
+  -o-transform: rotate(60deg) skew(60deg);
+  transform: rotate(60deg) skew(60deg);
+}
+/* line 277, ../../sass/_menu.scss */
+#options li:nth-child(4) {
+  -webkit-transform: rotate(90deg) skew(60deg);
+  -moz-transform: rotate(90deg) skew(60deg);
+  -ms-transform: rotate(90deg) skew(60deg);
+  -o-transform: rotate(90deg) skew(60deg);
+  transform: rotate(90deg) skew(60deg);
+}
+/* line 280, ../../sass/_menu.scss */
+#options li:nth-child(5) {
+  -webkit-transform: rotate(120deg) skew(60deg);
+  -moz-transform: rotate(120deg) skew(60deg);
+  -ms-transform: rotate(120deg) skew(60deg);
+  -o-transform: rotate(120deg) skew(60deg);
+  transform: rotate(120deg) skew(60deg);
+}
+/* line 283, ../../sass/_menu.scss */
+#options li:nth-child(6) {
+  -webkit-transform: rotate(150deg) skew(60deg);
+  -moz-transform: rotate(150deg) skew(60deg);
+  -ms-transform: rotate(150deg) skew(60deg);
+  -o-transform: rotate(150deg) skew(60deg);
+  transform: rotate(150deg) skew(60deg);
+}
+/* line 287, ../../sass/_menu.scss */
+#options li a {
+  color: #cccccc;
+  position: absolute;
+  text-align: center;
+  width: 200px;
+  height: 200px;
+  bottom: -72px;
+  right: -52px;
+  padding-top: 15px;
+  -webkit-transform: skew(-60deg) rotate(-75deg);
+  -moz-transform: skew(-60deg) rotate(-75deg);
+  -ms-transform: skew(-60deg) rotate(-75deg);
+  -o-transform: skew(-60deg) rotate(-75deg);
+  transform: skew(-60deg) rotate(-75deg);
+  text-decoration: none;
+}
+/* line 298, ../../sass/_menu.scss */
+#options li a i {
+  font-size: 2em;
+}
+/* line 301, ../../sass/_menu.scss */
+#options li a img {
+  width: 50px;
+}
+/* line 307, ../../sass/_menu.scss */
+#options #toggle-button {
+  visibility: visible;
+  width: 100px;
+  height: 100px;
+  line-height: 66.66667px;
+  font-size: 3em;
+  vertical-align: middle;
+  text-align: center;
+  color: #cccccc;
+  background-color: #000;
+  -webkit-box-shadow: 0px 0px 5px white;
+  -moz-box-shadow: 0px 0px 5px white;
+  box-shadow: 0px 0px 5px white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* line 4, ../../sass/games.scss */
+#menu .logo {
+  border-left: 0px;
+}
+/* line 7, ../../sass/games.scss */
+#menu ul.pull-right {
+  margin-right: 50px;
+}

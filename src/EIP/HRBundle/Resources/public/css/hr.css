@@ -1,0 +1,430 @@
+@font-face {
+font-family: "downcome";
+src: local("downcome"), url("../font/downcome.ttf");
+format ("truetype");
+} downcome
+
+*{margin:0px;padding:0px;}
+html,body{ font-family:Arial, Helvetica, sans-serif}
+header,footer,section,nav{display:block; text-align:center;}
+a:link{color:black; text-decoration:none;}
+a:visited{color:black; text-decoration:none;}
+a:hover{color:#ddd;}
+p{margin:0px;}
+h1,h2,h3,h4,h5,h6{font-family:downcome;}
+h1{font-size:40px;}
+h2{font-size:36px;}
+h3{font-size:30px;}
+h4{font-size:24px;}
+h5{font-size:18px;}
+h6{font-size:16px;}
+h7{font-size:24px;}
+
+/* ******* */
+/* VISITOR */
+/* ******* */
+
+#Visitor {background:#000 url("../images/_background.jpg") no-repeat top center;
+			-webkit-background-size: 100%;
+			-moz-background-size: 100%;
+			-o-background-size: 100%;
+			background-size: 100%;
+}
+
+#Visitor #mainWrapper{width:940px; margin:auto;
+					-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+					-gecko-box-shadow: 0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+					min-height:90%;
+					background:#000 url("../images/_content.jpg"); background-repeat:repeat-y;
+					border: 3px solid #000;padding-bottom:170px;}
+#Visitor #content{min-height:600px; width:940px;}
+#Visitor .tzone{background:rgba(255,255,255,0.2);margin:30px;padding:15px; border:3px solid #000; border-radius:20px 0 20px 0;color:#111;}
+#Visitor #logo-img{width:400px; text-align:center; margin:auto; padding:30px 0 30px 0;}
+
+#Visitor header #header-bar{width:940px;background:rgba(255,255,255,0.2);border:3px solid #000;
+                           border-radius: 0px 0px 45px 45px;height:30px;margin-top:-50px;margin-left:-3px;padding-top:48px;}
+#Visitor #header-bar table{width:100%;margin-top:2px;text-align:center;}
+#Visitor #header-bar table tr td{width:33.3%;}
+#Visitor #header-img{width:940px; height:100px;	margin:-3px 0 0 -3px; border:3px solid #000; border-radius:0 0 45px 45px;}
+
+#Visitor footer{margin-top:-145px;}
+#Visitor #footer-bar{margin:auto auto -70px auto; width:940px; height:100px; border:3px solid #000; border-radius:45px 45px 0 0;
+					background:rgba(255,255,255,0.2); }
+#Visitor #footer-bar table{width:100%;margin-top:2px;text-align:center;}
+#Visitor #footer-bar table tr td{width:33.3%;}
+#Visitor #footer-img{width:940px; height:100px;	border:3px solid #000; border-radius:45px 45px 0 0; margin:auto}
+
+#Visitor table tr td{line-height:25px;}
+#Visitor table tr td img{height:25px;}
+
+
+#Visitor #login{width:450px; min-height:200px; margin:30px auto 10px auto;
+			   border:3px solid #000; border-radius:20px 0 20px 0; text-align:center;
+			   background:rgba(255,255,255,0.2);}
+#Visitor #login ul{list-style:none;padding-left: 0px;}
+#Visitor #login li{width:50%;float:left;}
+#Visitor #login li img{height:30px;}
+#Visitor #login form input[type=text],
+#Visitor #login form input[type=password] {padding-left:8px;margin-top:2px;margin-bottom:2px;}
+
+
+#Visitor #register form table tr td {width:50%;}
+
+#Visitor #register{width:450px; min-height:200px; margin:30px auto 10px auto;
+				  border:3px solid #000; border-radius:20px 0 20px 0; text-align:center;
+				  background:rgba(255,255,255,0.2);}
+#Visitor #register ul{list-style:none; padding-left:0px;}
+/*#Visitor #register li{width:50%;float:left;}*/
+#Visitor #register li img{height:30px;}
+#Visitor #register form{margin-bottom:40px;}
+#Visitor #register form input[type=text],
+#Visitor #register form input[type=password] {padding-left:8px;margin-top:2px;margin-bottom:2px;}
+#Visitor .register-button{padding:3px 10px; margin:0px 60px;
+						 border-radius:10px;border:2px #000 solid;
+						 background:rgb(200,200,200); color:#000;}
+#Visitor .register-button:hover{background:rgb(230,230,230); color:#000;
+							   -webkit-box-shadow: 1px 1px 3px #000;-o-box-shadow: 1px 1px 3px #000;
+							   -gecko-box-shadow: 1px 1px 3px #000;-webkit-box-shadow: 1px 1px 4px #000;}
+
+#Visitor #credentials{width:450px; min-height:200px; margin:30px auto 10px auto;
+       				 border:3px solid #000; border-radius:20px 0 20px 0; text-align:center;
+       		 		 background:rgba(255,255,255,0.2);}
+
+#Visitor .about-list a, .orange{color:#cc9300;}
+
+#Visitor #faq ul, #Visitor #rules ul{list-style: none;color:#fff;margin:0px auto;padding:0px;}
+#Visitor #faq .faq-section ul, #Visitor #rules .rules-section ul{ list-style-type: disc; color: #000; margin-left: 30px;}
+#Visitor .faq-question, #Visitor .rules-question{font-weight:bold;font-size:1.5em;}
+
+/* ************** */
+/* ************** */
+/* ************** */
+
+
+/* ************** */
+/*      GAME      */
+/* ************** */
+
+/* GAMES */
+#Game {min-width:1600px; min-height:768px;
+		background:#000 url("../images/_background.jpg") no-repeat top center;
+		-webkit-background-size: 100%;
+		-moz-background-size: 100%;
+		-o-background-size: 100%;
+		background-size: 100%;
+}
+#Game #mainWrapper{	width:1280px; margin:auto;
+					-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+					-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+					min-height:90%;
+					background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+					border: 3px solid #000;padding-bottom:170px;
+}
+#Game #games-content{min-height:600px; width:1200px; text-align:center; margin:auto;}
+
+#Game .tzone{margin:30px; padding:15px; background:rgba(255,255,255,0.2); border:3px solid #000; border-radius:20px 0 20px 0; color:#111;}
+
+#Game header #header-bar{width:1280px;background:rgba(255,255,255,0.2);border:3px solid #000;
+                        border-radius: 0px 0px 45px 45px;height:30px;margin-top:-50px;margin-left:-3px;padding-top:48px;}
+#Game #header-bar table{width:100%;margin-top:2px;text-align:center;}
+#Game #header-bar table tr td{width:33.3%;}
+#Game #header-img{width:1280px; height:100px; margin:-3px 0 0 -3px; border:3px solid #000; border-radius:0 0 45px 45px;}
+
+#Game footer{margin-top:-145px;}
+#Game #footer-bar{margin:auto auto -70px auto; width:1280px; height:100px; border:3px solid #000; border-radius:45px 45px 0 0;
+				 background:rgba(255,255,255,0.2); }
+#Game #footer-bar table{width:100%;margin-top:2px;text-align:center;}
+#Game #footer-bar table tr td{width:33.3%;}
+#Game #footer-img{width:1280px; height:100px; border:3px solid #000; border-radius:45px 45px 0 0; margin:auto}
+
+
+#Game ul {list-style:none;margin:0px;padding:0px;}
+#Game a{color:#cc9300;}
+#Game .game-selection-col{width:33%;float:left; text-align: center;}
+#Game .game-selection-col ul,
+#Game .game-selection-col table {margin:auto;}
+#Game .game-selection-col table tr td,#Game .game-selection-col ul li{padding:2px 5px;}
+#Game .closed-game{color:#900;}
+#Game .opened-game{color:#cc9300;}
+
+/* DASHBOARD LEFT */
+#Game #dashboardLeft{float:left; width:17%;
+					margin:2% 2% 0 2%;
+					font-family:downcome;
+}
+
+#Game #dashboardLeft #logInfos{float:left; width:100%; margin-bottom:20px;
+								font-weight:600; font-size:16px; font-family: Arial, Helvetica, sans-serif; color:#999;
+								background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+								-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+								-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+								border: 3px solid #000;
+}
+#Game #dashboardLeft #logInfos table{width:100%; height:100%; text-align:center;}
+#Game #dashboardLeft #logInfos table tr td{width:50%;}
+
+#Game #dashboardLeft #menu{float:left; width:100%; height:30%; margin-bottom:2%;
+						background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+						-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+						-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+						border: 3px solid #000;
+}
+#Game #dashboardLeft #menu li a{color:#000;font-size:36px;}
+#Game #dashboardLeft #menu li a:hover{color:#ddd;}
+
+/* DASHBOARD CENTER */
+#Game #dashboardCenter{float:left; width:58%; margin:2% auto 0 auto; color:#999;}
+
+#Game #dashboardCenter #dashboardInfos{width:100%; min-height:60px;
+									text-align:center; margin-bottom:2%;
+									background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+									-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+									-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+									border: 3px solid #000;
+}
+#Game #dashboardCenter #dashboardContent{width:100%; min-height:300px;
+										text-align:center;
+										background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+										-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+										-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+										border: 3px solid #000;
+}
+#Game #dashboardCenter #dashboardResearch{width:100%; text-align:center;
+										margin-bottom:2%;
+										font-weight:none;
+}
+#Game #dashboardCenter #dashboardResearch .detail {width:100%; text-align:center; border-collapse:separate; border-spacing: 20px;}
+#Game #dashboardCenter #dashboardResearch .detail tr td{width:32%;padding-bottom:2%}
+#Game #dashboardCenter #dashboardResearch #armies{background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+												-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+												-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+												border: 3px solid #000;
+}
+#Game #dashboardCenter #dashboardResearch #buildings{background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+													-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+													-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+													border: 3px solid #000;
+}
+#Game #dashboardCenter #dashboardResearch #technologies{background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+														-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+														-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+														border: 3px solid #000;
+}
+#Game #dashboardCenter #dashboardResearch .queue {width:100%; height:100%; text-align:center;}
+#Game #dashboardCenter #dashboardResearch .queue tr td{width:50%; padding-bottom:0;}
+#Game #dashboardCenter #dashboardResearch .left{}
+#Game #dashboardCenter #dashboardResearch .right1{color:#090;font-size:20px;}
+#Game #dashboardCenter #dashboardResearch .right2{color:#180;font-size:20px;}
+#Game #dashboardCenter #dashboardResearch .right3{color:#270;font-size:20px;}
+#Game #dashboardCenter #dashboardResearch .right4{color:#360;font-size:18px;}
+#Game #dashboardCenter #dashboardResearch .right5{color:#450;font-size:16px;}
+#Game #dashboardCenter #dashboardResearch .right6{color:#540;}
+#Game #dashboardCenter #dashboardResearch .right7{color:#620;}
+#Game #dashboardCenter #dashboardResearch .right8{color:#720;}
+#Game #dashboardCenter #dashboardResearch .right9{color:#810;}
+#Game #dashboardCenter #dashboardResearch .right10{color:#900;}
+#Game #dashboardCenter #dashboardResearch .right11{color:#A00;}
+#Game #dashboardCenter #dashboardResearch .right12{color:#B00;}
+#Game #dashboardCenter #dashboardResearch .right13{color:#B00;}
+#Game #dashboardCenter #dashboardResearch .right14{color:#B00;}
+#Game #dashboardCenter #dashboardResearch .right15{color:#B00;}
+
+
+/* DASHBOARD RIGHT */
+#Game #dashboardRight{float:left; width:17%;
+						margin:2% 2% 0 2%;
+}
+#Game #dashboardRight table {width:100%; margin:auto;}
+#Game #dashboardRight table tr td {width:25%; padding:5px; color:#cc9300; text-align:center; overflow:auto;}
+#Game #dashboardRight .border-left {border-left: 3px solid #000;}
+
+#Game #dashboardRight #resourcesInfos{float:left; width:100%; margin-bottom:20px;
+									font-size:12px; font-weight:700;
+									background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+									-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+									-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+									text-align:center; padding:auto;
+}
+#Game #dashboardRight #resourcesInfos table{width:100%; text-align:center;}
+#Game #dashboardRight #resourcesInfos table tr td{width:auto; border: 3px solid #000; overflow:hidden;}
+#Game #dashboardRight #resourcesInfos img{background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+											width:50px; height:50px;
+}
+#Game #dashboardRight #resourcesInfos .resourcesMeter{width:100%; height:20px;}
+#Game #dashboardRight #resourcesInfos .resourceImg{width:50px;}
+#Game #dashboardRight #resourcesInfos .resourceValue{width:45%}
+
+#Game #dashboardRight #citiesImg{float:left; width:100%;
+								background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+								-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+								-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+								border-top: 3px solid #000;
+								border-right: 3px solid #000;
+								border-left: 3px solid #000;
+								text-align:center; padding:auto;
+}
+#Game #dashboardRight #citiesInfos{	float:left; width:100%; margin-bottom:2%;
+									font-size:12px; font-weight:700;
+									background:#000 url("../images/_content.jpg"); background-repeat:repeat;
+									-webkit-box-shadow: 0px 0px 9px #000; -o-box-shadow: 0px 0px 9px #000;
+									-gecko-box-shadow:0px 0px 9px #000; box-shadow: 0px 0px 9px #000;
+									border-right: 3px solid #000;
+									border-bottom: 3px solid #000;
+									border-left: 3px solid #000;
+									text-align:center; padding:auto;
+}
+#Game #dashboardRight #citiesInfos .selected{color:#999;}
+#Game #dashboardRight #citiesInfos table tr td {width:50%;border-top: 3px solid #000;}
+
+/* ************** */
+/* ************** */
+/* ************** */
+
+
+
+/* ************** */
+/*      UTILS     */
+/* ************** */
+.clear{clear:both;height:1px;width:100%;}
+.title-spec{margin:0; padding:15px 0; color:#ddd; text-shadow: 0 0 30px black;
+			-webkit-box-shadow: 0px 5px 9px #000; -o-box-shadow: 0px 5px 9px #000;
+			-gecko-box-shadow:0px 5px 9px #000; box-shadow: 0px 5px 9px #000;
+}
+.hr-title{font-family:downcome; margin-top:30px;}
+.hr-button{padding:3px 10px;
+           border-radius:10px;border:2px #000 solid;
+           background:rgb(200,200,200); color:#000;}
+.hr-button:hover{background:rgb(230,230,230); color:#000;
+      			-webkit-box-shadow: 1px 1px 3px #000;-o-box-shadow: 1px 1px 3px #000;
+      			-gecko-box-shadow: 1px 1px 3px #000;-webkit-box-shadow: 1px 1px 4px #000;}
+
+.small-margin-top{margin-top:10px;}
+.small-margin-bottom{margin-bottom:10px;}
+.center{text-align:center;}
+.center_block{text-align:center; margin:auto;}
+.error-msg{color:#B00; text-shadow:0px 0px 9px black;}
+.lfloat{float:left;}
+.rmargin{margin-right:10px;}
+.hidden{display:none;}
+.box-shadow{-webkit-box-shadow:0px 0px 5px #000;-o-box-shadow:0px 0px 5px #000;-gecko-box-shadow:0px 0px 5px #000;box-shadow:0px 0px 5px #000;}
+.scroll_bar{margin-top:100px; width:940px; height:100px; border-top:3px solid #000; border-radius:45px 45px 0 0;
+			background:rgba(0,0,0,0.4);-webkit-transition:all 0.4s; -moz-transition: 0.4s all; -o-transition: 0.4s all; transition: 0.4s all;}
+.scroll_bar:hover{margin-top:80px; background:rgba(255,255,255,0.2);}
+/* ************** */
+/* ************** */
+/* ************** */
+
+
+
+/* ************** */
+/*  BUILD BUTTON  */
+/* ************** */
+
+#cost a{color:#333333; }
+
+.built-it-true {
+-moz-box-shadow:inset 0px 1px 10px 0px #a4e271;
+-webkit-box-shadow:inset 0px 1px 10px 0px #a4e271;
+-o-box-shadow:inset 0px 1px 10px 0px #a4e271;
+box-shadow:inset 0px 1px 10px 0px #a4e271;
+background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809) );
+background:-moz-linear-gradient( center top, #89c403 5%, #77a809 100% );
+background-color:#89c403;
+-moz-border-radius:10px; -webkit-border-radius:10px; -o-border-radius:10px; border-radius:10px; border:2px solid #74b807;
+display:inline-block; color:#333333; font-family:downcome; font-size:26px; font-weight:bold;
+text-decoration:none; text-shadow:0px 0px 8px white;
+float:right; padding:10px 15px; margin-right:20px;
+}
+.built-it-true:hover {
+background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77a809), color-stop(1, #89c403) );
+background:-moz-linear-gradient( center top, #77a809 5%, #89c403 100% );
+background-color:#77a809;
+}
+.built-it-wrong {
+-moz-box-shadow:inset 0px 1px 10px -1px #f29c93;
+-webkit-box-shadow:inset 0px 1px 10px -1px #f29c93;
+-o-box-shadow:inset 0px 1px 10px -1px #f29c93;
+box-shadow:inset 0px 1px 10px -1px #f29c93;
+background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
+background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
+background-color:#fe1a00;
+-moz-border-radius:10px; -webkit-border-radius:10px; -o-border-radius:10px; border-radius:10px; border:2px solid #d83526;
+display:inline-block; color:#333333; font-family:downcome; font-size:26px; font-weight:bold;
+text-decoration:none; text-shadow:0px 0px 8px white;
+float:right; padding:10px 15px; margin-right:20px;
+}
+.built-it-wrong:hover {
+background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
+background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
+background-color:#ce0100;
+}
+
+/* ************** */
+/* ************** */
+/* ************** */
+
+
+/* **************** */
+/*  JQUERY TOOLTIP  */
+/* **************** */
+
+.ui-tooltip, .arrow:after {background:#000 url("../images/pop_up_content.jpg"); background-repeat:repeat; border: 2px solid #999;}
+.ui-tooltip {padding: 10px 20px; color: white; border-radius: 20px;
+			font:14px "Helvetica Neue", Sans-Serif; box-shadow: 0 0 7px black;
+}
+.ui-tooltip-title{font-family:downcome; font-weight:bold; font-size:24px; color:#cc9300;}
+.arrow {width: 70px; height: 16px; overflow: hidden; position: absolute; left: 50%; margin-left: -35px; bottom: -16px;}
+.arrow.top {top: -16px; bottom: auto;}
+.arrow.left {left: 20%;}
+.arrow:after {content: ""; position: absolute; left: 20px; top: -20px; width: 25px; height: 25px;
+				box-shadow: 6px 5px 9px -9px black;
+				-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg);
+				-o-transform: rotate(45deg); tranform: rotate(45deg);
+}
+.arrow.top:after {bottom: -20px; top: auto;}
+
+/* ************** */
+/* ************** */
+/* ************** */
+
+
+
+/* ************* */
+/*   HTML METER  */
+/* ************* */
+
+meter{-webkit-appearance: none;}
+meter::-webkit-meter-bar {
+    background: #666;
+    -webkit-box-shadow: inset 0 0 2px 2px #555;
+    -moz-box-shadow: inset 0 0 2px 2px #555;
+    box-shadow: inset 0 0 2px 2px #555;
+}
+meter::-webkit-meter-bar,
+.style meter::-webkit-meter-optimum-value,
+.style meter::-webkit-meter-suboptimum-value,
+.style meter::-webkit-meter-even-less-good-value {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+meter::-webkit-meter-optimum-value {
+    background: #4fa2f7;
+    border: 1px solid #1560ad;
+}
+meter::-webkit-meter-suboptimum-value {
+    background: #f7c64f;
+    border: 1px solid #b9870d;
+}
+meter::-webkit-meter-even-less-good-value {
+    background: #f76f4f;
+    border: 1px solid #bd3413;
+}
+
+
+
+/* ************** */
+/* ************** */
+/* ************** */
+
+.itemImage{width:100px;}

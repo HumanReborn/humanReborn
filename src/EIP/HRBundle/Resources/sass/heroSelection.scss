@@ -1,0 +1,75 @@
+@import "compass/css3";
+@import "variables";
+// variables
+$heroThumbSize:100px;
+// mixins
+
+@mixin heroSelectionImg($w, $h) {
+    width: $w;
+    height: $h;
+    margin: 0px 15px;
+    border: 1px #888 solid;
+    @include box-shadow(0px 0px 8px #000);
+}
+
+#menu {
+    height:$menuHeight;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    background-color: #000;
+    line-height: $menuHeight;
+    vertical-align: middle;
+    img {
+        height:30px;
+    }
+}
+
+.header{
+    img {
+        height: 70px;
+    }
+}
+#heroThumbsContainer {
+    img {
+        @include heroSelectionImg($heroThumbSize,$heroThumbSize);
+        &.selected{
+            border-color: $successColor;
+        }
+    }
+}
+#detailText {
+    p {
+        background-color: rgba(0,0,0,0.3);
+        padding:15px 70px;
+    }
+}
+#detailImg {
+    img {
+        @include heroSelectionImg(140px,140px);
+    }
+}
+#heroStats {
+    table {
+        margin:20px auto 40px auto;
+        max-width: 600px;
+        border:1px #777 solid;
+    }
+    thead {
+        th {
+            font-weight: bold;
+            text-align: center;
+        }
+    }
+    tbody {
+    td{
+        text-align: center;
+        vertical-align: middle;
+        img {
+            height: 30px;
+            padding:5px 0px;
+        }
+    }
+    }
+}
